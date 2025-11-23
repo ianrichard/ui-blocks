@@ -3,10 +3,16 @@ import { Card as MantineCard, Text, Group, Box, Stack } from '@mantine/core';
 
 // Types
 export interface CardProps {
+    /** Card content */
     children: React.ReactNode;
+    /** Whether the card should have a shadow */
     elevated?: boolean;
+    /** Whether the card should have a dimmed background */
     dimmed?: boolean;
+    /** Padding size */
     padding?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    /** Click handler */
+    onClick?: () => void;
 }
 
 export interface CardHeaderProps {
@@ -26,14 +32,20 @@ export interface CardFooterProps {
 }
 
 // Components
-const CardRoot = ({ children, elevated, dimmed, ...props }: CardProps) => {
+
+/**
+ * A flexible Card component that supports headers, bodies, and footers.
+ */
+const CardRoot = ({ children, elevated, dimmed, padding = 'lg', onClick, ...props }: CardProps) => {
     return (
         <MantineCard
             shadow={elevated ? 'sm' : 'none'}
-            padding="lg"
+            padding={padding}
             radius="md"
             withBorder={!elevated}
             bg={dimmed ? 'var(--mantine-color-gray-0)' : undefined}
+            onClick={onClick}
+            style={{ cursor: onClick ? 'pointer' : undefined }}
             {...props}
         >
             <Stack gap="md">

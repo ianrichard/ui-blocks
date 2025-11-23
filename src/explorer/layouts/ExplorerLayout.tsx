@@ -19,6 +19,8 @@ export function ExplorerLayout() {
         { icon: List, label: 'Features Pattern', to: '/patterns/features' },
         { icon: PlaySquare, label: 'Rich Media Card', to: '/patterns/rich-media' },
         { icon: Newspaper, label: 'Article Teaser', to: '/patterns/teaser' },
+        { icon: Box, label: 'Robust Pattern', to: '/patterns/robust' },
+        { icon: LayoutDashboard, label: 'Structure Pattern', to: '/patterns/structure' },
     ];
 
     return (

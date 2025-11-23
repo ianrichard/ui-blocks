@@ -5,18 +5,31 @@ import { MoreHorizontal } from 'lucide-react';
 // --- Button ---
 export interface ButtonProps {
     children: React.ReactNode;
+    /** Primary action style */
     primary?: boolean;
+    /** Secondary action style */
     secondary?: boolean;
+    /** Destructive action style */
     danger?: boolean;
+    /** Ghost/Subtle action style */
     ghost?: boolean;
+    /** Full width button */
     block?: boolean;
+    /** Disabled state */
     disabled?: boolean;
+    /** Loading state */
     loading?: boolean;
+    /** Button size */
     size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    /** Click handler */
     onClick?: () => void;
+    /** Optional icon */
     icon?: React.ElementType;
 }
 
+/**
+ * A versatile Button component.
+ */
 export const Button = ({
     children,
     primary,
@@ -70,12 +83,13 @@ export interface IconButtonProps {
     onClick?: () => void;
     variant?: 'transparent' | 'subtle' | 'light' | 'filled';
     color?: string;
+    size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 }
 
-export const IconButton = ({ icon: Icon, label, onClick, variant = 'subtle', color = 'gray' }: IconButtonProps) => {
+export const IconButton = ({ icon: Icon, label, onClick, variant = 'subtle', color = 'gray', size = 'md' }: IconButtonProps) => {
     return (
-        <ActionIcon variant={variant} color={color} onClick={onClick} aria-label={label}>
-            <Icon size="1.125rem" />
+        <ActionIcon variant={variant} color={color} onClick={onClick} aria-label={label} size={size}>
+            <Icon size="70%" />
         </ActionIcon>
     );
 };
@@ -83,6 +97,8 @@ export const IconButton = ({ icon: Icon, label, onClick, variant = 'subtle', col
 // --- Menu ---
 export interface MenuProps {
     children: React.ReactNode;
+    /** Custom trigger element */
+    trigger?: React.ReactNode;
 }
 
 export interface MenuItemProps {
@@ -92,13 +108,15 @@ export interface MenuItemProps {
     danger?: boolean;
 }
 
-const MenuRoot = ({ children }: MenuProps) => {
+const MenuRoot = ({ children, trigger }: MenuProps) => {
     return (
-        <MantineMenu shadow="md" width={200}>
+        <MantineMenu shadow="md" width={200} position="bottom-end">
             <MantineMenu.Target>
-                <ActionIcon variant="subtle" color="gray">
-                    <MoreHorizontal size="1rem" />
-                </ActionIcon>
+                {trigger || (
+                    <ActionIcon variant="subtle" color="gray">
+                        <MoreHorizontal size="1rem" />
+                    </ActionIcon>
+                )}
             </MantineMenu.Target>
 
             <MantineMenu.Dropdown>
