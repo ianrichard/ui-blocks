@@ -55,7 +55,7 @@ const CardRoot = ({ children, elevated, dimmed, padding = 'lg', onClick, ...prop
     );
 };
 
-const CardHeader = ({ children }: CardHeaderProps) => {
+export const CardHeader = ({ children }: CardHeaderProps) => {
     return (
         <Box>
             <Group justify="space-between" align="center">
@@ -65,7 +65,7 @@ const CardHeader = ({ children }: CardHeaderProps) => {
     );
 };
 
-const CardTitle = ({ children }: CardTitleProps) => {
+export const CardTitle = ({ children }: CardTitleProps) => {
     return (
         <Text fw={600} size="lg">
             {children}
@@ -73,11 +73,11 @@ const CardTitle = ({ children }: CardTitleProps) => {
     );
 };
 
-const CardBody = ({ children }: CardBodyProps) => {
+export const CardBody = ({ children }: CardBodyProps) => {
     return <Box>{children}</Box>;
 };
 
-const CardFooter = ({ children }: CardFooterProps) => {
+export const CardFooter = ({ children }: CardFooterProps) => {
     return (
         <Box pt="sm" style={{ borderTop: '1px solid var(--mantine-color-gray-2)' }}>
             <Group justify="flex-end">

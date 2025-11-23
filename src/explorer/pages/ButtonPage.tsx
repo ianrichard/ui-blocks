@@ -1,14 +1,20 @@
 import { useState } from 'react';
 import { Block } from '../../blocks';
-import { Stack, Group, Switch, Paper } from '@mantine/core';
+import { Switch, Group } from '@mantine/core';
+import { CodePreview } from '../components/CodePreview';
+import { ButtonVariantsDemo } from '../demos/ButtonVariantsDemo';
+import buttonDemoCodeRaw from '../demos/ButtonVariantsDemo.tsx?raw';
+import { extractDemoCode } from '../utils/extractDemoCode';
 
 export function ButtonPage() {
     const [block, setBlock] = useState(false);
     const [disabled, setDisabled] = useState(false);
     const [loading, setLoading] = useState(false);
 
+    const buttonDemoCode = extractDemoCode(buttonDemoCodeRaw);
+
     return (
-        <Stack gap="xl">
+        <Block.Stack gap="xl">
             <Block.Heading>Button Block</Block.Heading>
             <Block.Subheading>
                 Interactive elements for triggering actions.
@@ -32,53 +38,10 @@ export function ButtonPage() {
                 />
             </Group>
 
-            <Paper p="xl" withBorder>
-                <Stack gap="md" align={block ? 'stretch' : 'flex-start'}>
-                    <Block.Button
-                        primary
-                        block={block}
-                        disabled={disabled}
-                        loading={loading}
-                    >
-                        Primary Action
-                    </Block.Button>
-
-                    <Block.Button
-                        secondary
-                        block={block}
-                        disabled={disabled}
-                        loading={loading}
-                    >
-                        Secondary Action
-                    </Block.Button>
-
-                    <Block.Button
-                        danger
-                        block={block}
-                        disabled={disabled}
-                        loading={loading}
-                    >
-                        Danger Action
-                    </Block.Button>
-
-                    <Block.Button
-                        ghost
-                        block={block}
-                        disabled={disabled}
-                        loading={loading}
-                    >
-                        Ghost Action
-                    </Block.Button>
-
-                    <Block.Button
-                        block={block}
-                        disabled={disabled}
-                        loading={loading}
-                    >
-                        Default Action
-                    </Block.Button>
-                </Stack>
-            </Paper>
-        </Stack>
+            <CodePreview title="Button Variants" code={buttonDemoCode}>
+                <ButtonVariantsDemo block={block} disabled={disabled} loading={loading} />
+            </CodePreview>
+        </Block.Stack>
     );
 }
+

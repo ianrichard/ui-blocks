@@ -1,6 +1,8 @@
 import { useState } from 'react';
-import { Box, Paper, Code, Group, Button, Text, Collapse, ActionIcon, Tooltip, CopyButton } from '@mantine/core';
+import { Box, Paper, Group, Button, Text, Collapse, ActionIcon, Tooltip, CopyButton } from '@mantine/core';
 import { Code as CodeIcon, Check, Copy } from 'lucide-react';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 interface CodePreviewProps {
     children: React.ReactNode;
@@ -9,7 +11,7 @@ interface CodePreviewProps {
 }
 
 export function CodePreview({ children, code, title }: CodePreviewProps) {
-    const [opened, setOpened] = useState(false);
+    const [opened, setOpened] = useState(true); // Changed to true for expanded by default
 
     return (
         <Paper withBorder radius="md" mb="xl">
@@ -47,8 +49,20 @@ export function CodePreview({ children, code, title }: CodePreviewProps) {
             </Box>
 
             <Collapse in={opened}>
-                <Box p="md" style={{ borderTop: '1px solid var(--mantine-color-default-border)' }}>
-                    <Code block style={{ whiteSpace: 'pre-wrap' }}>{code}</Code>
+                <Box style={{ borderTop: '1px solid var(--mantine-color-default-border)' }}>
+                    <SyntaxHighlighter
+                        language="tsx"
+                        style={vscDarkPlus}
+                        customStyle={{
+                            margin: 0,
+                            borderRadius: 0,
+                            fontSize: '0.875rem',
+                            lineHeight: '1.5',
+                        }}
+                        showLineNumbers
+                    >
+                        {code}
+                    </SyntaxHighlighter>
                 </Box>
             </Collapse>
         </Paper>

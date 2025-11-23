@@ -10,7 +10,7 @@ export interface HeaderProps {
     sticky?: boolean;
 }
 
-export const Header = ({ children, height = 60, p = 'md', bg, sticky }: HeaderProps) => {
+export const ShellHeader = ({ children, height = 60, p = 'md', bg, sticky }: HeaderProps) => {
     return (
         <AppShell.Header
             p={p}
@@ -33,7 +33,7 @@ export interface FooterProps {
     bg?: string;
 }
 
-export const Footer = ({ children, height = 60, p = 'md', bg }: FooterProps) => {
+export const ShellFooter = ({ children, height = 60, p = 'md', bg }: FooterProps) => {
     return (
         <AppShell.Footer p={p} bg={bg} style={{ height }}>
             {children}

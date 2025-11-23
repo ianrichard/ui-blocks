@@ -8,28 +8,28 @@ export function CardPage() {
     const [dimmed, setDimmed] = useState(false);
 
     const interactiveCardCode = `<Block.Card elevated={${elevated}} dimmed={${dimmed}}>
-    <Block.Card.Header>
-        <Block.Card.Title>Interactive Card</Block.Card.Title>
-    </Block.Card.Header>
-    <Block.Card.Body>
+    <Block.Header>
+        <Block.Title>Interactive Card</Block.Title>
+    </Block.Header>
+    <Block.Body>
         <Block.Text>
             Toggle the switches above to change this card's state.
         </Block.Text>
-    </Block.Card.Body>
-    <Block.Card.Footer>
+    </Block.Body>
+    <Block.Footer>
         <Block.Text dim size="sm">Dynamic Props Demo</Block.Text>
-    </Block.Card.Footer>
+    </Block.Footer>
 </Block.Card>`;
 
     const staticCardCode = `<Block.Card>
-    <Block.Card.Header>
-        <Block.Card.Title>Static Card</Block.Card.Title>
-    </Block.Card.Header>
-    <Block.Card.Body>
+    <Block.Header>
+        <Block.Title>Static Card</Block.Title>
+    </Block.Header>
+    <Block.Body>
         <Block.Text>
             This is the default flat card with a border.
         </Block.Text>
-    </Block.Card.Body>
+    </Block.Body>
 </Block.Card>`;
 
     return (
@@ -54,30 +54,30 @@ export function CardPage() {
 
             <CodePreview title="Interactive Example" code={interactiveCardCode}>
                 <Block.Card elevated={elevated} dimmed={dimmed}>
-                    <Block.Card.Header>
-                        <Block.Card.Title>Interactive Card</Block.Card.Title>
-                    </Block.Card.Header>
-                    <Block.Card.Body>
+                    <Block.Header>
+                        <Block.Title>Interactive Card</Block.Title>
+                    </Block.Header>
+                    <Block.Body>
                         <Block.Text>
                             Toggle the switches above to change this card's state.
                         </Block.Text>
-                    </Block.Card.Body>
-                    <Block.Card.Footer>
+                    </Block.Body>
+                    <Block.Footer>
                         <Block.Text dim size="sm">Dynamic Props Demo</Block.Text>
-                    </Block.Card.Footer>
+                    </Block.Footer>
                 </Block.Card>
             </CodePreview>
 
             <CodePreview title="Static Example" code={staticCardCode}>
                 <Block.Card>
-                    <Block.Card.Header>
-                        <Block.Card.Title>Static Card</Block.Card.Title>
-                    </Block.Card.Header>
-                    <Block.Card.Body>
+                    <Block.Header>
+                        <Block.Title>Static Card</Block.Title>
+                    </Block.Header>
+                    <Block.Body>
                         <Block.Text>
                             This is the default flat card with a border.
                         </Block.Text>
-                    </Block.Card.Body>
+                    </Block.Body>
                 </Block.Card>
             </CodePreview>
         </Stack>
