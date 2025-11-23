@@ -3,18 +3,18 @@ import { Group } from '@mantine/core';
 import { CodePreview } from '../../components/CodePreview';
 
 export function ArticleTeaserPage() {
-    const articleTeaserCode = `<Block.Stack gap="lg">
+    const articleTeaserCode = `<Block.Column gap="lg">
     <Block.Card>
-        <Block.Columns>
-            <Block.Column span={4}>
+        <Block.Grid>
+            <Block.GridItem span={4}>
                 <Block.Image
                     src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-1.png"
                     alt="Tech"
                     height="100%"
                 />
             </Block.Column>
-            <Block.Column span={8}>
-                <Block.Stack gap="xs">
+            <Block.GridItem span={8}>
+                <Block.Column gap="xs">
                     <Group>
                         <Block.Badge color="blue">Technology</Block.Badge>
                         <Block.Text size="sm" dim>5 min read</Block.Text>
@@ -27,14 +27,14 @@ export function ArticleTeaserPage() {
                         <Block.Avatar src="..." size="sm" />
                         <Block.Text size="sm">Sarah Connor</Block.Text>
                     </Group>
-                </Block.Stack>
+                </Block.Column>
             </Block.Column>
-        </Block.Columns>
+        </Block.Grid>
     </Block.Card>
-</Block.Stack>`;
+</Block.Column>`;
 
     return (
-        <Block.Stack gap="xl">
+        <Block.Column gap="xl">
             <Block.Heading>Article Teaser</Block.Heading>
             <Block.Subheading>
                 Standardized content hierarchy for lists and feeds.
@@ -42,19 +42,19 @@ export function ArticleTeaserPage() {
 
             <CodePreview title="Article Teaser List" code={articleTeaserCode}>
                 <Block.Container size="md">
-                    <Block.Stack gap="lg">
+                    <Block.Column gap="lg">
                         {/* Item 1 */}
                         <Block.Card>
-                            <Block.Columns>
-                                <Block.Column span={4}>
+                            <Block.Grid>
+                                <Block.GridItem span={4}>
                                     <Block.Image
                                         src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-1.png"
                                         alt="Tech"
                                         height="100%"
                                     />
-                                </Block.Column>
-                                <Block.Column span={8}>
-                                    <Block.Stack gap="xs">
+                                </Block.GridItem>
+                                <Block.GridItem span={8}>
+                                    <Block.Column gap="xs">
                                         <Group>
                                             <Block.Badge color="blue">Technology</Block.Badge>
                                             <Block.Text size="sm" dim>5 min read</Block.Text>
@@ -67,23 +67,23 @@ export function ArticleTeaserPage() {
                                             <Block.Avatar src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-2.png" size="sm" />
                                             <Block.Text size="sm">Sarah Connor</Block.Text>
                                         </Group>
-                                    </Block.Stack>
-                                </Block.Column>
-                            </Block.Columns>
+                                    </Block.Column>
+                                </Block.GridItem>
+                            </Block.Grid>
                         </Block.Card>
 
                         {/* Item 2 */}
                         <Block.Card>
-                            <Block.Columns>
-                                <Block.Column span={4}>
+                            <Block.Grid>
+                                <Block.GridItem span={4}>
                                     <Block.Image
                                         src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-2.png"
                                         alt="Design"
                                         height="100%"
                                     />
-                                </Block.Column>
-                                <Block.Column span={8}>
-                                    <Block.Stack gap="xs">
+                                </Block.GridItem>
+                                <Block.GridItem span={8}>
+                                    <Block.Column gap="xs">
                                         <Group>
                                             <Block.Badge color="pink">Design</Block.Badge>
                                             <Block.Text size="sm" dim>3 min read</Block.Text>
@@ -96,14 +96,14 @@ export function ArticleTeaserPage() {
                                             <Block.Avatar src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-3.png" size="sm" />
                                             <Block.Text size="sm">John Doe</Block.Text>
                                         </Group>
-                                    </Block.Stack>
-                                </Block.Column>
-                            </Block.Columns>
+                                    </Block.Column>
+                                </Block.GridItem>
+                            </Block.Grid>
                         </Block.Card>
-                    </Block.Stack>
+                    </Block.Column>
                 </Block.Container>
             </CodePreview>
-        </Block.Stack>
+        </Block.Column>
     );
 }
 

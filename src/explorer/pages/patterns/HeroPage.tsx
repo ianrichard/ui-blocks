@@ -4,7 +4,7 @@ import { CodePreview } from '../../components/CodePreview';
 
 export function HeroPage() {
     const heroCode = `<Block.Container size="lg">
-    <Block.Stack relaxed>
+    <Block.Column>
         <Block.Badge variant="filled" color="blue">New Release</Block.Badge>
 
         <Block.Heading level={1}>
@@ -20,11 +20,11 @@ export function HeroPage() {
             <Block.Button primary size="lg">Get Started</Block.Button>
             <Block.Button size="lg">View Source</Block.Button>
         </Group>
-    </Block.Stack>
+    </Block.Column>
 </Block.Container>`;
 
     return (
-        <Block.Stack gap="xl">
+        <Block.Column gap="xl">
             <Block.Heading>Hero Header Pattern</Block.Heading>
             <Block.Subheading>
                 A high-impact section for landing pages.
@@ -32,7 +32,7 @@ export function HeroPage() {
 
             <CodePreview title="Hero Section" code={heroCode}>
                 <Block.Container size="lg">
-                    <Block.Stack relaxed>
+                    <Block.Column>
                         <Block.Badge variant="filled" color="blue">New Release</Block.Badge>
 
                         <Block.Heading level={1}>
@@ -48,10 +48,10 @@ export function HeroPage() {
                             <Block.Button primary size="lg">Get Started</Block.Button>
                             <Block.Button size="lg">View Source</Block.Button>
                         </Group>
-                    </Block.Stack>
+                    </Block.Column>
                 </Block.Container>
             </CodePreview>
-        </Block.Stack>
+        </Block.Column>
     );
 }
 

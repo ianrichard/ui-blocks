@@ -8,7 +8,7 @@ export function TypographyPage() {
     const typographyDemoCode = extractDemoCode(typographyDemoCodeRaw);
 
     return (
-        <Block.Stack gap="xl">
+        <Block.Column gap="xl">
             <Block.Heading>Typography Block</Block.Heading>
             <Block.Subheading>
                 Standardized text elements for consistent hierarchy.
@@ -17,6 +17,6 @@ export function TypographyPage() {
             <CodePreview title="Typography Variants" code={typographyDemoCode}>
                 <TypographyDemo />
             </CodePreview>
-        </Block.Stack>
+        </Block.Column>
     );
 }

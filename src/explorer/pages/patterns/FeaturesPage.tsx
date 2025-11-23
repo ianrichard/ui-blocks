@@ -16,63 +16,63 @@ const Feature = ({ icon: Icon, title, description }: any) => (
 );
 
 export function FeaturesPage() {
-    const featuresCode = `<Block.Columns>
-    <Block.Column span={4}>
+    const featuresCode = `<Block.Grid>
+    <Block.GridItem span={4}>
         <Feature
             icon={IconGauge}
             title="Performance"
             description="Optimized for speed and efficiency, ensuring your application runs smoothly under any load."
         />
     </Block.Column>
-    <Block.Column span={4}>
+    <Block.GridItem span={4}>
         <Feature
             icon={IconCookie}
             title="Privacy Focused"
             description="We respect user privacy and ensure data is handled with the utmost care and security."
         />
     </Block.Column>
-    <Block.Column span={4}>
+    <Block.GridItem span={4}>
         <Feature
             icon={IconUser}
             title="User Centric"
             description="Designed with the user in mind, providing an intuitive and enjoyable experience."
         />
     </Block.Column>
-</Block.Columns>`;
+</Block.Grid>`;
 
     return (
-        <Block.Stack gap="xl">
+        <Block.Column gap="xl">
             <Block.Heading>Features Grid Pattern</Block.Heading>
             <Block.Subheading>
                 A grid layout for highlighting key product features.
             </Block.Subheading>
 
             <CodePreview title="Features Grid" code={featuresCode}>
-                <Block.Columns>
-                    <Block.Column span={4}>
+                <Block.Grid>
+                    <Block.GridItem span={4}>
                         <Feature
                             icon={IconGauge}
                             title="Performance"
                             description="Optimized for speed and efficiency, ensuring your application runs smoothly under any load."
                         />
-                    </Block.Column>
-                    <Block.Column span={4}>
+                    </Block.GridItem>
+                    <Block.GridItem span={4}>
                         <Feature
                             icon={IconCookie}
                             title="Privacy Focused"
                             description="We respect user privacy and ensure data is handled with the utmost care and security."
                         />
-                    </Block.Column>
-                    <Block.Column span={4}>
+                    </Block.GridItem>
+                    <Block.GridItem span={4}>
                         <Feature
                             icon={IconUser}
                             title="User Centric"
                             description="Designed with the user in mind, providing an intuitive and enjoyable experience."
                         />
-                    </Block.Column>
-                </Block.Columns>
+                    </Block.GridItem>
+                </Block.Grid>
             </CodePreview>
-        </Block.Stack>
+        </Block.Column>
     );
 }
 

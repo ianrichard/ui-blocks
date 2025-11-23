@@ -8,7 +8,7 @@ interface ButtonVariantsDemoProps {
 
 export function ButtonVariantsDemo({ block, disabled, loading }: ButtonVariantsDemoProps) {
     return (
-        <Block.Stack gap="md" align={block ? 'stretch' : 'flex-start'}>
+        <Block.Column gap="md" align={block ? 'stretch' : 'flex-start'}>
             <Block.Button
                 primary
                 block={block}
@@ -52,6 +52,6 @@ export function ButtonVariantsDemo({ block, disabled, loading }: ButtonVariantsD
             >
                 Default Action
             </Block.Button>
-        </Block.Stack>
+        </Block.Column>
     );
 }

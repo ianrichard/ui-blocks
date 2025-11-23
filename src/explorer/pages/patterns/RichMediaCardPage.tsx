@@ -11,7 +11,7 @@ export function RichMediaCardPage() {
     />
 
     <Block.Body>
-        <Block.Stack gap="xs">
+        <Block.Column gap="xs">
             <Group justify="space-between" align="flex-start">
                 <Block.Heading level={3}>Big Buck Bunny</Block.Heading>
                 <Block.Menu>
@@ -29,12 +29,12 @@ export function RichMediaCardPage() {
                 <Block.Button primary icon={Play}>Watch Now</Block.Button>
                 <Block.Button>Trailer</Block.Button>
             </Group>
-        </Block.Stack>
+        </Block.Column>
     </Block.Body>
 </Block.Card>`;
 
     return (
-        <Block.Stack gap="xl">
+        <Block.Column gap="xl">
             <Block.Heading>Rich Media Card</Block.Heading>
             <Block.Subheading>
                 A holistic pattern combining media, content, and contextual actions.
@@ -49,7 +49,7 @@ export function RichMediaCardPage() {
                         />
 
                         <Block.Body>
-                            <Block.Stack gap="xs">
+                            <Block.Column gap="xs">
                                 <Group justify="space-between" align="flex-start">
                                     <Block.Heading level={3}>Big Buck Bunny</Block.Heading>
                                     <Block.Menu>
@@ -67,12 +67,12 @@ export function RichMediaCardPage() {
                                     <Block.Button primary icon={Play}>Watch Now</Block.Button>
                                     <Block.Button>Trailer</Block.Button>
                                 </Group>
-                            </Block.Stack>
+                            </Block.Column>
                         </Block.Body>
                     </Block.Card>
                 </Block.Container>
             </CodePreview>
-        </Block.Stack>
+        </Block.Column>
     );
 }
 

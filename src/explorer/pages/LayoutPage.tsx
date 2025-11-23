@@ -1,53 +1,41 @@
 import { useState } from 'react';
 import { Block } from '../../blocks';
-import { Switch, Group } from '@mantine/core';
+import { Group } from '@mantine/core';
 import { CodePreview } from '../components/CodePreview';
-import { StackDemo } from '../demos/StackDemo';
-import { ColumnsDemo } from '../demos/ColumnsDemo';
-import stackDemoCodeRaw from '../demos/StackDemo.tsx?raw';
-import columnsDemoCodeRaw from '../demos/ColumnsDemo.tsx?raw';
+import { ColumnDemo } from '../demos/ColumnDemo';
+import { GridDemo } from '../demos/GridDemo';
+import columnDemoCodeRaw from '../demos/ColumnDemo.tsx?raw';
+import gridDemoCodeRaw from '../demos/GridDemo.tsx?raw';
 import { extractDemoCode } from '../utils/extractDemoCode';
 
 export function LayoutPage() {
-    const [relaxed, setRelaxed] = useState(false);
-    const [compact, setCompact] = useState(false);
+    const [gap, setGap] = useState<'xs' | 'sm' | 'md' | 'lg' | 'xl'>('md');
 
-    const stackDemoCode = extractDemoCode(stackDemoCodeRaw);
-    const columnsDemoCode = extractDemoCode(columnsDemoCodeRaw);
+    const columnDemoCode = extractDemoCode(columnDemoCodeRaw);
+    const gridDemoCode = extractDemoCode(gridDemoCodeRaw);
 
     return (
-        <Block.Stack gap="xl">
+        <Block.Column gap="xl">
             <Block.Heading>Layout Blocks</Block.Heading>
             <Block.Subheading>
                 Structural components for managing spacing and "breathing room".
             </Block.Subheading>
 
             <Group>
-                <Switch
-                    label="Relaxed (More Space)"
-                    checked={relaxed}
-                    onChange={(e) => {
-                        setRelaxed(e.currentTarget.checked);
-                        if (e.currentTarget.checked) setCompact(false);
-                    }}
-                />
-                <Switch
-                    label="Compact (Less Space)"
-                    checked={compact}
-                    onChange={(e) => {
-                        setCompact(e.currentTarget.checked);
-                        if (e.currentTarget.checked) setRelaxed(false);
-                    }}
-                />
+                <Block.Button onClick={() => setGap('xs')} primary={gap === 'xs'}>XS</Block.Button>
+                <Block.Button onClick={() => setGap('sm')} primary={gap === 'sm'}>SM</Block.Button>
+                <Block.Button onClick={() => setGap('md')} primary={gap === 'md'}>MD</Block.Button>
+                <Block.Button onClick={() => setGap('lg')} primary={gap === 'lg'}>LG</Block.Button>
+                <Block.Button onClick={() => setGap('xl')} primary={gap === 'xl'}>XL</Block.Button>
             </Group>
 
-            <CodePreview title="Stack Example" code={stackDemoCode}>
-                <StackDemo relaxed={relaxed} compact={compact} />
+            <CodePreview title="Column Example" code={columnDemoCode}>
+                <ColumnDemo gap={gap} />
             </CodePreview>
 
-            <CodePreview title="Columns Example" code={columnsDemoCode}>
-                <ColumnsDemo />
+            <CodePreview title="Grid Example" code={gridDemoCode}>
+                <GridDemo />
             </CodePreview>
-        </Block.Stack>
+        </Block.Column>
     );
 }

@@ -30,16 +30,16 @@ export function ArticleCardPage() {
                 src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-1.png"
                 alt="Author"
             />
-            <Block.Stack gap="xs" compact>
+            <Block.Column gap="xs">
                 <Block.Text size="sm" bold>Elsa P.</Block.Text>
                 <Block.Text size="sm" dim>Editor in Chief</Block.Text>
-            </Block.Stack>
+            </Block.Column>
         </Group>
     </Block.Footer>
 </Block.Card>`;
 
     return (
-        <Block.Stack gap="xl">
+        <Block.Column gap="xl">
             <Block.Heading>Article Card Pattern</Block.Heading>
             <Block.Subheading>
                 A composed pattern for blog posts or news articles.
@@ -74,16 +74,16 @@ export function ArticleCardPage() {
                                     src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-1.png"
                                     alt="Author"
                                 />
-                                <Block.Stack gap="xs" compact>
+                                <Block.Column gap="xs">
                                     <Block.Text size="sm" bold>Elsa P.</Block.Text>
                                     <Block.Text size="sm" dim>Editor in Chief</Block.Text>
-                                </Block.Stack>
+                                </Block.Column>
                             </Group>
                         </Block.Footer>
                     </Block.Card>
                 </Block.Container>
             </CodePreview>
-        </Block.Stack>
+        </Block.Column>
     );
 }
 

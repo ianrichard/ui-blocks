@@ -17,15 +17,17 @@ const Placeholder = ({ height = 50, label }: { height?: number; label?: string }
     </Box>
 );
 
-export function GridDemo() {
-    return (
-        <Block.Grid>
-            <Block.GridItem span={4}><Placeholder label="Span 4" /></Block.GridItem>
-            <Block.GridItem span={4}><Placeholder label="Span 4" /></Block.GridItem>
-            <Block.GridItem span={4}><Placeholder label="Span 4" /></Block.GridItem>
+interface ColumnDemoProps {
+    gap?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+}
 
-            <Block.GridItem span={8}><Placeholder label="Span 8" /></Block.GridItem>
-            <Block.GridItem span={4}><Placeholder label="Span 4" /></Block.GridItem>
-        </Block.Grid>
+export function ColumnDemo({ gap = 'md' }: ColumnDemoProps) {
+    return (
+        <Block.Column gap={gap}>
+            <Placeholder label="Item 1" />
+            <Placeholder label="Item 2" />
+            <Placeholder label="Item 3" />
+        </Block.Column>
     );
 }
+

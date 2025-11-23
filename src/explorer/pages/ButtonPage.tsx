@@ -14,7 +14,7 @@ export function ButtonPage() {
     const buttonDemoCode = extractDemoCode(buttonDemoCodeRaw);
 
     return (
-        <Block.Stack gap="xl">
+        <Block.Column gap="xl">
             <Block.Heading>Button Block</Block.Heading>
             <Block.Subheading>
                 Interactive elements for triggering actions.
@@ -41,7 +41,7 @@ export function ButtonPage() {
             <CodePreview title="Button Variants" code={buttonDemoCode}>
                 <ButtonVariantsDemo block={block} disabled={disabled} loading={loading} />
             </CodePreview>
-        </Block.Stack>
+        </Block.Column>
     );
 }
 

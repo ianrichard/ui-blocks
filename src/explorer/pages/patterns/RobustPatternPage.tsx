@@ -3,8 +3,8 @@ import { Edit, Trash, Share, Bell, Settings } from 'lucide-react';
 import { CodePreview } from '../../components/CodePreview';
 
 export const RobustPatternPage = () => {
-    const robustPatternCode = `<Block.Columns gap="lg">
-    <Block.Column span={4}>
+    const robustPatternCode = `<Block.Grid gap="lg">
+    <Block.GridItem span={4}>
         <Block.Card elevated>
             <Block.Header>
                 <Block.Title>Card with Actions</Block.Title>
@@ -25,9 +25,9 @@ export const RobustPatternPage = () => {
                 <Block.Button size="xs" primary>Save</Block.Button>
             </Block.Footer>
         </Block.Card>
-    </Block.Column>
+    </Block.GridItem>
 
-    <Block.Column span={4}>
+    <Block.GridItem span={4}>
         <Block.Card>
             <Block.Header>
                 <Block.Avatar initials="JD" />
@@ -38,41 +38,41 @@ export const RobustPatternPage = () => {
                 <Block.Text dim size="sm">
                     Software Engineer at Tech Corp
                 </Block.Text>
-                <Block.Stack gap="xs">
+                <Block.Column gap="xs">
                     <Block.Button block secondary icon={Bell}>Follow</Block.Button>
                     <Block.Button block ghost icon={Settings}>Settings</Block.Button>
-                </Block.Stack>
+                </Block.GridItem>
             </Block.Body>
         </Block.Card>
-    </Block.Column>
+    </Block.GridItem>
 
-    <Block.Column span={4}>
+    <Block.GridItem span={4}>
         <Block.Card dimmed padding="xl">
             <Block.Body>
-                <Block.Stack align="center">
+                <Block.Column align="center">
                     <Block.Image src="..." alt="Tech" height={140} />
                     <Block.Heading level={4}>Dimmed Card</Block.Heading>
                     <Block.Text size="sm">
                         This card uses the 'dimmed' prop for a subtle background and 'padding="xl"' for more space.
                         The stack is aligned to center.
                     </Block.Text>
-                </Block.Stack>
+                </Block.GridItem>
             </Block.Body>
         </Block.Card>
-    </Block.Column>
-</Block.Columns>`;
+    </Block.GridItem>
+</Block.Grid>`;
 
     return (
         <Block.Container size="xl">
-            <Block.Stack gap="xl" relaxed>
+            <Block.Column gap="xl">
                 <Block.Heading level={1}>Robust Components Demo</Block.Heading>
                 <Block.Subheading>
                     Showcasing the enhanced robustness, type safety, and flexibility of our UI blocks.
                 </Block.Subheading>
 
                 <CodePreview title="Robust Pattern Examples" code={robustPatternCode}>
-                    <Block.Columns gap="lg">
-                        <Block.Column span={4}>
+                    <Block.Grid gap="lg">
+                        <Block.GridItem span={4}>
                             <Block.Card elevated>
                                 <Block.Header>
                                     <Block.Title>Card with Actions</Block.Title>
@@ -93,9 +93,9 @@ export const RobustPatternPage = () => {
                                     <Block.Button size="xs" primary>Save</Block.Button>
                                 </Block.Footer>
                             </Block.Card>
-                        </Block.Column>
+                        </Block.GridItem>
 
-                        <Block.Column span={4}>
+                        <Block.GridItem span={4}>
                             <Block.Card>
                                 <Block.Header>
                                     <Block.Avatar initials="JD" />
@@ -106,18 +106,18 @@ export const RobustPatternPage = () => {
                                     <Block.Text dim size="sm">
                                         Software Engineer at Tech Corp
                                     </Block.Text>
-                                    <Block.Stack gap="xs">
+                                    <Block.Column gap="xs">
                                         <Block.Button block secondary icon={Bell}>Follow</Block.Button>
                                         <Block.Button block ghost icon={Settings}>Settings</Block.Button>
-                                    </Block.Stack>
+                                    </Block.Column>
                                 </Block.Body>
                             </Block.Card>
-                        </Block.Column>
+                        </Block.GridItem>
 
-                        <Block.Column span={4}>
+                        <Block.GridItem span={4}>
                             <Block.Card dimmed padding="xl">
                                 <Block.Body>
-                                    <Block.Stack align="center">
+                                    <Block.Column align="center">
                                         <Block.Image
                                             src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80"
                                             alt="Tech"
@@ -128,11 +128,11 @@ export const RobustPatternPage = () => {
                                             This card uses the 'dimmed' prop for a subtle background and 'padding="xl"' for more space.
                                             The stack is aligned to center.
                                         </Block.Text>
-                                    </Block.Stack>
+                                    </Block.Column>
                                 </Block.Body>
                             </Block.Card>
-                        </Block.Column>
-                    </Block.Columns>
+                        </Block.GridItem>
+                    </Block.Grid>
                 </CodePreview>
 
                 <Block.Container size="sm">
@@ -141,7 +141,7 @@ export const RobustPatternPage = () => {
                     </Block.Text>
                 </Block.Container>
 
-            </Block.Stack>
+            </Block.Column>
         </Block.Container>
     );
 };

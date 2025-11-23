@@ -11,7 +11,7 @@ export const StructurePage = () => {
     return (
         <Block.Shell
             header={
-                <Block.Header sticky>
+                <Block.Header>
                     <Block.Navbar
                         logo={<Block.Heading level={3}>My App</Block.Heading>}
                         links={[
@@ -20,29 +20,29 @@ export const StructurePage = () => {
                             { label: 'About', to: '/about' },
                         ]}
                         actions={
-                            <Block.Stack gap="xs" align="center" justify="flex-end" relaxed={false} compact={false}>
+                            <Block.Column gap="xs" align="center" justify="flex-end">
                                 <TextInput placeholder="Search..." leftSection={<Search size={14} />} />
                                 <Block.IconButton icon={Bell} label="Notifications" />
                                 <Block.Avatar initials="US" size="sm" />
-                            </Block.Stack>
+                            </Block.Column>
                         }
                     />
                 </Block.Header>
             }
             footer={
                 <Block.Footer>
-                    <Block.Stack align="center" justify="space-between">
+                    <Block.Column align="center" justify="space-between">
                         <Block.Text size="sm" dim>© 2023 My App. All rights reserved.</Block.Text>
-                        <Block.Stack gap="md">
+                        <Block.Column gap="md">
                             <Block.Link href="#">Privacy</Block.Link>
                             <Block.Link href="#">Terms</Block.Link>
-                        </Block.Stack>
-                    </Block.Stack>
+                        </Block.Column>
+                    </Block.Column>
                 </Block.Footer>
             }
         >
             <Block.Container size="xl">
-                <Block.Stack gap="lg">
+                <Block.Column gap="lg">
                     <Block.Breadcrumbs mt="md">
                         <Block.Link to="/">Home</Block.Link>
                         <Block.Link to="/dashboard">Dashboard</Block.Link>
@@ -59,35 +59,35 @@ export const StructurePage = () => {
                         </Block.Tabs.List>
 
                         <Block.Tabs.Panel value="dashboard">
-                            <Block.Stack mt="lg">
+                            <Block.Column mt="lg">
                                 <Block.Text>Welcome to your dashboard overview.</Block.Text>
-                                <Block.Columns gap="md">
-                                    <Block.Column span={4}>
+                                <Block.Grid gap="md">
+                                    <Block.GridItem span={4}>
                                         <Block.Card elevated>
                                             <Block.Body>
                                                 <Block.Heading level={4}>Total Users</Block.Heading>
                                                 <Block.Text size="xl" bold>1,234</Block.Text>
                                             </Block.Body>
                                         </Block.Card>
-                                    </Block.Column>
-                                    <Block.Column span={4}>
+                                    </Block.GridItem>
+                                    <Block.GridItem span={4}>
                                         <Block.Card elevated>
                                             <Block.Body>
                                                 <Block.Heading level={4}>Revenue</Block.Heading>
                                                 <Block.Text size="xl" bold>$45,678</Block.Text>
                                             </Block.Body>
                                         </Block.Card>
-                                    </Block.Column>
-                                    <Block.Column span={4}>
+                                    </Block.GridItem>
+                                    <Block.GridItem span={4}>
                                         <Block.Card elevated>
                                             <Block.Body>
                                                 <Block.Heading level={4}>Active Sessions</Block.Heading>
                                                 <Block.Text size="xl" bold>89</Block.Text>
                                             </Block.Body>
                                         </Block.Card>
-                                    </Block.Column>
-                                </Block.Columns>
-                            </Block.Stack>
+                                    </Block.GridItem>
+                                </Block.Grid>
+                            </Block.Column>
                         </Block.Tabs.Panel>
 
                         <Block.Tabs.Panel value="users">
@@ -98,7 +98,7 @@ export const StructurePage = () => {
                             <Block.Text mt="lg">Settings configuration goes here.</Block.Text>
                         </Block.Tabs.Panel>
                     </Block.Tabs>
-                </Block.Stack>
+                </Block.Column>
             </Block.Container>
         </Block.Shell>
     );

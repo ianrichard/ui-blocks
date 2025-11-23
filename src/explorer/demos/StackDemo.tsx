@@ -18,16 +18,16 @@ const Placeholder = ({ height = 50, label }: { height?: number; label?: string }
 );
 
 interface StackDemoProps {
-    relaxed?: boolean;
-    compact?: boolean;
+   ?: boolean;
+   ?: boolean;
 }
 
-export function StackDemo({ relaxed, compact }: StackDemoProps) {
+export function StackDemo({, }: StackDemoProps) {
     return (
-        <Block.Stack relaxed={relaxed} compact={compact}>
+        <Block.Column={relaxed}={compact}>
             <Placeholder label="Item 1" />
             <Placeholder label="Item 2" />
             <Placeholder label="Item 3" />
-        </Block.Stack>
+        </Block.Column>
     );
 }
