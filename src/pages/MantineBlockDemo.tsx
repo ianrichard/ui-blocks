@@ -1,45 +1,55 @@
-import Block from '../components/Block';
-import {
-    basicCard,
-    cardWithImage,
-    horizontalCard,
-    gridLayout,
-    cardWithHeader,
-    backgroundVariants,
-    buttonVariants,
-    markdownExample
-} from '../snippets';
+import MantineBlock from "../components/Block/MantineBlock";
+import MantineCodePreview from "../components/CodePreview/MantineCodePreview";
+import MantineMarkdown from "../components/Markdown/MantineMarkdown";
+import { Demos } from "../demos";
 
 export function MantineBlockDemo() {
-    return (
-        <Block column gap="xl">
-            {/* Basic Card Example */}
-            <Block.Markdown src={basicCard} />
-            <Block.CodePreview src={basicCard} title="Basic Card" />
+  return (
+    <MantineBlock gap="xl">
+      {/* Basic Card Example */}
+      <Demos.BasicCard.Demo />
+      <MantineCodePreview src={Demos.BasicCard.source} title="Basic Card" />
 
-            {/* Card with Image */}
-            <Block.Markdown src={cardWithImage} />
-            <Block.CodePreview src={cardWithImage} title="Card with Image" />
+      {/* Card with Image */}
+      <Demos.CardWithImage.Demo />
+      <MantineCodePreview
+        src={Demos.CardWithImage.source}
+        title="Card with Image"
+      />
 
-            {/* Horizontal Card Layout */}
-            <Block.Markdown src={horizontalCard} />
-            <Block.CodePreview src={horizontalCard} title="Horizontal Card" />
+      {/* Horizontal Card Layout */}
+      <Demos.HorizontalCard.Demo />
+      <MantineCodePreview
+        src={Demos.HorizontalCard.source}
+        title="Horizontal Card"
+      />
 
-            {/* Grid Layout */}
-            <Block.Markdown src={gridLayout} />
-            <Block.CodePreview src={gridLayout} title="Grid Layout" />
+      {/* Grid Layout */}
+      <Demos.GridLayout.Demo />
+      <MantineCodePreview src={Demos.GridLayout.source} title="Grid Layout" />
 
-            {/* Card with Header and Actions */}
-            <Block.Markdown src={cardWithHeader} />
-            <Block.CodePreview src={cardWithHeader} title="Card with Header" />
+      {/* Card with Header and Actions */}
+      <Demos.CardWithHeader.Demo />
+      <MantineCodePreview
+        src={Demos.CardWithHeader.source}
+        title="Card with Header"
+      />
 
-            {/* Background Variants */}
-            <Block.Markdown src={backgroundVariants} />
-            <Block.CodePreview src={backgroundVariants} title="Background Variants" />
+      {/* Background Variants */}
+      <Demos.BackgroundVariants.Demo />
+      <MantineCodePreview
+        src={Demos.BackgroundVariants.source}
+        title="Background Variants"
+      />
 
-            {/* Button Variants */}
-            <Block.Markdown src={buttonVariants} />
-            <Block.CodePreview src={buttonVariants} title="Button Variants" />
-        </Block>
-    );
+      {/* Button Variants */}
+      <Demos.ButtonVariants.Demo />
+      <MantineCodePreview
+        src={Demos.ButtonVariants.source}
+        title="Button Variants"
+      />
+
+      <MantineMarkdown src="<Block><Block.Title>Hi</Block.Title></Block>" />
+    </MantineBlock>
+  );
 }

@@ -3,43 +3,51 @@
  * Each snippet is a TypeScript const string containing JSX code
  */
 
-export const basicCard = `<Block.Card inset="lg" shadow="md">
-  <Block.Title>Basic Card with Inset</Block.Title>
-  <Block.Text>
-    This is a simple card with inset padding. The Block.Card component wraps content
-    with optional shadows and borders.
-  </Block.Text>
-  <Block.Button>Learn More</Block.Button>
+export const basicCard = `
+<Block.Card>
+    <Block inset>
+        <Block.Icon />
+        <Block.Title>Basic Card with Inset</Block.Title>
+        <Block.Text>
+            This is a simple card with inset padding. The Block.Card component wraps content
+            with optional shadows and borders.
+        </Block.Text>
+        <Block.Button>Learn More</Block.Button>
+    </Block>
 </Block.Card>`;
 
-export const cardWithImage = `<Block.Card shadow="md">
-  <Block.Image height={200} />
-  <Block inset>
-    <Block.Title size="md">Card with Image</Block.Title>
-    <Block.Text>
-      Images can be placed inside cards. This example shows a card with an image
-      at the top and content below with inset padding.
-    </Block.Text>
-    <Block row mb={0}>
-      <Block.Button>Primary</Block.Button>
-      <Block.Button secondary>Secondary</Block.Button>
+export const cardWithImage = `
+<Block.Card>
+    <Block.Image height={200} />
+    <Block inset>
+        <Block.Title>Card with Image</Block.Title>
+        <Block.Text>
+            Images can be placed inside cards. This example shows a card with an image
+            at the top and content below with inset padding.
+        </Block.Text>
+        <Block row>
+            <Block.Button>Primary</Block.Button>
+            <Block.Button secondary>Secondary</Block.Button>
+        </Block>
     </Block>
-  </Block>
 </Block.Card>`;
 
-export const horizontalCard = `<Block.Card gap="lg" row shadow="md" middle>
-  <Block.Image width={300} height={200} />
-  <Block inset fill>
-    <Block.Title size="md">Horizontal Card</Block.Title>
-    <Block.Text>
-      Cards can be arranged horizontally using the row prop. This creates a
-      flexible layout perfect for media-rich content.
-    </Block.Text>
-    <Block row>
-      <Block.Button>Action</Block.Button>
-      <Block.Button hollow>Cancel</Block.Button>
+export const horizontalCard = `
+<Block.Card gap="lg" shadow="md" middle>
+    <Block row middle>
+        <Block.Image width={300} height={200} />
+        <Block inset>
+            <Block.Title size="md">Horizontal Card</Block.Title>
+            <Block.Text>
+            Cards can be arranged horizontally using the row prop. This creates a
+            flexible layout perfect for media-rich content.
+            </Block.Text>
+            <Block row>
+            <Block.Button>Action</Block.Button>
+            <Block.Button hollow>Cancel</Block.Button>
+            </Block>
+        </Block>
     </Block>
-  </Block>
 </Block.Card>`;
 
 export const gridLayout = `<Block grid cols={3} gap="md">
@@ -92,4 +100,3 @@ export const buttonVariants = `<Block.Card inset="lg" shadow="md">
     <Block.Button destructive>Destructive</Block.Button>
   </Block>
 </Block.Card>`;
-
