@@ -1,63 +1,76 @@
-import { forwardRef } from 'react';
-import type { ReactNode } from 'react';
-import { Button as MantineButtonComponent } from '@mantine/core';
+import React, { forwardRef } from "react";
+import type { ReactNode } from "react";
+import { Button } from "@mantine/core";
+import { useBlockSize } from "../Block/useBlockContext";
+import { getMantineButtonSize } from "../sizeMap";
 
 export interface ButtonProps {
-    children: ReactNode;
-    onClick?: () => void;
-    href?: string;
-    secondary?: boolean;
-    tertiary?: boolean;
-    destructive?: boolean;
-    hollow?: boolean;
-    disabled?: boolean;
+  children: ReactNode;
+  href?: string;
+  secondary?: boolean;
+  tertiary?: boolean;
+  destructive?: boolean;
+  hollow?: boolean;
+  disabled?: boolean;
+  size?: string | number;
 }
 
-const MantineButton = forwardRef<HTMLButtonElement, ButtonProps>(
-    ({ children, onClick, href, secondary, tertiary, destructive, hollow, disabled }, ref) => {
-        let variant: 'filled' | 'light' | 'outline' | 'subtle' = 'filled';
-        let color = 'blue';
+const MantineButton = forwardRef<
+  HTMLButtonElement | HTMLAnchorElement,
+  ButtonProps
+>((props, ref) => {
+  let variant: "filled" | "light" | "outline" | "subtle" = "filled";
+  let color = "blue";
 
-        if (secondary) {
-            variant = 'light';
-        } else if (tertiary) {
-            variant = 'subtle';
-        } else if (hollow) {
-            variant = 'outline';
-        }
+  const {
+    secondary,
+    tertiary,
+    destructive,
+    hollow,
+    disabled,
+    children,
+    href,
+    size,
+    ...other
+  } = props;
 
-        if (destructive) {
-            color = 'red';
-        }
+  const blockSize = useBlockSize(size);
+  const buttonSize = getMantineButtonSize(blockSize, -1);
 
-        if (href) {
-            return (
-                <MantineButtonComponent
-                    component="a"
-                    href={href}
-                    variant={variant}
-                    color={color}
-                    disabled={disabled}
-                >
-                    {children}
-                </MantineButtonComponent>
-            );
-        }
+  if (secondary) {
+    variant = "light";
+  } else if (tertiary) {
+    variant = "subtle";
+  } else if (hollow) {
+    variant = "outline";
+  }
 
-        return (
-            <MantineButtonComponent
-                ref={ref}
-                onClick={onClick}
-                variant={variant}
-                color={color}
-                disabled={disabled}
-            >
-                {children}
-            </MantineButtonComponent>
-        );
-    }
-);
+  if (destructive) {
+    color = "red";
+  }
 
-MantineButton.displayName = 'Block.Button';
+  const commonProps = {
+    variant,
+    color,
+    disabled,
+    size: buttonSize,
+    ...other,
+  };
+
+  if (href) {
+    return (
+      <Button component="a" href={href} {...commonProps}>
+        {children}
+      </Button>
+    );
+  }
+  return (
+    <Button ref={ref as React.ForwardedRef<HTMLButtonElement>} {...commonProps}>
+      {children}
+    </Button>
+  );
+});
+
+MantineButton.displayName = "Block.Button";
 
 export default MantineButton;

@@ -4,9 +4,7 @@ export default function CardWithHeaderDemo() {
   return (
     <Block.Card>
       <Block inset row middle justify borderBottom>
-        <Block.Title size="md" mb={0}>
-          Card with Header
-        </Block.Title>
+        <Block.Title fill>Card with Header</Block.Title>
         <Block.Icon
           name="IconSettings"
           onClick={() => alert("Settings clicked!")}
