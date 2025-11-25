@@ -2,8 +2,8 @@ import { forwardRef } from "react";
 import { Text } from "@mantine/core";
 import type { TextProps } from "@mantine/core";
 import type { ReactNode } from "react";
-import { getMantineSpacing, getMantineTextSize } from "../sizeMap";
-import { useBlockSize } from "../Block/useBlockContext";
+import styles from "./Text.module.scss";
+import classNames from "classnames";
 
 interface MantineTextProps extends TextProps {
   children?: ReactNode;
@@ -11,12 +11,9 @@ interface MantineTextProps extends TextProps {
 
 const MantineText = forwardRef<HTMLParagraphElement, MantineTextProps>(
   (props, ref) => {
-    const { children, size, ...other } = props;
-    const blockSize = useBlockSize(size);
-    const textSize = getMantineTextSize(blockSize);
-    const margin = getMantineSpacing(blockSize, -1);
+    const { children, className, ...other } = props;
     return (
-      <Text ref={ref} size={textSize} my={margin} {...other}>
+      <Text className={classNames(styles.text, className)} ref={ref} {...other}>
         {children}
       </Text>
     );

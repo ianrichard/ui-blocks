@@ -62,6 +62,7 @@ export interface BlockProps
   gap?: Spacing;
   inset?: boolean;
   fill?: boolean;
+  className?: string;
   onClick?: () => void;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;

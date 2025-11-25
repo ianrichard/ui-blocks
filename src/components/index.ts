@@ -1,4 +1,3 @@
-import MantineBlock from "./Block/MantineBlock";
 import MantineCard from "./Card/MantineCard";
 import MantineButton from "./Button/MantineButton";
 import MantineIcon from "./Icon/MantineIcon";
@@ -9,26 +8,16 @@ import MantineImage from "./Image/MantineImage";
 import MantineLink from "./Link/MantineLink";
 import MantineAvatar from "./Avatar/MantineAvatar";
 
-const Block = MantineBlock as typeof MantineBlock & {
-  Card: typeof MantineCard;
-  Button: typeof MantineButton;
-  Icon: typeof MantineIcon;
-  Text: typeof MantineText;
-  Title: typeof MantineTitle;
-  Subtitle: typeof MantineSubtitle;
-  Image: typeof MantineImage;
-  Link: typeof MantineLink;
-  Avatar: typeof MantineAvatar;
+const Block = {
+  Card: MantineCard,
+  Button: MantineButton,
+  Icon: MantineIcon,
+  Text: MantineText,
+  Title: MantineTitle,
+  Subtitle: MantineSubtitle,
+  Image: MantineImage,
+  Link: MantineLink,
+  Avatar: MantineAvatar,
 };
-
-Block.Card = MantineCard;
-Block.Button = MantineButton;
-Block.Icon = MantineIcon;
-Block.Text = MantineText;
-Block.Title = MantineTitle;
-Block.Subtitle = MantineSubtitle;
-Block.Image = MantineImage;
-Block.Link = MantineLink;
-Block.Avatar = MantineAvatar;
 
 export default Block;

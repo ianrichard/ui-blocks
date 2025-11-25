@@ -1,0 +1,18 @@
+.container {
+  display: block;
+  border-radius: var(--border-radius);
+}
+
+.container > :first-child {
+  margin-top: 0 !important;
+}
+
+.container > :last-child {
+  margin-bottom: 0 !important;
+}
+
+@for $i from 1 through 6 {
+  .container h#{$i} {
+    font-size: calc(var(--headline-#{$i}) * 0.75);
+  }
+}

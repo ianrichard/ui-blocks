@@ -2,10 +2,10 @@ import { forwardRef } from "react";
 import type { BlockProps } from "./Block.types";
 import { getBorderProps } from "./border";
 import { getColorProps } from "./color";
-import { Box, Flex, Grid } from "@mantine/core";
+import { Box, Flex } from "@mantine/core";
 import { useResponsiveProp } from "./useResponsiveProp";
-import { BlockProvider } from "./BlockContext";
-import { useBlockSize } from "./useBlockContext";
+import styles from "./Block.module.scss";
+import classNames from "classnames";
 
 const MantineBlock = forwardRef<HTMLDivElement, BlockProps>((props, ref) => {
   const {
@@ -16,11 +16,12 @@ const MantineBlock = forwardRef<HTMLDivElement, BlockProps>((props, ref) => {
     borderRight,
     borderBottom,
     borderLeft,
-    inset,
     middle,
     fill,
     grid,
-    size = "md",
+    size,
+    inset,
+    className,
     ...rest
   } = props;
 
@@ -37,7 +38,6 @@ const MantineBlock = forwardRef<HTMLDivElement, BlockProps>((props, ref) => {
   const col = useResponsiveProp("col", props);
   const flexDirection = row ? "row" : col ? "column" : undefined;
   const width = useResponsiveProp("width", props);
-  const renderSize = useBlockSize(size);
 
   let Component;
 
@@ -48,33 +48,23 @@ const MantineBlock = forwardRef<HTMLDivElement, BlockProps>((props, ref) => {
     Component = Box;
   }
 
-  const content = (
+  return (
     <Component
       ref={ref}
-      gap={flexDirection || grid ? "md" : undefined}
       direction={flexDirection}
       align={flexDirection === "row" && middle ? "center" : undefined}
       flex={fill ? 1 : undefined}
-      p={inset ? size : 0}
       w={width}
       bg={bg}
       color={color}
       style={{ ...borderStyles }}
-      size={renderSize}
+      className={classNames(styles.blockBase, className, {
+        [styles[`size-${size}`]]: size,
+        [styles.inset]: inset,
+      })}
       {...rest}
     />
   );
-
-  const blockContextSize = typeof size === "number" ? String(size) : size;
-
-  if (blockContextSize) {
-    return (
-      <BlockProvider value={{ size: blockContextSize }}>
-        {content}
-      </BlockProvider>
-    );
-  }
-  return content;
 });
 
 export default MantineBlock;
