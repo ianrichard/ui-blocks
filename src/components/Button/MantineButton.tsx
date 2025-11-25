@@ -3,9 +3,12 @@ import type { ReactNode } from "react";
 import { Button } from "@mantine/core";
 import { useBlockSize } from "../Block/useBlockContext";
 import { getMantineButtonSize } from "../sizeMap";
+import styles from "./Button.module.scss";
+import classNames from "classnames";
 
 export interface ButtonProps {
   children: ReactNode;
+  className?: string;
   href?: string;
   secondary?: boolean;
   tertiary?: boolean;
@@ -30,7 +33,8 @@ const MantineButton = forwardRef<
     disabled,
     children,
     href,
-    size,
+    size = "md",
+    className,
     ...other
   } = props;
 
@@ -55,6 +59,9 @@ const MantineButton = forwardRef<
     disabled,
     size: buttonSize,
     ...other,
+    className: classNames(styles.button, className, {
+      [styles[`size-${size}`]]: size,
+    }),
   };
 
   if (href) {

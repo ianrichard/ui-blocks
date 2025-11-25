@@ -2,7 +2,7 @@ import Block from "../components";
 
 export default function BasicCardDemo() {
   return (
-    <Block.Card inset size="xl">
+    <Block.Card inset>
       <Block.Icon />
       <Block.Title>Basic Card with Inset</Block.Title>
       <Block.Text>

@@ -72,6 +72,7 @@
   --text: var(--text-xs);
   --space: var(--space-xs);
   --border-radius: var(--border-radius-xs);
+  --button: var(--text-xs);
 }
 
 .blockBase {
@@ -87,6 +88,7 @@
   --headline-5: var(--headline-5-sm);
   --headline-6: var(--headline-6-sm);
   --text: var(--text-sm);
+  --button: var(--text-sm);
   --space: var(--space-sm);
   --border-radius: var(--border-radius-sm);
 }
@@ -100,6 +102,7 @@
   --headline-5: var(--headline-5-md);
   --headline-6: var(--headline-6-md);
   --text: var(--text-md);
+  --button: var(--text-md);
   --space: var(--space-md);
   --border-radius: var(--border-radius-md);
 }
@@ -113,6 +116,7 @@
   --headline-5: var(--headline-5-lg);
   --headline-6: var(--headline-6-lg);
   --text: var(--text-lg);
+  --button: var(--text-lg);
   --space: var(--space-lg);
   --border-radius: var(--border-radius-lg);
 }
@@ -126,6 +130,7 @@
   --headline-5: var(--headline-5-xl);
   --headline-6: var(--headline-6-xl);
   --text: var(--text-xl);
+  --button: var(--text-xl);
   --space: var(--space-xl);
   --border-radius: var(--border-radius-xl);
 }

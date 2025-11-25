@@ -1,0 +1,27 @@
+.button {
+  --button-text: var(--text);
+  --padding-y: calc(var(--space) * 0.5);
+  --padding-x: calc(var(--space) * 0.75);
+  --button-scale: 1;
+
+  font-size: calc(var(--button-text) * var(--button-scale));
+  padding: calc(var(--padding-y) * var(--button-scale))
+    calc(var(--padding-x) * var(--button-scale));
+  height: auto;
+}
+
+.size-xs {
+  --button-scale: 0.7;
+}
+.size-sm {
+  --button-scale: 0.8;
+}
+.size-md {
+  --button-scale: 0.9;
+}
+.size-lg {
+  --button-scale: 1;
+}
+.size-xl {
+  --button-scale: 1.1;
+}
