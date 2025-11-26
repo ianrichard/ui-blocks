@@ -7,6 +7,8 @@ import MantineSubtitle from "./Subtitle/MantineSubtitle";
 import MantineImage from "./Image/MantineImage";
 import MantineLink from "./Link/MantineLink";
 import MantineAvatar from "./Avatar/MantineAvatar";
+import MantineSection from "./Section/MantineSection";
+import { MantineGrid, MantineGridItem } from "./Grid/MantineGrid";
 
 const Block = {
   Card: MantineCard,
@@ -18,6 +20,9 @@ const Block = {
   Image: MantineImage,
   Link: MantineLink,
   Avatar: MantineAvatar,
+  Section: MantineSection,
+  Grid: MantineGrid,
+  GridItem: MantineGridItem,
 };
 
 export default Block;

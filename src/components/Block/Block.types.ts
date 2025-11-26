@@ -40,30 +40,33 @@ export interface BlockProps
   extends WidthResponsiveProps,
     RowResponsiveProps,
     ColResponsiveProps {
-  children?: ReactNode;
-  component?: ElementType;
-  inverse?: boolean;
-  secondary?: boolean;
   border?: boolean;
+  borderBottom?: boolean;
   borderLeft?: boolean;
   borderRight?: boolean;
   borderTop?: boolean;
-  borderBottom?: boolean;
-  withBorder?: boolean;
-  column?: boolean;
-  grid?: boolean;
-  cols?: number;
-  left?: boolean;
-  right?: boolean;
-  center?: boolean;
-  top?: boolean;
-  middle?: boolean;
   bottom?: boolean;
-  gap?: Spacing;
-  inset?: boolean;
-  fill?: boolean;
+  center?: boolean;
+  children?: ReactNode;
   className?: string;
+  cols?: number;
+  column?: boolean;
+  compact?: boolean;
+  component?: ElementType;
+  cozy?: boolean;
+  fill?: boolean;
+  grid?: boolean;
+  inset?: boolean;
+  inverse?: boolean;
+  left?: boolean;
+  maxWidth?: string | number;
+  middle?: boolean;
   onClick?: () => void;
+  right?: boolean;
+  secondary?: boolean;
+  top?: boolean;
+  withBorder?: boolean;
+  withGap?: boolean;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
 }

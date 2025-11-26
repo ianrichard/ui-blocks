@@ -2,8 +2,6 @@ import BasicCardDemo from "./BasicCardDemo";
 import basicCardSource from "./BasicCardDemo.tsx?raw";
 import CardWithImageDemo from "./CardWithImageDemo";
 import cardWithImageSource from "./CardWithImageDemo.tsx?raw";
-import HorizontalCardDemo from "./HorizontalCardDemo";
-import horizontalCardSource from "./HorizontalCardDemo.tsx?raw";
 import GridLayoutDemo from "./GridLayoutDemo";
 import gridLayoutSource from "./GridLayoutDemo.tsx?raw";
 import CardWithHeaderDemo from "./CardWithHeaderDemo";
@@ -22,10 +20,6 @@ export const Demos = {
   CardWithImage: {
     Demo: CardWithImageDemo,
     source: cardWithImageSource,
-  },
-  HorizontalCard: {
-    Demo: HorizontalCardDemo,
-    source: horizontalCardSource,
   },
   GridLayout: {
     Demo: GridLayoutDemo,

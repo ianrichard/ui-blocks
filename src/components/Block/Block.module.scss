@@ -1,138 +1,56 @@
 :root {
-  /* Headline 1 */
-  --headline-1-xs: 2rem;
-  --headline-1-sm: 2.25rem;
-  --headline-1-md: 2.5rem;
-  --headline-1-lg: 2.75rem;
-  --headline-1-xl: 3rem;
-
-  /* Headline 2 */
-  --headline-2-xs: 1.75rem;
-  --headline-2-sm: 2rem;
-  --headline-2-md: 2.25rem;
-  --headline-2-lg: 2.5rem;
-  --headline-2-xl: 2.75rem;
-
-  /* Headline 3 */
-  --headline-3-xs: 1.5rem;
-  --headline-3-sm: 1.75rem;
-  --headline-3-md: 2rem;
-  --headline-3-lg: 2.25rem;
-  --headline-3-xl: 2.5rem;
-
-  /* Headline 4 */
-  --headline-4-xs: 1.25rem;
-  --headline-4-sm: 1.5rem;
-  --headline-4-md: 1.75rem;
-  --headline-4-lg: 2rem;
-  --headline-4-xl: 2.25rem;
-
-  /* Headline 5 */
-  --headline-5-xs: 1.125rem;
-  --headline-5-sm: 1.25rem;
-  --headline-5-md: 1.5rem;
-  --headline-5-lg: 1.75rem;
-  --headline-5-xl: 2rem;
-
-  /* Headline 6 */
-  --headline-6-xs: 1rem;
-  --headline-6-sm: 1.125rem;
-  --headline-6-md: 1.25rem;
-  --headline-6-lg: 1.5rem;
-  --headline-6-xl: 1.75rem;
-
-  /* Text */
-  --text-xs: 0.95rem;
-  --text-sm: 1.05rem;
-  --text-md: 1.15rem;
-  --text-lg: 1.25rem;
-  --text-xl: 1.35rem;
-
-  /* Space */
-  --space-xs: 0.75rem;
-  --space-sm: 1rem;
-  --space-md: 1.25rem;
-  --space-lg: 1.5rem;
-  --space-xl: 2rem;
-
-  /* Border Radius */
-  --border-radius-xs: 8px;
-  --border-radius-sm: 10px;
-  --border-radius-md: 12px;
-  --border-radius-lg: 16px;
-  --border-radius-xl: 20px;
-
-  --color: pink;
-  --headline-1: var(--headline-1-xs);
-  --headline-2: var(--headline-2-xs);
-  --headline-3: var(--headline-3-xs);
-  --headline-4: var(--headline-4-xs);
-  --headline-5: var(--headline-5-xs);
-  --headline-6: var(--headline-6-xs);
-  --text: var(--text-xs);
-  --space: var(--space-xs);
-  --border-radius: var(--border-radius-xs);
-  --button: var(--text-xs);
+  --space: 1.5rem;
+  --border-radius: 12px;
+  --border-width: 1px;
+  --border-color: var(--mantine-color-default-border);
+  --gap: 1rem;
+  --grid-gutter: 1rem;
 }
 
 .blockBase {
   padding: 0;
 }
 
-.size-sm {
-  --color: green;
-  --headline-1: var(--headline-1-sm);
-  --headline-2: var(--headline-2-sm);
-  --headline-3: var(--headline-3-sm);
-  --headline-4: var(--headline-4-sm);
-  --headline-5: var(--headline-5-sm);
-  --headline-6: var(--headline-6-sm);
-  --text: var(--text-sm);
-  --button: var(--text-sm);
-  --space: var(--space-sm);
-  --border-radius: var(--border-radius-sm);
+.block {
+  display: block;
 }
 
-.size-md {
-  --color: red;
-  --headline-1: var(--headline-1-md);
-  --headline-2: var(--headline-2-md);
-  --headline-3: var(--headline-3-md);
-  --headline-4: var(--headline-4-md);
-  --headline-5: var(--headline-5-md);
-  --headline-6: var(--headline-6-md);
-  --text: var(--text-md);
-  --button: var(--text-md);
-  --space: var(--space-md);
-  --border-radius: var(--border-radius-md);
+.flex {
+  display: flex;
 }
 
-.size-lg {
-  --color: orange;
-  --headline-1: var(--headline-1-lg);
-  --headline-2: var(--headline-2-lg);
-  --headline-3: var(--headline-3-lg);
-  --headline-4: var(--headline-4-lg);
-  --headline-5: var(--headline-5-lg);
-  --headline-6: var(--headline-6-lg);
-  --text: var(--text-lg);
-  --button: var(--text-lg);
-  --space: var(--space-lg);
-  --border-radius: var(--border-radius-lg);
+.compact {
+  --space: 1rem;
+  --border-radius: 8px;
+  --gap: 0.75rem;
 }
 
-.size-xl {
-  --color: yellow;
-  --headline-1: var(--headline-1-xl);
-  --headline-2: var(--headline-2-xl);
-  --headline-3: var(--headline-3-xl);
-  --headline-4: var(--headline-4-xl);
-  --headline-5: var(--headline-5-xl);
-  --headline-6: var(--headline-6-xl);
-  --text: var(--text-xl);
-  --button: var(--text-xl);
-  --space: var(--space-xl);
-  --border-radius: var(--border-radius-xl);
+.cozy {
+  font-size: 1.2rem;
+  --space: 2.5rem;
+  --border-radius: 16px;
+  --border-width: 2px;
+  --gap: 1rem;
+}
+
+.border {
+  border: var(--border-width) solid var(--border-color);
+}
+
+.borderLeft {
+  border-left: var(--border-width) solid var(--border-color);
+}
+
+.borderRight {
+  border-right: var(--border-width) solid var(--border-color);
+}
+
+.borderTop {
+  border-top: var(--border-width) solid var(--border-color);
+}
+
+.borderBottom {
+  border-bottom: var(--border-width) solid var(--border-color);
 }
 
 .inset {

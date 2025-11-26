@@ -2,7 +2,7 @@ import Block from "../components";
 
 export default function BasicCardDemo() {
   return (
-    <Block.Card inset>
+    <Block.Card inset border maxWidth={320}>
       <Block.Icon />
       <Block.Title>Basic Card with Inset</Block.Title>
       <Block.Text>

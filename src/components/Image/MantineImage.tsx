@@ -1,9 +1,14 @@
 import { forwardRef } from "react";
 import { Image as MantineImageComponent } from "@mantine/core";
+import { useResponsiveWidthProp } from "../Block/useResponsiveWidthProp";
+import { useResponsiveHeightProp } from "../Block/useResponsiveHeightProp";
+import type { ResponsiveWidthProps } from "../Block/useResponsiveWidthProp";
+import type { ResponsiveHeightProps } from "../Block/useResponsiveHeightProp";
 
-export interface ImageProps {
+export interface ImageProps
+  extends ResponsiveWidthProps,
+    ResponsiveHeightProps {
   url?: string;
-  width?: string | number;
   height?: string | number;
   maxWidth?: string | number;
   cover?: boolean;
@@ -13,15 +18,16 @@ export interface ImageProps {
 const MantineImage = forwardRef<HTMLImageElement, ImageProps>(
   (
     {
-      url = "https://placehold.co/600x400",
-      width = "100%",
-      height = 320,
+      url = "/placeholder.jpg",
       maxWidth,
       cover = true,
       alt = "Image",
+      ...responsiveProps
     },
     ref
   ) => {
+    const width = useResponsiveWidthProp(responsiveProps);
+    const height = useResponsiveHeightProp(responsiveProps);
     return (
       <MantineImageComponent
         ref={ref}
@@ -31,6 +37,7 @@ const MantineImage = forwardRef<HTMLImageElement, ImageProps>(
         h={height}
         maw={maxWidth}
         fit={cover ? "cover" : "contain"}
+        {...responsiveProps}
       />
     );
   }

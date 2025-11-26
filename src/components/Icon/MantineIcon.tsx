@@ -22,7 +22,7 @@ const MantineIcon = forwardRef<HTMLButtonElement, IconProps>(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   (
     {
-      name = "IconCircle",
+      name = "IconPhoto",
       size = "lg",
       onClick,
       href,

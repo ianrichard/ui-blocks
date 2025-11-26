@@ -2,26 +2,16 @@ import { Card } from "@mantine/core";
 import { forwardRef } from "react";
 import type { BlockProps } from "../Block/Block.types";
 import MantineBlock from "../Block/MantineBlock";
-import styles from "./MantineCard.module.scss";
+import styles from "./Card.module.scss";
 
-export interface CardProps extends BlockProps {
-  border?: boolean;
-}
-
-const MantineCard = forwardRef<HTMLDivElement, CardProps>((props, ref) => {
-  const { children, border = true, size, ...blockProps } = props;
-
+const MantineCard = forwardRef<HTMLDivElement, BlockProps>((props, ref) => {
   return (
     <MantineBlock
-      className={styles.container}
-      withBorder={border}
+      className={styles.card}
       ref={ref}
       component={Card}
-      size={size}
-      {...blockProps}
-    >
-      {children}
-    </MantineBlock>
+      {...props}
+    />
   );
 });
 
