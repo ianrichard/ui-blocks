@@ -53,7 +53,7 @@ const MantineBlock = forwardRef<HTMLDivElement, BlockProps>((props, ref) => {
       p={inset && size}
       size={size}
       gap={gap === true ? size : typeof gap === "string" ? gap : undefined}
-      my={verticalSpace ? size : undefined}
+      my={verticalSpace ? "xl" : undefined}
       className={classNames(styles.blockBase, className, {
         [styles[size || ""]]: !!size,
         [styles.inset]: inset,

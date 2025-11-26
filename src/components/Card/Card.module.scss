@@ -1,32 +1,11 @@
-:root {
-  // --card-headline-1: 1.6em;
-  // --card-headline-2: 1.4em;
-  // --card-headline-3: 1.2em;
-  // --card-headline-4: 1.1em;
-  // --card-headline-5: 1em;
-  // --card-headline-6: 0.95em;
-}
-
-.card {
-  // display: block; // Mantine override default flex
-  border-radius: var(--border-radius);
-}
-
 .card > :first-child {
-  margin-top: 0 !important;
+  margin-top: 0;
 }
 
 .card > :last-child {
-  margin-bottom: 0 !important;
+  margin-bottom: 0;
 }
 
 .card svg {
   margin-bottom: 0.25em;
-}
-
-@for $i from 1 through 6 {
-  .card h#{$i} {
-    // font-size: var(--card-headline-#{$i});
-    margin-bottom: 0.25em;
-  }
 }

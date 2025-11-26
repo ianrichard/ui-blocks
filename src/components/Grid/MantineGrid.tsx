@@ -1,35 +1,33 @@
 import React from "react";
-import { Grid, SimpleGrid } from "@mantine/core";
+import { Grid } from "@mantine/core";
 import { useResponsiveColsProp } from "../Block/useResponsiveColsProp";
 import type { ResponsiveColsProps } from "../Block/useResponsiveColsProp";
-
+import { withBlockSize } from "../withBlockSize";
+import type { MantineSize } from "@mantine/core";
 import styles from "./MantineGrid.module.scss";
+import MantineBlock from "../Block/MantineBlock";
 
 export interface MantineGridProps extends ResponsiveColsProps {
   children: React.ReactNode;
+  size?: MantineSize;
 }
 
-export const MantineGrid = (props: MantineGridProps) => {
-  const { children, cols } = props;
-
+const MantineGridBase = (props: MantineGridProps) => {
+  const { children, size = "md", ...rest } = props;
   return (
-    <>
-      {cols ? (
-        <SimpleGrid className={styles.grid} cols={3}>
-          {children}
-        </SimpleGrid>
-      ) : (
-        <Grid className={styles.grid}>{children}</Grid>
-      )}
-    </>
+    <MantineBlock component={Grid} gutter={size} {...rest} verticalSpace>
+      {children}
+    </MantineBlock>
   );
 };
+
+export const MantineGrid = withBlockSize(MantineGridBase);
 
 export const MantineGridItem = (props: MantineGridProps) => {
   const { children, ...colsProps } = props;
   const cols = useResponsiveColsProp(colsProps) || 1;
   return (
-    <Grid.Col span={cols} {...colsProps}>
+    <Grid.Col className={styles.gridItem} span={cols} {...colsProps}>
       {children}
     </Grid.Col>
   );

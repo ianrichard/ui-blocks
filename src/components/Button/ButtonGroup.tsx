@@ -11,7 +11,7 @@ const ButtonGroup = ({ children, ...rest }: ButtonGroupProps) => {
   //   let gap = "sm";
   //   if (size === "lg" || size === "xl") gap = "sm";
   return (
-    <MantineBlock row gap="sm" {...rest}>
+    <MantineBlock row gap="sm" wrap="wrap" {...rest}>
       {children}
     </MantineBlock>
   );

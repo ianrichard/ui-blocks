@@ -5,7 +5,7 @@ import { Demos } from "../demos";
 
 export function MantineBlockDemo() {
   return (
-    <MantineBlock gap="xl">
+    <MantineBlock inset>
       {/* Basic Card Example */}
       <Demos.BasicCard.Demo />
       <MantineCodePreview src={Demos.BasicCard.source} title="Basic Card" />
@@ -16,10 +16,10 @@ export function MantineBlockDemo() {
         title="Card with Image"
       />
 
-      {/* <Demos.GridLayout.Demo />
-      <MantineCodePreview src={Demos.GridLayout.source} title="Grid Layout" /> */}
-      {/*
-      <Demos.CardWithHeader.Demo />
+      <Demos.GridLayout.Demo />
+      <MantineCodePreview src={Demos.GridLayout.source} title="Grid Layout" />
+
+      {/*<Demos.CardWithHeader.Demo />
       <MantineCodePreview
         src={Demos.CardWithHeader.source}
         title="Card with Header"

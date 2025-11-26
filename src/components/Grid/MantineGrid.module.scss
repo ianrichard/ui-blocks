@@ -1,5 +1,6 @@
-.grid {
-  --grid-margin: 0.5rem;
-  --grid-gutter: 2rem;
-  --grid-col-padding: 2rem;
+.gridItem {
+  > * {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
 }

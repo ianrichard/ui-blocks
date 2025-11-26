@@ -1,9 +1,9 @@
 :root {
-  --space: 1.5rem;
-  --border-radius: 12px;
+  // --space: 1.5rem;
+  // --border-radius: 12px;
   --border-width: 1px;
   --border-color: var(--mantine-color-default-border);
-  --gap: 1rem;
+  // --gap: 1rem;
   --grid-gutter: 1rem;
 }
 
@@ -24,18 +24,18 @@
 
 .xs,
 .sm {
-  --space: 1rem;
-  --border-radius: 8px;
-  --gap: 0.75rem;
+  // --space: 1rem;
+  // --border-radius: 8px;
+  // --gap: 0.75rem;
 }
 
 .lg,
 .xl {
   // font-size: 1.2rem;
-  --space: 2.5rem;
-  --border-radius: 16px;
+  // --space: 2.5rem;
+  // --border-radius: 16px;
   --border-width: 2px;
-  --gap: 1rem;
+  // --gap: 1rem;
 }
 
 .border {
