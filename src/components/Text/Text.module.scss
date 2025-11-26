@@ -1,3 +1,22 @@
+:root {
+  --text-size: 1rem;
+  --text-scale: 1;
+}
+
+.sm {
+  --text-scale: 1;
+}
+.md {
+  --text-scale: 1;
+}
+.lg {
+  --text-scale: 1.25;
+}
+.xl {
+  --text-scale: 1.25;
+}
+
 .text {
-  font-size: var(--text-size);
+  font-size: calc(var(--text-size) * var(--text-scale, 1));
+  margin-bottom: 1em;
 }

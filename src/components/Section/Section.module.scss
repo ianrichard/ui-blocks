@@ -1,3 +1,20 @@
-.section {
+.section p {
+  margin-bottom: 1em;
+}
+
+.section > :first-child {
+  margin-top: 0 !important;
+}
+
+.section > :last-child {
+  margin-bottom: 0 !important;
+}
+
+.section h1:first-of-type,
+.section h2:first-of-type,
+.section h3:first-of-type,
+.section h4:first-of-type,
+.section h5:first-of-type,
+.section h6:first-of-type {
   margin-top: 0 !important;
 }

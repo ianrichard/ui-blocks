@@ -16,8 +16,8 @@ export function MantineBlockDemo() {
         title="Card with Image"
       />
 
-      <Demos.GridLayout.Demo />
-      <MantineCodePreview src={Demos.GridLayout.source} title="Grid Layout" />
+      {/* <Demos.GridLayout.Demo />
+      <MantineCodePreview src={Demos.GridLayout.source} title="Grid Layout" /> */}
       {/*
       <Demos.CardWithHeader.Demo />
       <MantineCodePreview

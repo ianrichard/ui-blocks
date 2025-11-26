@@ -66,7 +66,7 @@ export interface BlockProps
   secondary?: boolean;
   top?: boolean;
   withBorder?: boolean;
-  withGap?: boolean;
+  withGap?: boolean | string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
 }

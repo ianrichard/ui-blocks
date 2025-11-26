@@ -1,28 +1,28 @@
-.button {
-  --space-scale: 1;
-  --padding-y: calc(var(--space) * 0.5 * var(--space-scale));
-  --padding-x: calc(var(--space) * 0.7 * var(--space-scale));
-  padding: calc(var(--padding-y)) calc(var(--padding-x));
-  height: auto;
-}
+// .button {
+//   --space-scale: 1;
+//   --padding-y: calc(var(--space) * 0.5 * var(--space-scale));
+//   --padding-x: calc(var(--space) * 0.7 * var(--space-scale));
+//   padding: calc(var(--padding-y)) calc(var(--padding-x));
+//   height: auto;
+// }
 
-.size-xs {
-  font-size: 0.7em;
-  --space-scale: 0.6;
-}
-.size-sm {
-  font-size: 0.8em;
-  --space-scale: 0.7;
-}
-.size-md {
-  font-size: 0.9em;
-  --space-scale: 0.8;
-}
-.size-lg {
-  font-size: 1em;
-  --space-scale: 0.9;
-}
-.size-xl {
-  font-size: 1.1em;
-  --space-scale: 1;
-}
+// .size-xs {
+//   font-size: 0.7em;
+//   --space-scale: 0.6;
+// }
+// .size-sm {
+//   font-size: 0.8em;
+//   --space-scale: 0.7;
+// }
+// .size-md {
+//   font-size: 0.9em;
+//   --space-scale: 0.8;
+// }
+// .size-lg {
+//   font-size: 1em;
+//   --space-scale: 0.9;
+// }
+// .size-xl {
+//   font-size: 1.1em;
+//   --space-scale: 1;
+// }

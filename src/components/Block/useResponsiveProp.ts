@@ -1,9 +1,9 @@
 import { useBreakpointMatches } from "./useBreakpointMatches";
 
-export function useResponsiveProp<T = any>(
-  base: string,
-  props: Record<string, any>
-): T | undefined {
+export function useResponsiveProp<
+  Props extends Record<string, unknown>,
+  K extends keyof Props = keyof Props
+>(base: string, props: Props): Props[K] | undefined {
   const matches = useBreakpointMatches();
 
   // Find the highest active breakpoint
@@ -18,7 +18,7 @@ export function useResponsiveProp<T = any>(
   for (let i = highestActive; i >= 0; i--) {
     const bpKey = matches[i].key;
     const propName = bpKey ? `${base}${bpKey}` : base;
-    if (props[propName] !== undefined) return props[propName];
+    if (props[propName as K] !== undefined) return props[propName as K];
   }
   return undefined;
 }

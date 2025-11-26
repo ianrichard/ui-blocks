@@ -1,10 +1,9 @@
 import React, { forwardRef } from "react";
 import type { ReactNode } from "react";
 import { Button } from "@mantine/core";
-import { useBlockSize } from "../Block/useBlockContext";
-import { getMantineButtonSize } from "../sizeMap";
-import styles from "./Button.module.scss";
-import classNames from "classnames";
+import { resolveSizeProp } from "../Size/resolveSizeProp";
+import { withBlockSize } from "../withBlockSize";
+import type { MantineSize } from "@mantine/core";
 
 export interface ButtonProps {
   children: ReactNode;
@@ -15,10 +14,10 @@ export interface ButtonProps {
   destructive?: boolean;
   hollow?: boolean;
   disabled?: boolean;
-  size?: string | number;
+  size?: MantineSize;
 }
 
-const MantineButton = forwardRef<
+const MantineButtonBase = forwardRef<
   HTMLButtonElement | HTMLAnchorElement,
   ButtonProps
 >((props, ref) => {
@@ -34,12 +33,10 @@ const MantineButton = forwardRef<
     children,
     href,
     size = "md",
-    className,
     ...other
   } = props;
 
-  const blockSize = useBlockSize(size);
-  const buttonSize = getMantineButtonSize(blockSize, -1);
+  const buttonSize = resolveSizeProp({ size }, undefined, 0);
 
   if (secondary) {
     variant = "light";
@@ -59,9 +56,6 @@ const MantineButton = forwardRef<
     disabled,
     size: buttonSize,
     ...other,
-    className: classNames(styles.button, className, {
-      [styles[`size-${size}`]]: size,
-    }),
   };
 
   if (href) {
@@ -77,6 +71,10 @@ const MantineButton = forwardRef<
     </Button>
   );
 });
+
+MantineButtonBase.displayName = "Block.ButtonBase";
+
+const MantineButton = withBlockSize(MantineButtonBase);
 
 MantineButton.displayName = "Block.Button";
 

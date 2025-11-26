@@ -1,7 +1,7 @@
-import { Box, Flex, Grid } from "@mantine/core";
+import { Box, Flex, Grid, type MantineSize } from "@mantine/core";
 import type { BlockProps } from "./Block.types";
 
-const MantineBaseComponent = (props: BlockProps) => {
+const MantineBaseComponent = (props: BlockProps & { size?: MantineSize }) => {
   let Component;
 
   if (props.component) Component = props.component;

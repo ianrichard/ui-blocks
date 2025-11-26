@@ -6,6 +6,8 @@ import MantineBlock from "../Block/MantineBlock";
 import styles from "./Title.module.scss";
 import { getExclusiveProp } from "../../utils/mutuallyExclusiveProps";
 import classNames from "classnames";
+import { withBlockSize } from "../withBlockSize";
+import type { MantineSize } from "@mantine/core";
 
 interface MantineTitleProps extends TitleProps {
   children?: ReactNode;
@@ -16,11 +18,12 @@ interface MantineTitleProps extends TitleProps {
   level4?: boolean;
   level5?: boolean;
   level6?: boolean;
+  size?: MantineSize;
 }
 
-const MantineTitle = forwardRef<HTMLHeadingElement, MantineTitleProps>(
+const MantineTitleBase = forwardRef<HTMLHeadingElement, MantineTitleProps>(
   (props, ref) => {
-    const { children, className, ...rest } = props;
+    const { children, className, size = "md", ...rest } = props;
 
     const exclusiveKey = getExclusiveProp(
       props as Record<string, unknown>,
@@ -46,7 +49,12 @@ const MantineTitle = forwardRef<HTMLHeadingElement, MantineTitleProps>(
         component={Title}
         ref={ref}
         order={order}
-        className={classNames(styles.title, styles[levelClass], className)}
+        className={classNames(
+          styles.title,
+          styles[levelClass],
+          styles[size],
+          className
+        )}
         {...rest}
       >
         {children}
@@ -54,5 +62,7 @@ const MantineTitle = forwardRef<HTMLHeadingElement, MantineTitleProps>(
     );
   }
 );
+
+const MantineTitle = withBlockSize(MantineTitleBase);
 
 export default MantineTitle;

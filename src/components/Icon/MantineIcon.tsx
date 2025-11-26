@@ -1,86 +1,58 @@
 import { forwardRef } from "react";
-import { ActionIcon, Box } from "@mantine/core";
+import { ActionIcon } from "@mantine/core";
 import * as TablerIcons from "@tabler/icons-react";
+import { type ResponsiveIconSizeProps } from "./useResponsiveIconSizeProp";
+import { withBlockSize } from "../withBlockSize";
 
-export interface IconProps {
+export interface IconProps extends ResponsiveIconSizeProps {
   name?: keyof typeof TablerIcons;
-  size?: "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl";
   onClick?: () => void;
   href?: string;
-
-  // Size boolean props
-  sizeXxs?: boolean;
-  sizeXs?: boolean;
-  sizeSm?: boolean;
-  sizeMd?: boolean;
-  sizeLg?: boolean;
-  sizeXl?: boolean;
-  sizeXxl?: boolean;
 }
 
-const MantineIcon = forwardRef<HTMLButtonElement, IconProps>(
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  (
-    {
-      name = "IconPhoto",
-      size = "lg",
-      onClick,
-      href,
-      sizeXxs,
-      sizeXs,
-      sizeSm,
-      sizeMd,
-      sizeLg,
-      sizeXl,
-      sizeXxl,
-    },
-    _ref
-  ) => {
-    // Determine size from boolean props
-    let finalSize = size;
-    if (sizeXxs) finalSize = "xxs";
-    if (sizeXs) finalSize = "xs";
-    if (sizeSm) finalSize = "sm";
-    if (sizeMd) finalSize = "md";
-    if (sizeLg) finalSize = "lg";
-    if (sizeXl) finalSize = "xl";
-    if (sizeXxl) finalSize = "xxl";
+const MantineIconBase = forwardRef<
+  HTMLSpanElement | HTMLButtonElement | HTMLAnchorElement,
+  IconProps
+>(({ name = "IconPhoto", onClick, href, size = "md", ...other }, ref) => {
+  const sizeMap: Record<string, number> = {
+    xs: 32,
+    sm: 32,
+    md: 48,
+    lg: 64,
+    xl: 64,
+  };
 
-    // Map sizes to pixel values
-    const sizeMap: Record<string, number> = {
-      xxs: 12,
-      xs: 16,
-      sm: 20,
-      md: 24,
-      lg: 32,
-      xl: 40,
-      xxl: 48,
-    };
+  const IconComponent = (TablerIcons[name] ||
+    TablerIcons.IconCircle) as React.ComponentType<{ size: number }>;
 
-    const IconComponent = (TablerIcons[name] ||
-      TablerIcons.IconCircle) as React.ComponentType<{ size: number }>;
+  const sizeValue = sizeMap[size];
 
-    if (onClick || href) {
-      return (
-        <ActionIcon
-          variant="transparent"
-          onClick={onClick}
-          component={href ? "a" : undefined}
-          href={href}
-          size={sizeMap[finalSize]}
-        >
-          <IconComponent size={sizeMap[finalSize]} />
-        </ActionIcon>
-      );
-    }
-
+  if (onClick || href) {
     return (
-      <Box mb="xs">
-        <IconComponent size={sizeMap[finalSize]} />
-      </Box>
+      <ActionIcon
+        variant="transparent"
+        onClick={onClick}
+        component={href ? "a" : undefined}
+        href={href}
+        size={sizeValue}
+        ref={ref as React.ForwardedRef<HTMLAnchorElement>}
+        {...other}
+      >
+        <IconComponent size={sizeValue} />
+      </ActionIcon>
     );
   }
-);
+
+  return (
+    <span ref={ref as React.ForwardedRef<HTMLSpanElement>}>
+      <IconComponent size={sizeValue} {...other} />
+    </span>
+  );
+});
+
+MantineIconBase.displayName = "Block.IconBase";
+
+const MantineIcon = withBlockSize(MantineIconBase);
 
 MantineIcon.displayName = "Block.Icon";
 

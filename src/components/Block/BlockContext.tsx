@@ -4,7 +4,9 @@ export type BlockContextType = {
   size?: string;
 };
 
-const BlockContext = createContext<BlockContextType>({});
+const BlockContext = createContext<BlockContextType>({
+  size: "md",
+});
 export { BlockContext };
 
 export const BlockProvider = BlockContext.Provider;

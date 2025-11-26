@@ -6,39 +6,53 @@
   --headline-4: 1.25em;
   --headline-5: 1.125em;
   --headline-6: 1em;
+  --headline-scale: 0.8;
+}
+
+.sm {
+  --headline-scale: 0.9;
+}
+.md {
+  --headline-scale: 1;
+}
+.lg {
+  --headline-scale: 1.25;
+}
+.xl {
+  --headline-scale: 1.5;
+}
+
+.title {
+  font-weight: 700;
+  line-height: 1.2;
 }
 
 .hero {
-  font-size: var(--headline-1);
+  font-size: calc(var(--hero) * var(--headline-scale, 1));
   font-weight: 800;
 }
 
 .level1 {
-  font-size: var(--headline-1);
+  font-size: calc(var(--headline-1) * var(--headline-scale, 1));
   font-weight: 700;
 }
-
 .level2 {
-  font-size: var(--headline-2);
+  font-size: calc(var(--headline-2) * var(--headline-scale, 1));
   font-weight: 700;
 }
-
 .level3 {
-  font-size: var(--headline-3);
+  font-size: calc(var(--headline-3) * var(--headline-scale, 1));
   font-weight: 600;
 }
-
 .level4 {
-  font-size: var(--headline-4);
+  font-size: calc(var(--headline-4) * var(--headline-scale, 1));
   font-weight: 600;
 }
-
 .level5 {
-  font-size: var(--headline-5);
+  font-size: calc(var(--headline-5) * var(--headline-scale, 1));
   font-weight: 500;
 }
-
 .level6 {
-  font-size: var(--headline-6);
+  font-size: calc(var(--headline-6) * var(--headline-scale, 1));
   font-weight: 500;
 }
