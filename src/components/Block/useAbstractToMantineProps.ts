@@ -3,7 +3,7 @@ import { useBreakpointMatches } from "./useBreakpointMatches";
 import { mantineSizes } from "../Size/resolveSizeProp";
 import { useSizeProp } from "../Size/useSizeProp";
 
-const RESPONSIVE_BASES = [
+const RESPONSIVE_PREFIXES = [
   "width",
   "minWidth",
   "maxWidth",
@@ -33,7 +33,7 @@ const BREAKPOINTS = [
 
 function getAllResponsiveKeys() {
   const keys: string[] = [];
-  for (const base of RESPONSIVE_BASES) {
+  for (const base of RESPONSIVE_PREFIXES) {
     for (const bp of BREAKPOINTS) {
       keys.push(bp ? `${base}${bp}` : base);
     }
@@ -41,12 +41,23 @@ function getAllResponsiveKeys() {
   return keys;
 }
 
-export function useResponsiveProps<Props extends Record<string, unknown>>(
-  props: Props
-) {
+export function useAbstractToMantineProps<
+  Props extends Record<string, unknown>
+>(props: Props) {
   const matches = useBreakpointMatches();
   const responsiveKeys = getAllResponsiveKeys();
   const resolvedSize = useSizeProp(props);
+
+  // Color/background logic
+  let backgroundColor: string | undefined = undefined;
+  let textColor: string | undefined = undefined;
+  if (props.backgroundInverse) {
+    backgroundColor = "blue.6";
+    textColor = "white";
+  } else if (props.backgroundSecondary) {
+    backgroundColor = "gray.1";
+    textColor = "black";
+  }
 
   function resolveResponsiveProp(base: string) {
     let highestActive = 0;
@@ -133,6 +144,8 @@ export function useResponsiveProps<Props extends Record<string, unknown>>(
     innerSpaceRight: resolveSpaceProp("innerSpaceRight"),
     gap: resolveGapProp(),
     flexDirection: resolveResponsiveDirection(),
+    backgroundColor,
+    textColor,
     otherProps,
   } as {
     width?: string | number;
@@ -154,6 +167,8 @@ export function useResponsiveProps<Props extends Record<string, unknown>>(
     innerSpaceRight?: MantineSpacing;
     gap?: MantineSpacing;
     flexDirection?: "row" | "column";
+    backgroundColor?: string;
+    textColor?: string;
     otherProps: Record<string, unknown>;
   };
 }

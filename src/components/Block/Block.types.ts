@@ -181,12 +181,12 @@ export interface BlockProps
   component?: ElementType;
   cozy?: boolean;
   fill?: boolean;
-  inverse?: boolean;
+  backgroundInverse?: boolean;
   left?: boolean;
   middle?: boolean;
   onClick?: () => void;
   right?: boolean;
-  secondary?: boolean;
+  backgroundSecondary?: boolean;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
 }

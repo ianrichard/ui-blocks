@@ -4,7 +4,7 @@ import type {
   HeightResponsiveProps,
   WidthResponsiveProps,
 } from "../Block/Block.types";
-import { useResponsiveProps } from "../Block/useResponsiveProps";
+import { useAbstractToMantineProps } from "../Block/useAbstractToMantineProps";
 
 export interface ImageProps
   extends WidthResponsiveProps,
@@ -27,7 +27,7 @@ const MantineImage = forwardRef<HTMLImageElement, ImageProps>(
     },
     ref
   ) => {
-    const { width, height } = useResponsiveProps(other);
+    const { width, height } = useAbstractToMantineProps(other);
     return (
       <MantineImageComponent
         ref={ref}
