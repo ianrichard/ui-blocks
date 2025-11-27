@@ -109,70 +109,74 @@ export function useAbstractToMantineProps<
   );
 
   const {
-    className,
-    backgroundInverse,
-    backgroundSecondary,
-    border,
-    borderLeft,
-    borderRight,
-    borderTop,
-    borderBottom,
-    middle,
-    verticalSpace,
-    fill,
+    className: classNameProp,
+    backgroundInverse: backgroundInverseProp,
+    backgroundSecondary: backgroundSecondaryProp,
+    border: borderProp,
+    borderLeft: borderLeftProp,
+    borderRight: borderRightProp,
+    borderTop: borderTopProp,
+    borderBottom: borderBottomProp,
+    middle: middleProp,
+    verticalSpace: verticalSpaceProp,
+    fill: fillProp,
+    component: componentProp,
     ...passthroughProps
   } = nonResponsiveProps;
 
-  const flexDirectionRaw = resolveResponsiveDirection();
+  const flexDirection = resolveResponsiveDirection();
   let component;
-  let display;
+  let display = "block";
 
-  if (flexDirectionRaw === "row" || flexDirectionRaw === "column") {
-    component = Flex;
+  if (flexDirection === "row" || flexDirection === "column") {
     display = "flex";
+  }
+
+  if (componentProp) {
+    component = componentProp;
+  } else if (!componentProp && display === "flex") {
+    component = Flex;
   } else {
     component = Box;
-    display = "block";
   }
 
-  let flexDirection = flexDirectionRaw;
-  if (display === "flex" && !flexDirection) {
-    flexDirection = "row";
-  }
+  const flexAlign =
+    flexDirection === "row" && middleProp ? "center" : undefined;
 
-  const flexAlign = flexDirection === "row" && middle ? "center" : undefined;
+  const flex = fillProp ? 1 : undefined;
 
-  const flex = fill ? 1 : undefined;
-
-  const outerSpaceTopBottom = verticalSpace
-    ? typeof verticalSpace === "string"
-      ? verticalSpace
+  const outerSpaceTopBottom = verticalSpaceProp
+    ? typeof verticalSpaceProp === "string"
+      ? verticalSpaceProp
       : "xl"
     : undefined;
 
   let backgroundColor: ColorInputProp = undefined;
   let textColor: ColorInputProp = undefined;
-  if (backgroundInverse) {
+  if (backgroundInverseProp) {
     backgroundColor = "blue.6";
     textColor = "white";
-  } else if (backgroundSecondary) {
+  } else if (backgroundSecondaryProp) {
     backgroundColor = "gray.1";
     textColor = "black";
   }
 
   const mergedClassName = classNames(
     styles.blockBase,
-    className as string | undefined,
+    classNameProp as string | undefined,
     {
-      [styles.border]: border,
-      [styles.borderLeft]: borderLeft,
-      [styles.borderRight]: borderRight,
-      [styles.borderTop]: borderTop,
-      [styles.borderBottom]: borderBottom,
+      [styles.border]: borderProp,
+      [styles.borderLeft]: borderLeftProp,
+      [styles.borderRight]: borderRightProp,
+      [styles.borderTop]: borderTopProp,
+      [styles.borderBottom]: borderBottomProp,
       [styles.flex]: display === "flex",
-      [styles.block]: display !== "flex",
     }
   );
+
+  if (props.component) {
+    console.log(flexDirection);
+  }
 
   return {
     className: mergedClassName,
