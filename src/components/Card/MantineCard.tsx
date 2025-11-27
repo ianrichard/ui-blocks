@@ -1,12 +1,12 @@
 import { Card } from "@mantine/core";
 import { forwardRef } from "react";
-import type { BlockProps } from "../Block/Block.types";
+import type { BlockInputProps } from "../Block/Block.types";
 import MantineBlock from "../Block/MantineBlock";
 import styles from "./Card.module.scss";
 import { withBlockSize } from "../withBlockSize";
 import type { ReactNode } from "react";
 
-interface MantineCardProps extends BlockProps {
+interface MantineCardProps extends BlockInputProps {
   children?: ReactNode;
 }
 

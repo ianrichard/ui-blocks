@@ -3,9 +3,9 @@ import { ActionIcon } from "@mantine/core";
 import * as TablerIcons from "@tabler/icons-react";
 import { withBlockSize } from "../withBlockSize";
 import styles from "./Icon.module.scss";
-import type { ResponsiveSizeProps } from "../Block/Block.types";
+import type { SizeInputProps } from "../Block/Block.types";
 
-export interface IconProps extends ResponsiveSizeProps {
+export interface IconProps extends SizeInputProps {
   name?: keyof typeof TablerIcons;
   onClick?: () => void;
   href?: string;

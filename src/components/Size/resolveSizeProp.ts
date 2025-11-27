@@ -1,9 +1,16 @@
-export type SizeValue = "compact" | "cozy" | "xs" | "sm" | "md" | "lg" | "xl";
+export type SizeValue =
+  | "sizeCompact"
+  | "sizeCozy"
+  | "xs"
+  | "sm"
+  | "md"
+  | "lg"
+  | "xl";
 
 export interface SizeResolvableProps {
   size?: SizeValue;
-  compact?: boolean;
-  cozy?: boolean;
+  sizeCompact?: boolean;
+  sizeCozy?: boolean;
 }
 
 export const mantineSizes = ["xs", "sm", "md", "lg", "xl"] as const;
@@ -15,8 +22,8 @@ export function resolveSizeProp(
   increment: number = 0
 ): MantineSizes {
   let resolved: SizeValue | undefined;
-  if (props.compact) resolved = "xs";
-  else if (props.cozy) resolved = "xl";
+  if (props.sizeCompact) resolved = "xs";
+  else if (props.sizeCozy) resolved = "xl";
   else if (props.size) resolved = props.size;
   else resolved = (contextSize as SizeValue) || "md";
   // Only allow valid Mantine sizes for stepping

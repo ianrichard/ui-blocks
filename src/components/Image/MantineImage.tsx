@@ -1,14 +1,9 @@
 import { forwardRef } from "react";
 import { Image as MantineImageComponent } from "@mantine/core";
-import type {
-  HeightResponsiveProps,
-  WidthResponsiveProps,
-} from "../Block/Block.types";
+import type { HeightInputProps, WidthInputProps } from "../Block/Block.types";
 import { useAbstractToMantineProps } from "../Block/useAbstractToMantineProps";
 
-export interface ImageProps
-  extends WidthResponsiveProps,
-    HeightResponsiveProps {
+export interface ImageProps extends WidthInputProps, HeightInputProps {
   url?: string;
   height?: string | number;
   maxWidth?: string | number;
