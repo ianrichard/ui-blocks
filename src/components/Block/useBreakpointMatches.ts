@@ -1,5 +1,6 @@
 import { useMantineTheme } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
+import { mantineSizes } from "../Size/resolveSizeProp";
 
 export interface BreakpointMatch {
   key: string;
@@ -8,22 +9,23 @@ export interface BreakpointMatch {
 
 export function useBreakpointMatches(): BreakpointMatch[] {
   const theme = useMantineTheme();
+  const breakpoints = mantineSizes.map((size) => theme.breakpoints[size]);
   const queries = [
     { key: "", query: undefined },
-    { key: "Xs", query: `(max-width: ${theme.breakpoints.xs})` },
+    { key: "Xs", query: `(max-width: ${breakpoints[0]})` },
     {
       key: "Sm",
-      query: `(min-width: ${theme.breakpoints.xs}) and (max-width: ${theme.breakpoints.sm})`,
+      query: `(min-width: ${breakpoints[0]}) and (max-width: ${breakpoints[1]})`,
     },
     {
       key: "Md",
-      query: `(min-width: ${theme.breakpoints.sm}) and (max-width: ${theme.breakpoints.md})`,
+      query: `(min-width: ${breakpoints[1]}) and (max-width: ${breakpoints[2]})`,
     },
     {
       key: "Lg",
-      query: `(min-width: ${theme.breakpoints.md}) and (max-width: ${theme.breakpoints.lg})`,
+      query: `(min-width: ${breakpoints[2]}) and (max-width: ${breakpoints[3]})`,
     },
-    { key: "Xl", query: `(min-width: ${theme.breakpoints.lg})` },
+    { key: "Xl", query: `(min-width: ${breakpoints[3]})` },
   ];
   // Call useMediaQuery for each breakpoint in a fixed order
   const matches = [

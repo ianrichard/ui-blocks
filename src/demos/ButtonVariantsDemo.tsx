@@ -2,7 +2,7 @@ import Block from "../components";
 
 export default function ButtonVariantsDemo() {
   return (
-    <Block.Card inset>
+    <Block.Card innerSpace>
       <Block.Title>Button Variants</Block.Title>
       <Block.ButtonGroup>
         <Block.Button>Primary</Block.Button>

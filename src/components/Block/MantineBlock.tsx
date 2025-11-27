@@ -2,10 +2,9 @@ import { forwardRef } from "react";
 import type { BlockProps } from "./Block.types";
 import { getColorProps } from "./color";
 import { Box, Flex } from "@mantine/core";
-import { useResponsiveProp } from "./useResponsiveProp";
+import { useResponsiveProps } from "./useResponsiveProps";
 import styles from "./Block.module.scss";
 import classNames from "classnames";
-import { useSizeProp } from "../Size/useSizeProp";
 
 const MantineBlock = forwardRef<HTMLDivElement, BlockProps>((props, ref) => {
   const {
@@ -16,22 +15,16 @@ const MantineBlock = forwardRef<HTMLDivElement, BlockProps>((props, ref) => {
     borderTop,
     className,
     fill,
-    inset,
     inverse,
-    maxWidth,
     middle,
     secondary,
-    gap,
     verticalSpace = false,
-    ...rest
+    ...other
   } = props;
 
-  const { bg, color } = getColorProps(inverse, secondary);
-  const size = useSizeProp(rest);
-  const row = useResponsiveProp("row", props);
-  const col = useResponsiveProp("col", props);
-  const flexDirection = row ? "row" : col ? "column" : undefined;
-  const width = useResponsiveProp("width", props);
+  const colorProps = getColorProps(inverse, secondary);
+  const responsiveProps = useResponsiveProps(other);
+  const flexDirection = responsiveProps.flexDirection;
 
   let Component;
 
@@ -43,20 +36,30 @@ const MantineBlock = forwardRef<HTMLDivElement, BlockProps>((props, ref) => {
   return (
     <Component
       align={flexDirection === "row" && middle ? "center" : undefined}
-      bg={bg}
-      c={color}
+      bg={colorProps.bg}
+      c={colorProps.color}
       direction={flexDirection}
       flex={fill ? 1 : undefined}
-      maw={maxWidth}
       ref={ref}
-      w={width}
-      p={inset && size}
-      size={size}
-      gap={gap === true ? size : typeof gap === "string" ? gap : undefined}
+      w={responsiveProps.width}
+      miw={responsiveProps.minWidth}
+      maw={responsiveProps.maxWidth}
+      h={responsiveProps.height}
+      mih={responsiveProps.minHeight}
+      mah={responsiveProps.maxHeight}
+      p={responsiveProps.innerSpace}
+      pt={responsiveProps.innerSpaceTop}
+      pb={responsiveProps.innerSpaceBottom}
+      pl={responsiveProps.innerSpaceLeft}
+      pr={responsiveProps.innerSpaceRight}
+      m={responsiveProps.outerSpace}
+      mt={responsiveProps.outerSpaceTop}
+      mb={responsiveProps.outerSpaceBottom}
+      ml={responsiveProps.outerSpaceLeft}
+      mr={responsiveProps.outerSpaceRight}
+      gap={responsiveProps.gap}
       my={verticalSpace ? "xl" : undefined}
       className={classNames(styles.blockBase, className, {
-        [styles[size || ""]]: !!size,
-        [styles.inset]: inset,
         [styles.border]: border,
         [styles.borderLeft]: borderLeft,
         [styles.borderRight]: borderRight,
@@ -65,7 +68,7 @@ const MantineBlock = forwardRef<HTMLDivElement, BlockProps>((props, ref) => {
         [styles.block]: !flexDirection,
         [styles.flex]: flexDirection,
       })}
-      {...rest}
+      {...responsiveProps.otherProps}
     />
   );
 });

@@ -5,11 +5,11 @@
 
 export const basicCard = `
 <Block.Card>
-    <Block inset>
+    <Block innerSpace>
         <Block.Icon />
-        <Block.Title>Basic Card with Inset</Block.Title>
+        <Block.Title>Basic Card with innerSpace</Block.Title>
         <Block.Text>
-            This is a simple card with inset padding. The Block.Card component wraps content
+            This is a simple card with innerSpace padding. The Block.Card component wraps content
             with optional shadows and borders.
         </Block.Text>
         <Block.Button>Learn More</Block.Button>
@@ -19,11 +19,11 @@ export const basicCard = `
 export const cardWithImage = `
 <Block.Card>
     <Block.Image height={200} />
-    <Block inset>
+    <Block innerSpace>
         <Block.Title>Card with Image</Block.Title>
         <Block.Text>
             Images can be placed inside cards. This example shows a card with an image
-            at the top and content below with inset padding.
+            at the top and content below with innerSpace padding.
         </Block.Text>
         <Block row>
             <Block.Button>Primary</Block.Button>
@@ -36,7 +36,7 @@ export const horizontalCard = `
 <Block.Card gap="lg" shadow="md" middle>
     <Block row middle>
         <Block.Image width={300} height={200} />
-        <Block inset>
+        <Block innerSpace>
             <Block.Title size="md">Horizontal Card</Block.Title>
             <Block.Text>
             Cards can be arranged horizontally using the row prop. This creates a
@@ -52,7 +52,7 @@ export const horizontalCard = `
 
 export const gridLayout = `<Block grid cols={3} gap="md">
   {[1, 2, 3].map((i) => (
-    <Block.Card key={i} inset="md" shadow="sm">
+    <Block.Card key={i} innerSpace="md" shadow="sm">
       <Block.Title size="sm" mt={0}>Card {i}</Block.Title>
       <Block.Text>Grid layout example with multiple cards.</Block.Text>
     </Block.Card>
@@ -60,11 +60,11 @@ export const gridLayout = `<Block grid cols={3} gap="md">
 </Block>`;
 
 export const cardWithHeader = `<Block.Card shadow="md">
-  <Block inset="lg" row middle justify borderBottom>
+  <Block innerSpace="lg" row middle justify borderBottom>
     <Block.Title size="md" mb={0}>Card with Header</Block.Title>
     <Block.Icon name="IconSettings" onClick={() => alert('Settings clicked!')} />
   </Block>
-  <Block inset="lg">
+  <Block innerSpace="lg">
     <Block.Text>
       This card demonstrates a header section with a title and action icon,
       separated by a bottom border.
@@ -80,17 +80,17 @@ export const cardWithHeader = `<Block.Card shadow="md">
 </Block.Card>`;
 
 export const backgroundVariants = `<Block row gap="md">
-  <Block.Card fill inset="lg" inverse>
+  <Block.Card fill innerSpace="lg" inverse>
     <Block.Title size="sm" mt={0}>Inverse Background</Block.Title>
     <Block.Text>Dark background with light text</Block.Text>
   </Block.Card>
-  <Block.Card fill inset="lg" secondary>
+  <Block.Card fill innerSpace="lg" secondary>
     <Block.Title size="sm" mt={0}>Secondary Background</Block.Title>
     <Block.Text>Light grey background</Block.Text>
   </Block.Card>
 </Block>`;
 
-export const buttonVariants = `<Block.Card inset="lg" shadow="md">
+export const buttonVariants = `<Block.Card innerSpace="lg" shadow="md">
   <Block.Title size="md" mt={0}>Button Variants</Block.Title>
   <Block row gap="sm">
     <Block.Button>Primary</Block.Button>

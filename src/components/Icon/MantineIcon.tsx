@@ -1,11 +1,11 @@
 import { forwardRef } from "react";
 import { ActionIcon } from "@mantine/core";
 import * as TablerIcons from "@tabler/icons-react";
-import { type ResponsiveIconSizeProps } from "./useResponsiveIconSizeProp";
 import { withBlockSize } from "../withBlockSize";
 import styles from "./Icon.module.scss";
+import type { ResponsiveSizeProps } from "../Block/Block.types";
 
-export interface IconProps extends ResponsiveIconSizeProps {
+export interface IconProps extends ResponsiveSizeProps {
   name?: keyof typeof TablerIcons;
   onClick?: () => void;
   href?: string;

@@ -20,7 +20,7 @@ export function AppShell() {
       px="md"
     >
       <MantineAppShell.Header>
-        <Block.Section row inset gap>
+        <Block.Section row innerSpace gap>
           <Burger hiddenFrom="sm" opened={opened} onClick={toggle} size="sm" />
           <Block.Title>Block UI</Block.Title>
         </Block.Section>

@@ -1,7 +1,6 @@
 :root {
   --border-width: 1px;
   --border-color: var(--mantine-color-default-border);
-  --grid-gutter: 1rem;
 }
 
 .blockBase {
@@ -18,11 +17,6 @@
     margin-top: 0 !important;
     margin-bottom: 0 !important;
   }
-}
-
-.lg,
-.xl {
-  --border-width: 2px;
 }
 
 .border {

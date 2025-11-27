@@ -14,7 +14,7 @@ export default function MantineCodePreview({
   title,
 }: CodePreviewProps) {
   return (
-    <Block.Card inset>
+    <Block.Card innerSpace>
       {title && <Block.Text>{title}</Block.Text>}
       <SyntaxHighlighter
         language={language}
