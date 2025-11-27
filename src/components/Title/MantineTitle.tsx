@@ -44,6 +44,8 @@ const MantineTitleBase = forwardRef<HTMLHeadingElement, MantineTitleProps>(
       }
     }
 
+    console.log(size);
+
     return (
       <MantineBlock
         component={Title}

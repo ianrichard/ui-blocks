@@ -22,6 +22,7 @@ export default function MantineMarkdown({ src, children }: MarkdownProps) {
     "Link",
     "Avatar",
     "Icon",
+    "Section",
   ];
 
   componentMap.forEach((name) => {
@@ -33,7 +34,7 @@ export default function MantineMarkdown({ src, children }: MarkdownProps) {
     <Markdown
       options={{
         overrides: {
-          Block: { component: Block },
+          BlockSection: { component: Block.Section },
           BlockCard: { component: Block.Card },
           BlockImage: { component: Block.Image },
           BlockTitle: { component: Block.Title },

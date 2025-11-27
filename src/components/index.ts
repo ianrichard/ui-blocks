@@ -11,6 +11,7 @@ import MantineSection from "./Section/MantineSection";
 import { MantineGrid, MantineGridItem } from "./Grid/MantineGrid";
 import Size from "./Size/Size";
 import ButtonGroup from "./Button/ButtonGroup";
+import MantineMarkdown from "./Markdown/MantineMarkdown";
 
 const Block = {
   Card: MantineCard,
@@ -27,6 +28,7 @@ const Block = {
   GridItem: MantineGridItem,
   Size,
   ButtonGroup,
+  Markdown: MantineMarkdown,
 };
 
 export default Block;

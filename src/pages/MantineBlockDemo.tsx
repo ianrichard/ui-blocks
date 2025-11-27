@@ -1,6 +1,5 @@
 import MantineBlock from "../components/Block/MantineBlock";
 import MantineCodePreview from "../components/CodePreview/MantineCodePreview";
-import MantineMarkdown from "../components/Markdown/MantineMarkdown";
 import { Demos } from "../demos";
 
 export function MantineBlockDemo() {
@@ -19,7 +18,7 @@ export function MantineBlockDemo() {
       <Demos.GridLayout.Demo />
       <MantineCodePreview src={Demos.GridLayout.source} title="Grid Layout" />
 
-      {/*<Demos.CardWithHeader.Demo />
+      <Demos.CardWithHeader.Demo />
       <MantineCodePreview
         src={Demos.CardWithHeader.source}
         title="Card with Header"
@@ -35,9 +34,16 @@ export function MantineBlockDemo() {
       <MantineCodePreview
         src={Demos.ButtonVariants.source}
         title="Button Variants"
-      /> */}
+      />
 
-      {/* <MantineMarkdown src="<Block><Block.Title>Hi</Block.Title></Block>" /> */}
+      <Demos.Markdown.Demo />
+      <MantineCodePreview src={Demos.Markdown.source} title="Button Variants" />
+
+      <Demos.Typography.Demo />
+      <MantineCodePreview
+        src={Demos.Typography.source}
+        title="Button Variants"
+      />
     </MantineBlock>
   );
 }

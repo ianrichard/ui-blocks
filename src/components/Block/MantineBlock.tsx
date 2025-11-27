@@ -44,7 +44,7 @@ const MantineBlock = forwardRef<HTMLDivElement, BlockProps>((props, ref) => {
     <Component
       align={flexDirection === "row" && middle ? "center" : undefined}
       bg={bg}
-      color={color}
+      c={color}
       direction={flexDirection}
       flex={fill ? 1 : undefined}
       maw={maxWidth}

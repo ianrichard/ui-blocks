@@ -29,31 +29,31 @@
 }
 
 .hero {
-  font-size: calc(var(--hero) * var(--headline-scale, 1));
+  font-size: calc(var(--hero) * var(--headline-scale));
   font-weight: 800;
 }
 
 .level1 {
-  font-size: calc(var(--headline-1) * var(--headline-scale, 1));
+  font-size: calc(var(--headline-1) * var(--headline-scale));
   font-weight: 700;
 }
 .level2 {
-  font-size: calc(var(--headline-2) * var(--headline-scale, 1));
+  font-size: calc(var(--headline-2) * var(--headline-scale));
   font-weight: 700;
 }
 .level3 {
-  font-size: calc(var(--headline-3) * var(--headline-scale, 1));
+  font-size: calc(var(--headline-3) * var(--headline-scale));
   font-weight: 600;
 }
 .level4 {
-  font-size: calc(var(--headline-4) * var(--headline-scale, 1));
+  font-size: calc(var(--headline-4) * var(--headline-scale));
   font-weight: 600;
 }
 .level5 {
-  font-size: calc(var(--headline-5) * var(--headline-scale, 1));
+  font-size: calc(var(--headline-5) * var(--headline-scale));
   font-weight: 500;
 }
 .level6 {
-  font-size: calc(var(--headline-6) * var(--headline-scale, 1));
+  font-size: calc(var(--headline-6) * var(--headline-scale));
   font-weight: 500;
 }

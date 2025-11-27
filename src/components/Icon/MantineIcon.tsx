@@ -3,6 +3,7 @@ import { ActionIcon } from "@mantine/core";
 import * as TablerIcons from "@tabler/icons-react";
 import { type ResponsiveIconSizeProps } from "./useResponsiveIconSizeProp";
 import { withBlockSize } from "../withBlockSize";
+import styles from "./Icon.module.scss";
 
 export interface IconProps extends ResponsiveIconSizeProps {
   name?: keyof typeof TablerIcons;
@@ -36,6 +37,7 @@ const MantineIconBase = forwardRef<
         href={href}
         size={sizeValue}
         ref={ref as React.ForwardedRef<HTMLAnchorElement>}
+        className={styles.icon}
         {...other}
       >
         <IconComponent size={sizeValue} />
@@ -44,7 +46,10 @@ const MantineIconBase = forwardRef<
   }
 
   return (
-    <span ref={ref as React.ForwardedRef<HTMLSpanElement>}>
+    <span
+      className={styles.icon}
+      ref={ref as React.ForwardedRef<HTMLSpanElement>}
+    >
       <IconComponent size={sizeValue} {...other} />
     </span>
   );

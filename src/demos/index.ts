@@ -10,7 +10,10 @@ import BackgroundVariantsDemo from "./BackgroundVariantsDemo";
 import backgroundVariantsSource from "./BackgroundVariantsDemo.tsx?raw";
 import ButtonVariantsDemo from "./ButtonVariantsDemo";
 import buttonVariantsSource from "./ButtonVariantsDemo.tsx?raw";
-// import other demos and their sources here as you modularize them
+import MarkdownDemo from "./MarkdownDemo";
+import markdownSource from "./MarkdownDemo.tsx?raw";
+import TypographyDemo from "./TypographyDemo";
+import typographySource from "./TypographyDemo.tsx?raw";
 
 export const Demos = {
   BasicCard: {
@@ -37,5 +40,12 @@ export const Demos = {
     Demo: ButtonVariantsDemo,
     source: buttonVariantsSource,
   },
-  // Add more demos here
+  Markdown: {
+    Demo: MarkdownDemo,
+    source: markdownSource,
+  },
+  Typography: {
+    Demo: TypographyDemo,
+    source: typographySource,
+  },
 };

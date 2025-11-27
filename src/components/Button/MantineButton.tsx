@@ -36,7 +36,7 @@ const MantineButtonBase = forwardRef<
     ...other
   } = props;
 
-  const buttonSize = resolveSizeProp({ size }, undefined, 0);
+  const buttonSize = resolveSizeProp({ size }, undefined, -1);
 
   if (secondary) {
     variant = "light";

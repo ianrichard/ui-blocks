@@ -1,17 +1,11 @@
 :root {
-  // --space: 1.5rem;
-  // --border-radius: 12px;
   --border-width: 1px;
   --border-color: var(--mantine-color-default-border);
-  // --gap: 1rem;
   --grid-gutter: 1rem;
 }
 
 .blockBase {
-  // padding: 0;
-  &:not(.inset) {
-    padding: 0;
-  }
+  padding: 0;
 }
 
 .block {
@@ -20,22 +14,15 @@
 
 .flex {
   display: flex;
-}
-
-.xs,
-.sm {
-  // --space: 1rem;
-  // --border-radius: 8px;
-  // --gap: 0.75rem;
+  & > * {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
 }
 
 .lg,
 .xl {
-  // font-size: 1.2rem;
-  // --space: 2.5rem;
-  // --border-radius: 16px;
   --border-width: 2px;
-  // --gap: 1rem;
 }
 
 .border {
@@ -56,8 +43,4 @@
 
 .borderBottom {
   border-bottom: var(--border-width) solid var(--border-color);
-}
-
-.inset {
-  // padding: var(--space);
 }
