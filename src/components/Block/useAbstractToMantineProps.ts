@@ -13,7 +13,7 @@ const RESPONSIVE_PREFIXES = [
   "height",
   "minHeight",
   "maxHeight",
-  "cols",
+  "columns",
   "outerSpace",
   "outerSpaceTop",
   "outerSpaceBottom",
@@ -25,7 +25,7 @@ const RESPONSIVE_PREFIXES = [
   "innerSpaceLeft",
   "innerSpaceRight",
   "row",
-  "col",
+  "column",
   "gap",
 ];
 
@@ -72,16 +72,6 @@ export function useAbstractToMantineProps<
     return undefined;
   }
 
-  let backgroundColor: ColorInputProp = undefined;
-  let textColor: ColorInputProp = undefined;
-  if (props.backgroundInverse) {
-    backgroundColor = "blue.6";
-    textColor = "white";
-  } else if (props.backgroundSecondary) {
-    backgroundColor = "gray.1";
-    textColor = "black";
-  }
-
   function resolveResponsiveProp(base: string) {
     return iterateBreakpoints((bpKey) => {
       const propName = bpKey ? `${base}${bpKey}` : base;
@@ -101,9 +91,9 @@ export function useAbstractToMantineProps<
   function resolveResponsiveDirection() {
     return iterateBreakpoints((bpKey) => {
       const rowProp = bpKey ? `row${bpKey}` : "row";
-      const colProp = bpKey ? `col${bpKey}` : "col";
+      const columnProp = bpKey ? `column${bpKey}` : "column";
       if (props[rowProp]) return "row";
-      if (props[colProp]) return "column";
+      if (props[columnProp]) return "column";
       return undefined;
     });
   }
@@ -117,14 +107,19 @@ export function useAbstractToMantineProps<
   const nonResponsiveProps = Object.fromEntries(
     Object.entries(props).filter(([key]) => !responsiveKeys.includes(key))
   );
+
   const {
-    className: userClassName,
+    className,
+    backgroundInverse,
+    backgroundSecondary,
     border,
     borderLeft,
     borderRight,
     borderTop,
     borderBottom,
-    blockExtraClassName,
+    middle,
+    verticalSpace,
+    fill,
     ...passthroughProps
   } = nonResponsiveProps;
 
@@ -145,29 +140,37 @@ export function useAbstractToMantineProps<
     flexDirection = "row";
   }
 
-  const flexAlign =
-    flexDirection === "row" && props.middle ? "center" : undefined;
+  const flexAlign = flexDirection === "row" && middle ? "center" : undefined;
 
-  const flex = props.fill ? 1 : undefined;
+  const flex = fill ? 1 : undefined;
 
-  const outerSpaceTopBottom = props.verticalSpace
-    ? typeof props.verticalSpace === "string"
-      ? props.verticalSpace
+  const outerSpaceTopBottom = verticalSpace
+    ? typeof verticalSpace === "string"
+      ? verticalSpace
       : "xl"
     : undefined;
 
+  let backgroundColor: ColorInputProp = undefined;
+  let textColor: ColorInputProp = undefined;
+  if (backgroundInverse) {
+    backgroundColor = "blue.6";
+    textColor = "white";
+  } else if (backgroundSecondary) {
+    backgroundColor = "gray.1";
+    textColor = "black";
+  }
+
   const mergedClassName = classNames(
     styles.blockBase,
-    blockExtraClassName as string | undefined,
-    userClassName as string | undefined,
+    className as string | undefined,
     {
       [styles.border]: border,
       [styles.borderLeft]: borderLeft,
       [styles.borderRight]: borderRight,
       [styles.borderTop]: borderTop,
       [styles.borderBottom]: borderBottom,
-      [styles.block]: display === "block",
       [styles.flex]: display === "flex",
+      [styles.block]: display !== "flex",
     }
   );
 
@@ -179,7 +182,7 @@ export function useAbstractToMantineProps<
     height: resolveResponsiveProp("height"),
     minHeight: resolveResponsiveProp("minHeight"),
     maxHeight: resolveResponsiveProp("maxHeight"),
-    cols: resolveResponsiveProp("cols"),
+    columns: resolveResponsiveProp("columns"),
     outerSpace: resolveSpaceProp("outerSpace"),
     outerSpaceTop: resolveSpaceProp("outerSpaceTop"),
     outerSpaceBottom: resolveSpaceProp("outerSpaceBottom"),

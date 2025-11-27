@@ -72,13 +72,13 @@ export interface HeightInputProps {
   maxHeightXl?: HeightInputProp;
 }
 
-export interface ColsInputProps {
-  cols?: ColumnsInputProp;
-  colsXs?: ColumnsInputProp;
-  colsSm?: ColumnsInputProp;
-  colsMd?: ColumnsInputProp;
-  colsLg?: ColumnsInputProp;
-  colsXl?: ColumnsInputProp;
+export interface ColumnsInputProps {
+  columns?: ColumnsInputProp;
+  columnsXs?: ColumnsInputProp;
+  columnsSm?: ColumnsInputProp;
+  columnsMd?: ColumnsInputProp;
+  columnsLg?: ColumnsInputProp;
+  columnsXl?: ColumnsInputProp;
 }
 
 export interface SpaceInputProps {
@@ -156,13 +156,13 @@ export interface RowInputProps {
   rowXl?: RowInputProp;
 }
 
-export interface ColInputProps {
-  col?: ColumnInputProp;
-  colXs?: ColumnInputProp;
-  colSm?: ColumnInputProp;
-  colMd?: ColumnInputProp;
-  colLg?: ColumnInputProp;
-  colXl?: ColumnInputProp;
+export interface ColumnInputProps {
+  column?: ColumnInputProp;
+  columnXs?: ColumnInputProp;
+  columnumnsm?: ColumnInputProp;
+  columnMd?: ColumnInputProp;
+  columnLg?: ColumnInputProp;
+  columnXl?: ColumnInputProp;
 }
 
 export interface SizeInputProps {
@@ -186,11 +186,11 @@ export interface GapInputProps {
 export interface BlockInputProps
   extends WidthInputProps,
     HeightInputProps,
-    ColsInputProps,
+    ColumnsInputProps,
     SpaceInputProps,
     InnerSpaceInputProps,
     RowInputProps,
-    ColInputProps,
+    ColumnInputProps,
     GapInputProps {
   alignBottom?: AlignmentInputProp;
   alignCenter?: AlignmentInputProp;
@@ -218,7 +218,7 @@ export interface BlockInputProps
 export type BlockMappedProps = {
   backgroundColor?: ColorMappedProp;
   className: string;
-  cols?: ColumnsMappedProp;
+  columns?: ColumnsMappedProp;
   component: ComponentMappedProp;
   display?: string;
   flex?: number;

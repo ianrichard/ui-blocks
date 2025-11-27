@@ -4,7 +4,7 @@ export default function GridLayoutDemo() {
   return (
     <Block.Grid>
       {[1, 2, 3, 4].map((i) => (
-        <Block.GridItem key={i} cols={4}>
+        <Block.GridItem key={i} columns={4}>
           <Block.Card>
             <Block.Section innerSpace>
               <Block.Title size="sm" mt={0}>{`Card ${i}`}</Block.Title>
