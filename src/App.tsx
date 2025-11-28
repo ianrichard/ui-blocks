@@ -3,7 +3,7 @@ import { MantineProvider } from "@mantine/core";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AppShell } from "./components/AppShell";
 import { MantineBlockDemo } from "./pages/MantineBlockDemo";
-import { BreakpointProvider } from "./components/Block/BreakpointContextProvider";
+import { BreakpointProvider } from "./components/Abstract/BreakpointContextProvider";
 
 function App() {
   return (

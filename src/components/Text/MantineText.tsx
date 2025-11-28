@@ -4,7 +4,7 @@ import type { TextProps } from "@mantine/core";
 import type { ReactNode } from "react";
 import styles from "./Text.module.scss";
 import classNames from "classnames";
-import { withBlockSize } from "../withBlockSize";
+import { withBlockSize } from "../Block/withBlockSize";
 import type { MantineSize } from "@mantine/core";
 
 interface MantineTextProps extends TextProps {

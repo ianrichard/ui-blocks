@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { BreakpointContext } from "./BreakpointContext.ts";
+import { BreakpointContext } from "../Abstract/BreakpointContext.ts";
 
 export function useBreakpointContext() {
   const ctx = useContext(BreakpointContext);

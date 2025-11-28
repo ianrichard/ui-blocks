@@ -6,7 +6,7 @@ import MantineBlock from "../Block/MantineBlock";
 import styles from "./Title.module.scss";
 import { getExclusiveProp } from "../../utils/mutuallyExclusiveProps";
 import classNames from "classnames";
-import { withBlockSize } from "../withBlockSize";
+import { withBlockSize } from "../Block/withBlockSize";
 import type { MantineSize } from "@mantine/core";
 
 interface MantineTitleProps extends TitleProps {

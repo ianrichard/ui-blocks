@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { resolveSizeProp, type SizeResolvableProps } from "./resolveSizeProp";
-import { BlockProvider } from "../Block/BlockContext";
+import { BlockProvider } from "../Abstract/BlockContext";
 
 interface SizeProps extends SizeResolvableProps {
   children: ReactNode;

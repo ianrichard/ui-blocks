@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import { useBlockSize } from "./Block/useBlockContext";
+import { useBlockSize } from "./useBlockContext";
 import type { MantineSize } from "@mantine/core";
 
 export function withBlockSize<

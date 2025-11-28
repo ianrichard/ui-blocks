@@ -2,7 +2,7 @@ import React, { forwardRef } from "react";
 import type { ReactNode } from "react";
 import { Button } from "@mantine/core";
 import { resolveSizeProp } from "../Size/resolveSizeProp";
-import { withBlockSize } from "../withBlockSize";
+import { withBlockSize } from "../Block/withBlockSize";
 import type { MantineSize } from "@mantine/core";
 
 export interface ButtonProps {

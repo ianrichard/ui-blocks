@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 import { ActionIcon } from "@mantine/core";
 import * as TablerIcons from "@tabler/icons-react";
-import { withBlockSize } from "../withBlockSize";
+import { withBlockSize } from "../Block/withBlockSize";
 import styles from "./Icon.module.scss";
 import type { SizeInputProps } from "../Block/Block.types";
 

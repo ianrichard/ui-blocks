@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { BlockContext } from "./BlockContext";
+import { BlockContext } from "../Abstract/BlockContext";
 import type { MantineSize } from "@mantine/core";
 
 export function useBlockContext() {

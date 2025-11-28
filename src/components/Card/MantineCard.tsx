@@ -3,7 +3,7 @@ import { forwardRef } from "react";
 import type { BlockInputProps } from "../Block/Block.types";
 import MantineBlock from "../Block/MantineBlock";
 import styles from "./Card.module.scss";
-import { withBlockSize } from "../withBlockSize";
+import { withBlockSize } from "../Block/withBlockSize";
 import type { ReactNode } from "react";
 
 interface MantineCardProps extends BlockInputProps {

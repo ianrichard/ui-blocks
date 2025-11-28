@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid } from "@mantine/core";
 import type { ResponsiveColumnsProps } from "../Block/useResponsiveColumnsProp";
-import { withBlockSize } from "../withBlockSize";
+import { withBlockSize } from "../Block/withBlockSize";
 import type { MantineSize } from "@mantine/core";
 import styles from "./MantineGrid.module.scss";
 import MantineBlock from "../Block/MantineBlock";
