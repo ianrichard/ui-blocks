@@ -37,7 +37,9 @@ const MantineBlock = forwardRef<HTMLDivElement, BlockInputProps>(
         ref={ref}
         w={mappedProps.width}
         {...mappedProps.otherProps}
-      />
+      >
+        {mappedProps.children}
+      </Component>
     );
 
     const parentContext = useBlockContext();

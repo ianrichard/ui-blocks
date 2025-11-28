@@ -209,6 +209,11 @@ export interface BlockInputProps
   borderRight?: BorderInputProp;
   borderTop?: BorderInputProp;
   children?: ReactNode;
+  childrenXs?: ReactNode;
+  childrenSm?: ReactNode;
+  childrenMd?: ReactNode;
+  childrenLg?: ReactNode;
+  childrenXl?: ReactNode;
   className?: string | undefined;
   component?: ElementType;
   fill?: boolean;
@@ -221,6 +226,7 @@ export interface BlockInputProps
 
 export type BlockMappedProps = {
   backgroundColor?: ColorMappedProp;
+  children?: ReactNode; // resolved responsive children
   className: string;
   columns?: ColumnsMappedProp;
   component: ComponentMappedProp;

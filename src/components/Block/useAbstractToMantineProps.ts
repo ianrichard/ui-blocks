@@ -145,13 +145,10 @@ export function useAbstractToMantineProps<
     : undefined;
 
   let backgroundColor: ColorInputProp = undefined;
-  //   let textColor: ColorInputProp = undefined;
   if (backgroundInverseProp) {
     backgroundColor = "inverse";
-    // textColor = "white";
   } else if (backgroundSecondaryProp) {
     backgroundColor = "secondary";
-    // textColor = "black";
   }
 
   const mergedClassName = classNames(
@@ -171,6 +168,7 @@ export function useAbstractToMantineProps<
 
   return {
     className: mergedClassName,
+    children: resolveResponsiveProp("children"),
     width: resolveResponsiveProp("width"),
     minWidth: resolveResponsiveProp("minWidth"),
     maxWidth: resolveResponsiveProp("maxWidth"),
