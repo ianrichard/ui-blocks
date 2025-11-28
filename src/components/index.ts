@@ -8,7 +8,6 @@ import MantineLink from "./Link/MantineLink";
 import MantineAvatar from "./Avatar/MantineAvatar";
 import MantineSection from "./Section/MantineSection";
 import { MantineGrid, MantineGridItem } from "./Grid/MantineGrid";
-import Size from "./Size/Size";
 import ButtonGroup from "./Button/ButtonGroup";
 import MantineMarkdown from "./Markdown/MantineMarkdown";
 
@@ -24,7 +23,6 @@ const Block = {
   Section: MantineSection,
   Grid: MantineGrid,
   GridItem: MantineGridItem,
-  Size,
   ButtonGroup,
   Markdown: MantineMarkdown,
 };

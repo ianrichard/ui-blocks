@@ -1,13 +1,14 @@
 import { forwardRef } from "react";
 import type { BlockInputProps } from "./Block.types";
 import { useAbstractToMantineProps } from "./useAbstractToMantineProps";
+import { BlockProvider } from "./BlockContext";
 
 const MantineBlock = forwardRef<HTMLDivElement, BlockInputProps>(
   (props, ref) => {
     const mappedProps = useAbstractToMantineProps(props);
     const Component = mappedProps.component;
 
-    return (
+    const content = (
       <Component
         align={mappedProps.flexAlign}
         bg={mappedProps.backgroundColor}
@@ -37,6 +38,15 @@ const MantineBlock = forwardRef<HTMLDivElement, BlockInputProps>(
         {...mappedProps.otherProps}
       />
     );
+
+    if (mappedProps.size) {
+      return (
+        <BlockProvider value={{ size: mappedProps.size }}>
+          {content}
+        </BlockProvider>
+      );
+    }
+    return content;
   }
 );
 

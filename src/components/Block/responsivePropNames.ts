@@ -21,6 +21,7 @@ const RESPONSIVE_PREFIXES = [
   "row",
   "column",
   "gap",
+  "size",
 ];
 
 const BREAKPOINT_SUFFIXES = [

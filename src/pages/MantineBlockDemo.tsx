@@ -35,7 +35,7 @@ export function MantineBlockDemo() {
         src={Demos.ButtonVariants.source}
         title="Button Variants"
       />
-      {/*
+
       <Demos.Markdown.Demo />
       <MantineCodePreview src={Demos.Markdown.source} title="Button Variants" />
 
@@ -43,7 +43,7 @@ export function MantineBlockDemo() {
       <MantineCodePreview
         src={Demos.Typography.source}
         title="Button Variants"
-      /> */}
+      />
     </MantineBlock>
   );
 }

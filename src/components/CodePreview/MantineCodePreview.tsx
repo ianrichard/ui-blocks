@@ -1,4 +1,7 @@
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { lazy, Suspense } from "react";
+const SyntaxHighlighter = lazy(() =>
+  import("react-syntax-highlighter").then((mod) => ({ default: mod.Prism }))
+);
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 import Block from "..";
 
@@ -14,21 +17,26 @@ export default function MantineCodePreview({
   title,
 }: CodePreviewProps) {
   return (
-    <Block.Card innerSpace>
-      {title && <Block.Text>{title}</Block.Text>}
-      <SyntaxHighlighter
-        language={language}
-        style={vscDarkPlus}
-        customStyle={{
-          margin: 0,
-          padding: "1rem",
-          // background: "#1e1e1e",
-          borderRadius: 12,
-        }}
-        wrapLongLines
-      >
-        {src.trim()}
-      </SyntaxHighlighter>
+    <Block.Card>
+      {title && (
+        <Block.Title innerSpace level4>
+          {title}
+        </Block.Title>
+      )}
+      <Suspense fallback={<div>Loading…</div>}>
+        <SyntaxHighlighter
+          language={language}
+          style={vscDarkPlus}
+          customStyle={{
+            margin: 0,
+            padding: "1rem",
+            // borderRadius: 12,
+          }}
+          wrapLongLines
+        >
+          {src.trim()}
+        </SyntaxHighlighter>
+      </Suspense>
     </Block.Card>
   );
 }

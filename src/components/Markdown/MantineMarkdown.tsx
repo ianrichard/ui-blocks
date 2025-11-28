@@ -40,6 +40,11 @@ export default function MantineMarkdown({ src, children }: MarkdownProps) {
           BlockLink: { component: Block.Link },
           BlockAvatar: { component: Block.Avatar },
           BlockIcon: { component: Block.Icon },
+          p: {
+            component: ({ children }: { children: React.ReactNode }) => (
+              <>{children}</>
+            ),
+          },
         },
         forceBlock: true,
       }}

@@ -16,6 +16,7 @@ export type HeightInputProp = string | number;
 export type HeightMappedProp = HeightInputProp;
 export type RowInputProp = boolean;
 export type SizeInputProp = MantineSize;
+export type SizeMappedProp = SizeInputProp;
 export type SpaceInputProp = boolean | MantineSpacing;
 export type SpaceMappedProp = MantineSpacing;
 export type WidthInputProp = string | number;
@@ -29,6 +30,7 @@ export type FlexAlignMappedProp =
   | undefined;
 export type FlexMappedProp = number | undefined;
 export type ComponentMappedProp = React.ElementType;
+export type SizeAliasInputProp = boolean;
 
 export interface WidthInputProps {
   width?: WidthInputProp;
@@ -209,8 +211,8 @@ export interface BlockInputProps
   component?: ElementType;
   fill?: boolean;
   onClick?: () => void;
-  sizeCompact?: boolean;
-  sizeCozy?: boolean;
+  sizeCompact?: SizeAliasInputProp;
+  sizeCozy?: SizeAliasInputProp;
   textColor?: ColorInputProp;
   [key: string]: unknown;
 }
@@ -244,4 +246,5 @@ export type BlockMappedProps = {
   outerSpaceTopBottom?: SpaceMappedProp;
   textColor?: ColorMappedProp;
   width?: WidthMappedProp;
+  size?: SizeMappedProp;
 };

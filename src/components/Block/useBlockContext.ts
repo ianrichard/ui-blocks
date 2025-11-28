@@ -1,12 +1,12 @@
 import { useContext } from "react";
 import type { MantineSize } from "@mantine/core";
-import { BlockSizeContext } from "./BlockSizeContext";
+import { BlockContext } from "./BlockContext";
 
-export function useBlockSizeContext() {
-  return useContext(BlockSizeContext);
+export function useBlockContext() {
+  return useContext(BlockContext);
 }
 
 export function useBlockSize(size?: MantineSize) {
-  const context = useBlockSizeContext();
+  const context = useBlockContext();
   return size || context.size || "md";
 }

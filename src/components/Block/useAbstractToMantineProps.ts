@@ -89,15 +89,17 @@ export function useAbstractToMantineProps<
     return value;
   }
 
-  const nonResponsiveProps = useMemo(
-    () =>
-      Object.fromEntries(
-        Object.entries(props).filter(
-          ([key]) => !RESPONSIVE_PROP_NAMES.includes(key)
-        )
-      ),
-    [props]
-  );
+  const nonResponsiveProps = useMemo(() => {
+    const filtered = Object.fromEntries(
+      Object.entries(props).filter(
+        ([key]) =>
+          !RESPONSIVE_PROP_NAMES.includes(key) &&
+          key !== "sizeCozy" &&
+          key !== "sizeCompact"
+      )
+    );
+    return filtered;
+  }, [props]);
 
   const {
     className: classNameProp,
@@ -108,7 +110,7 @@ export function useAbstractToMantineProps<
     borderRight: borderRightProp,
     borderTop: borderTopProp,
     borderBottom: borderBottomProp,
-    middle: middleProp,
+    alignMiddle: alignMiddleProp,
     verticalSpace: verticalSpaceProp,
     fill: fillProp,
     component: componentProp,
@@ -132,7 +134,7 @@ export function useAbstractToMantineProps<
   }
 
   const flexAlign =
-    flexDirection === "row" && middleProp ? "center" : undefined;
+    flexDirection === "row" && alignMiddleProp ? "center" : undefined;
 
   const flex = fillProp ? 1 : undefined;
 
@@ -194,5 +196,6 @@ export function useAbstractToMantineProps<
     otherProps: passthroughProps,
     flexAlign,
     flex,
+    size: resolvedSize,
   } as BlockMappedProps;
 }
