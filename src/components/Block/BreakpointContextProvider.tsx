@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
+import { BreakpointContext } from "./BreakpointContext";
 
-// Updated Mantine breakpoints with base
-export const BREAKPOINTS = [
+const BREAKPOINTS = [
+  { key: "base", value: 0 },
   { key: "xs", value: 576 },
   { key: "sm", value: 768 },
   { key: "md", value: 992 },
@@ -9,10 +10,9 @@ export const BREAKPOINTS = [
   { key: "xl", value: 1408 },
 ];
 
-export function useBreakpointsState(): { activeBreakpoints: string[] } {
+export function BreakpointProvider({ children }: { children: ReactNode }) {
   const getActiveBreakpoints = () => {
     const width = window.innerWidth;
-    // Return all breakpoints that match (from lowest to highest)
     return BREAKPOINTS.filter((bp) => width >= bp.value).map((bp) => bp.key);
   };
 
@@ -22,15 +22,15 @@ export function useBreakpointsState(): { activeBreakpoints: string[] } {
 
   useEffect(() => {
     const handleResize = () => {
-      const next = getActiveBreakpoints();
-      setActiveBreakpoints((prev) => {
-        if (prev.join() === next.join()) return prev;
-        return next;
-      });
+      setActiveBreakpoints(getActiveBreakpoints());
     };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  return { activeBreakpoints };
+  return (
+    <BreakpointContext.Provider value={{ activeBreakpoints }}>
+      {children}
+    </BreakpointContext.Provider>
+  );
 }

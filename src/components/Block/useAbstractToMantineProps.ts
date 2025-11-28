@@ -1,23 +1,22 @@
-import { useBreakpointsState } from "./useBreakpointsState";
-
+import { useBreakpointContext } from "./useBreakpointContext";
 import { useSizeProp } from "../Size/useSizeProp";
 import { Box, Flex } from "@mantine/core";
 import type { BlockMappedProps, ColorInputProp } from "./Block.types";
 import classNames from "classnames";
 import styles from "./Block.module.scss";
+import { responsivePropNames } from "./responsivePropNames";
 import { useMemo } from "react";
-import { getResponsivePropNames } from "./responsivePropNames";
+import { BREAKPOINTS } from "./useBreakpointsState";
+
+const breakpointSuffixes = BREAKPOINTS.map(
+  (bp) => bp.key.charAt(0).toUpperCase() + bp.key.slice(1)
+);
 
 export function useAbstractToMantineProps<
   Props extends Record<string, unknown>
 >(props: Props) {
-  const { breakpointsState, highestActiveIndex } = useBreakpointsState();
-
-  const responsivePropNames = useMemo(() => getResponsivePropNames(), []);
-
-  // List of valid breakpoint suffixes
-  const breakpointSuffixes = ["Xs", "Sm", "Md", "Lg", "Xl"];
-
+  const { activeBreakpoints } = useBreakpointContext();
+  console.log(activeBreakpoints);
   const responsivePropsUsed = useMemo(() => {
     const used: Record<string, string[]> = {};
     responsivePropNames.forEach((name) => {
@@ -37,29 +36,25 @@ export function useAbstractToMantineProps<
       }
     });
     return used;
-  }, [props, responsivePropNames, breakpointSuffixes]);
+  }, [props]);
 
   const resolvedSize = useSizeProp(props);
 
-  console.log(responsivePropsUsed);
-
-  function iterateBreakpoints<T>(
-    handler: (breakpointKey: string) => T | undefined
-  ): T | undefined {
-    for (let i = highestActiveIndex; i >= 0; i--) {
-      const breakpointKey = breakpointsState[i].key;
-      const result = handler(breakpointKey);
-      if (result !== undefined) return result;
-    }
-    return undefined;
-  }
-
   function resolveResponsiveProp(base: string) {
-    if (!responsivePropsUsed[base]) return undefined;
-    return iterateBreakpoints((breakpointKey) => {
-      const propName = breakpointKey ? `${base}${breakpointKey}` : base;
-      if (props[propName] !== undefined) return props[propName];
-    });
+    const used = responsivePropsUsed[base];
+    if (!used) return undefined;
+    // activeBreakpoints is ordered highest to lowest
+    for (const key of activeBreakpoints) {
+      if (used.includes(key)) {
+        const propName = key
+          ? `${base}${key.charAt(0).toUpperCase()}${key.slice(1)}`
+          : base;
+        if (props[propName] !== undefined) return props[propName];
+      }
+    }
+    // fallback to base
+    if (used.includes("base") && props[base] !== undefined) return props[base];
+    return undefined;
   }
 
   function resolveGapProp() {
@@ -81,8 +76,14 @@ export function useAbstractToMantineProps<
     return value;
   }
 
-  const nonResponsiveProps = Object.fromEntries(
-    Object.entries(props).filter(([key]) => !responsivePropNames.includes(key))
+  const nonResponsiveProps = useMemo(
+    () =>
+      Object.fromEntries(
+        Object.entries(props).filter(
+          ([key]) => !responsivePropNames.includes(key)
+        )
+      ),
+    [props]
   );
 
   const {

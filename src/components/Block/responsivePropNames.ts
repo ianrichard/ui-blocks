@@ -28,7 +28,7 @@ const BREAKPOINTS = [
   ...mantineSizes.map((s) => s.charAt(0).toUpperCase() + s.slice(1)),
 ];
 
-export function getResponsivePropNames() {
+export const responsivePropNames: string[] = (() => {
   const keys: string[] = [];
   for (const base of RESPONSIVE_PREFIXES) {
     for (const bp of BREAKPOINTS) {
@@ -36,4 +36,4 @@ export function getResponsivePropNames() {
     }
   }
   return keys;
-}
+})();
