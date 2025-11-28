@@ -1,6 +1,6 @@
 import { forwardRef } from "react";
-import { useBlockSize } from "./useBlockContext";
 import type { MantineSize } from "@mantine/core";
+import { useBlockSize } from "./useBlockContext";
 
 export function withBlockSize<
   Props extends { size?: MantineSize; children?: React.ReactNode } & Record<

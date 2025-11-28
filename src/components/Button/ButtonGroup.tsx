@@ -1,9 +1,10 @@
 import MantineBlock from "../Block/MantineBlock";
-import { type SizeResolvableProps } from "../Size/useSizeProp";
 import type { ReactNode } from "react";
 import { withBlockSize } from "../Block/withBlockSize";
+import type { SizeProp } from "../Size/sizeTypes";
 
-interface ButtonGroupProps extends SizeResolvableProps {
+interface ButtonGroupProps {
+  size?: SizeProp;
   children?: ReactNode;
 }
 

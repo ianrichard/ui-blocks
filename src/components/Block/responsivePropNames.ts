@@ -1,4 +1,4 @@
-import { mantineSizes } from "../Size/resolveSizeProp";
+import { BREAKPOINTS } from "../Breakpoints/breakpoints";
 
 const RESPONSIVE_PREFIXES = [
   "width",
@@ -23,16 +23,16 @@ const RESPONSIVE_PREFIXES = [
   "gap",
 ];
 
-const BREAKPOINTS = [
+const BREAKPOINT_SUFFIXES = [
   "",
-  ...mantineSizes.map((s) => s.charAt(0).toUpperCase() + s.slice(1)),
+  ...BREAKPOINTS.map((b) => b.key.charAt(0).toUpperCase() + b.key.slice(1)),
 ];
 
-export const responsivePropNames: string[] = (() => {
+export const RESPONSIVE_PROP_NAMES: string[] = (() => {
   const keys: string[] = [];
   for (const base of RESPONSIVE_PREFIXES) {
-    for (const bp of BREAKPOINTS) {
-      keys.push(bp ? `${base}${bp}` : base);
+    for (const breakpoint of BREAKPOINT_SUFFIXES) {
+      keys.push(breakpoint ? `${base}${breakpoint}` : base);
     }
   }
   return keys;

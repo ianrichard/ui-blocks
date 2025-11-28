@@ -3,12 +3,12 @@ import { MantineProvider } from "@mantine/core";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AppShell } from "./components/AppShell";
 import { MantineBlockDemo } from "./pages/MantineBlockDemo";
-import { BreakpointProvider } from "./components/Abstract/BreakpointContextProvider";
+import { BreakpointsProvider } from "./components/Breakpoints/BreakpointsProvider";
 
 function App() {
   return (
     <MantineProvider defaultColorScheme="auto">
-      <BreakpointProvider>
+      <BreakpointsProvider>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<AppShell />}>
@@ -17,7 +17,7 @@ function App() {
             </Route>
           </Routes>
         </BrowserRouter>
-      </BreakpointProvider>
+      </BreakpointsProvider>
     </MantineProvider>
   );
 }

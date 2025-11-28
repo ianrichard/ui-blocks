@@ -1,19 +1,13 @@
 import { useEffect, useState } from "react";
-
-// Updated Mantine breakpoints with base
-export const BREAKPOINTS = [
-  { key: "xs", value: 576 },
-  { key: "sm", value: 768 },
-  { key: "md", value: 992 },
-  { key: "lg", value: 1200 },
-  { key: "xl", value: 1408 },
-];
+import { BREAKPOINTS } from "./breakpoints";
 
 export function useBreakpointsState(): { activeBreakpoints: string[] } {
   const getActiveBreakpoints = () => {
     const width = window.innerWidth;
     // Return all breakpoints that match (from lowest to highest)
-    return BREAKPOINTS.filter((bp) => width >= bp.value).map((bp) => bp.key);
+    return BREAKPOINTS.filter((breakpoint) => width >= breakpoint.value).map(
+      (breakpoint) => breakpoint.key
+    );
   };
 
   const [activeBreakpoints, setActiveBreakpoints] = useState<string[]>(() =>

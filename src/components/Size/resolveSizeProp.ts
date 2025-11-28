@@ -1,33 +1,19 @@
-export type SizeValue =
-  | "sizeCompact"
-  | "sizeCozy"
-  | "xs"
-  | "sm"
-  | "md"
-  | "lg"
-  | "xl";
-
-export interface SizeResolvableProps {
-  size?: SizeValue;
-  sizeCompact?: boolean;
-  sizeCozy?: boolean;
-}
-
-export const mantineSizes = ["xs", "sm", "md", "lg", "xl"] as const;
-export type MantineSizes = (typeof mantineSizes)[number];
+import type { SizeProp, SizeProps } from "./sizeTypes";
+import { SIZE_VALUES } from "./sizeConstants";
+import type { MantineSizes } from "./sizeConstants";
 
 export function resolveSizeProp(
-  props: SizeResolvableProps,
-  contextSize?: string | undefined,
+  props: SizeProps,
+  contextSize?: SizeProp,
   increment: number = 0
 ): MantineSizes {
-  let resolved: SizeValue | undefined;
+  let resolved: SizeProp | undefined;
   if (props.sizeCompact) resolved = "xs";
   else if (props.sizeCozy) resolved = "xl";
   else if (props.size) resolved = props.size;
-  else resolved = (contextSize as SizeValue) || "md";
+  else resolved = (contextSize as SizeProp) || "md";
   // Only allow valid Mantine sizes for stepping
-  const validSize = mantineSizes.includes(resolved as MantineSizes)
+  const validSize = SIZE_VALUES.includes(resolved as MantineSizes)
     ? (resolved as MantineSizes)
     : "md";
   function getMantineSteppedSize(
@@ -40,5 +26,5 @@ export function resolveSizeProp(
     const newIdx = Math.max(0, Math.min(order.length - 1, safeIdx + increment));
     return order[newIdx];
   }
-  return getMantineSteppedSize(validSize, mantineSizes, increment);
+  return getMantineSteppedSize(validSize, SIZE_VALUES, increment);
 }

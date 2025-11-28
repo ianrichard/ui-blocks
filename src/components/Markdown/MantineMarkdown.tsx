@@ -2,9 +2,7 @@ import Markdown from "markdown-to-jsx";
 import Block from "..";
 
 export interface MarkdownProps {
-  /** Markdown content to render */
   src?: string;
-  /** Children can also be passed as markdown string */
   children?: string;
 }
 
@@ -16,7 +14,6 @@ export default function MantineMarkdown({ src, children }: MarkdownProps) {
     "Card",
     "Image",
     "Title",
-    "Subtitle",
     "Text",
     "Button",
     "Link",
@@ -38,7 +35,6 @@ export default function MantineMarkdown({ src, children }: MarkdownProps) {
           BlockCard: { component: Block.Card },
           BlockImage: { component: Block.Image },
           BlockTitle: { component: Block.Title },
-          BlockSubtitle: { component: Block.Subtitle },
           BlockText: { component: Block.Text },
           BlockButton: { component: Block.Button },
           BlockLink: { component: Block.Link },

@@ -1,49 +1,53 @@
-import { useBreakpointContext } from "./useBreakpointContext";
+import { BREAKPOINTS } from "../Breakpoints/breakpoints";
+import { useBreakpointsContext } from "../Breakpoints/useBreakpointsContext";
 import { useSizeProp } from "../Size/useSizeProp";
 import { Box, Flex } from "@mantine/core";
 import type { BlockMappedProps, ColorInputProp } from "./Block.types";
 import classNames from "classnames";
 import styles from "./Block.module.scss";
-import { responsivePropNames } from "./responsivePropNames";
 import { useMemo } from "react";
-import { BREAKPOINTS } from "./useBreakpointsState";
+import { RESPONSIVE_PROP_NAMES } from "./responsivePropNames";
 
-const breakpointSuffixes = BREAKPOINTS.map(
-  (bp) => bp.key.charAt(0).toUpperCase() + bp.key.slice(1)
+const RESPONSIVE_PROPS_SUFFIXES = BREAKPOINTS.map(
+  (breakpoint) =>
+    breakpoint.key.charAt(0).toUpperCase() + breakpoint.key.slice(1)
 );
+
+function getResponsivePropsUsed(props: Record<string, unknown>) {
+  const used: Record<string, string[]> = {};
+  RESPONSIVE_PROP_NAMES.forEach((name) => {
+    if (props[name] !== undefined) {
+      const matchedSuffix = RESPONSIVE_PROPS_SUFFIXES.find((suffix) =>
+        name.endsWith(suffix)
+      );
+      if (matchedSuffix) {
+        const base = name.slice(0, -matchedSuffix.length);
+        const suffix = matchedSuffix.toLowerCase();
+        if (!used[base]) used[base] = [];
+        used[base].push(suffix);
+      } else {
+        if (!used[name]) used[name] = [];
+        used[name].push("base");
+      }
+    }
+  });
+  return used;
+}
 
 export function useAbstractToMantineProps<
   Props extends Record<string, unknown>
 >(props: Props) {
-  const { activeBreakpoints } = useBreakpointContext();
-  console.log(activeBreakpoints);
-  const responsivePropsUsed = useMemo(() => {
-    const used: Record<string, string[]> = {};
-    responsivePropNames.forEach((name) => {
-      if (props[name] !== undefined) {
-        const matchedSuffix = breakpointSuffixes.find((suf) =>
-          name.endsWith(suf)
-        );
-        if (matchedSuffix) {
-          const base = name.slice(0, -matchedSuffix.length);
-          const suffix = matchedSuffix.toLowerCase();
-          if (!used[base]) used[base] = [];
-          used[base].push(suffix);
-        } else {
-          if (!used[name]) used[name] = [];
-          used[name].push("base");
-        }
-      }
-    });
-    return used;
-  }, [props]);
+  const { activeBreakpoints } = useBreakpointsContext();
+  const responsivePropsUsed = useMemo(
+    () => getResponsivePropsUsed(props),
+    [props]
+  );
 
   const resolvedSize = useSizeProp(props);
 
   function resolveResponsiveProp(base: string) {
     const used = responsivePropsUsed[base];
     if (!used) return undefined;
-    // activeBreakpoints is ordered highest to lowest
     for (const key of activeBreakpoints) {
       if (used.includes(key)) {
         const propName = key
@@ -52,7 +56,6 @@ export function useAbstractToMantineProps<
         if (props[propName] !== undefined) return props[propName];
       }
     }
-    // fallback to base
     if (used.includes("base") && props[base] !== undefined) return props[base];
     return undefined;
   }
@@ -80,7 +83,7 @@ export function useAbstractToMantineProps<
     () =>
       Object.fromEntries(
         Object.entries(props).filter(
-          ([key]) => !responsivePropNames.includes(key)
+          ([key]) => !RESPONSIVE_PROP_NAMES.includes(key)
         )
       ),
     [props]
