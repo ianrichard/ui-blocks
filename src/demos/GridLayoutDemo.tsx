@@ -4,7 +4,13 @@ export default function GridLayoutDemo() {
   return (
     <Block.Grid>
       {[1, 2, 3, 4].map((i) => (
-        <Block.GridItem key={i} columns={4} columnsMd={3}>
+        <Block.GridItem
+          key={i}
+          columns={12}
+          columnsMd={6}
+          columnsLg={4}
+          columnsXl={3}
+        >
           <Block.Card>
             <Block.Section innerSpace>
               <Block.Title level4>{`Card ${i}`}</Block.Title>

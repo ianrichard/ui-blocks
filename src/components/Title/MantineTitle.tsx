@@ -7,6 +7,7 @@ import { getExclusiveProp } from "../../utils/mutuallyExclusiveProps";
 import classNames from "classnames";
 import { withBlockSize } from "../Block/withBlockSize";
 import type { MantineSize } from "@mantine/core";
+import MantineBlock from "../Block/MantineBlock";
 
 interface MantineTitleProps extends TitleProps {
   children?: ReactNode;
@@ -65,7 +66,8 @@ const MantineTitleBase = forwardRef<HTMLHeadingElement, MantineTitleProps>(
     ]);
 
     return (
-      <Title
+      <MantineBlock
+        component={Title}
         ref={ref}
         order={order}
         className={classNames(
@@ -77,7 +79,7 @@ const MantineTitleBase = forwardRef<HTMLHeadingElement, MantineTitleProps>(
         {...titleProps}
       >
         {children}
-      </Title>
+      </MantineBlock>
     );
   }
 );

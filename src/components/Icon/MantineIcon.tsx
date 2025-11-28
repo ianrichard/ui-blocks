@@ -18,9 +18,9 @@ const MantineIconBase = forwardRef<
   const sizeMap: Record<string, number> = {
     xs: 32,
     sm: 32,
-    md: 48,
-    lg: 64,
-    xl: 64,
+    md: 32,
+    lg: 48,
+    xl: 48,
   };
 
   const IconComponent = (TablerIcons[name] ||

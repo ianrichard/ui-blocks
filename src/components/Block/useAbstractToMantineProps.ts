@@ -13,8 +13,8 @@ const RESPONSIVE_PROPS_SUFFIXES = BREAKPOINTS.map(
     breakpoint.key.charAt(0).toUpperCase() + breakpoint.key.slice(1)
 );
 
-function getResponsivePropsUsed(props: Record<string, unknown>) {
-  const used: Record<string, string[]> = {};
+function getResponsivePropsForAttribute(props: Record<string, unknown>) {
+  const responsivePropsForAttribute: Record<string, string[]> = {};
   RESPONSIVE_PROP_NAMES.forEach((name) => {
     if (props[name] !== undefined) {
       const matchedSuffix = RESPONSIVE_PROPS_SUFFIXES.find((suffix) =>
@@ -23,40 +23,50 @@ function getResponsivePropsUsed(props: Record<string, unknown>) {
       if (matchedSuffix) {
         const base = name.slice(0, -matchedSuffix.length);
         const suffix = matchedSuffix.toLowerCase();
-        if (!used[base]) used[base] = [];
-        used[base].push(suffix);
+        if (!responsivePropsForAttribute[base])
+          responsivePropsForAttribute[base] = [];
+        responsivePropsForAttribute[base].push(suffix);
       } else {
-        if (!used[name]) used[name] = [];
-        used[name].push("base");
+        if (!responsivePropsForAttribute[name])
+          responsivePropsForAttribute[name] = [];
+        responsivePropsForAttribute[name].push("base");
       }
     }
   });
-  return used;
+  return responsivePropsForAttribute;
 }
 
 export function useAbstractToMantineProps<
   Props extends Record<string, unknown>
 >(props: Props) {
   const { activeBreakpoints } = useBreakpointsContext();
-  const responsivePropsUsed = useMemo(
-    () => getResponsivePropsUsed(props),
+  const cachedResponsiveProps = useMemo(
+    () => getResponsivePropsForAttribute(props),
     [props]
   );
 
   const resolvedSize = useSizeProp(props);
 
-  function resolveResponsiveProp(base: string) {
-    const used = responsivePropsUsed[base];
-    if (!used) return undefined;
-    for (const key of activeBreakpoints) {
-      if (used.includes(key)) {
+  function resolveResponsiveProp(propWithoutResponsiveSuffix: string) {
+    const responsivePropsForAttribute =
+      cachedResponsiveProps[propWithoutResponsiveSuffix];
+    if (!responsivePropsForAttribute) return undefined;
+    for (let i = activeBreakpoints.length - 1; i >= 0; i--) {
+      const key = activeBreakpoints[i];
+      if (responsivePropsForAttribute.includes(key)) {
         const propName = key
-          ? `${base}${key.charAt(0).toUpperCase()}${key.slice(1)}`
-          : base;
+          ? `${propWithoutResponsiveSuffix}${key
+              .charAt(0)
+              .toUpperCase()}${key.slice(1)}`
+          : propWithoutResponsiveSuffix;
         if (props[propName] !== undefined) return props[propName];
       }
     }
-    if (used.includes("base") && props[base] !== undefined) return props[base];
+    if (
+      responsivePropsForAttribute.includes("base") &&
+      props[propWithoutResponsiveSuffix] !== undefined
+    )
+      return props[propWithoutResponsiveSuffix];
     return undefined;
   }
 

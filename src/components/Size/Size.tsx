@@ -1,12 +1,13 @@
 import type { ReactNode } from "react";
-import { resolveSizeProp, type SizeProps } from "./resolveSizeProp";
+import { resolveSizeProp } from "./resolveSizeProp";
 import { BlockProvider } from "../Block/BlockSizeContext";
+import type { SizeProps } from "./sizeTypes";
 
-interface SizeProps extends SizeProps {
+interface SizeComponentProps extends SizeProps {
   children: ReactNode;
 }
 
-const Size = ({ children, ...rest }: SizeProps) => {
+const Size = ({ children, ...rest }: SizeComponentProps) => {
   const size = resolveSizeProp(rest);
   return <BlockProvider value={{ size }}>{children}</BlockProvider>;
 };
