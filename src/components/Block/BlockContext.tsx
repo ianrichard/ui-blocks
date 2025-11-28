@@ -1,13 +1,7 @@
 import { createContext } from "react";
-import type { SizeProp } from "../Size/sizeTypes";
+import type { BlockContextValue } from "./Block.types";
 
-export type BlockContextType = {
-  size?: SizeProp;
-};
-
-const BlockContext = createContext<BlockContextType>({
-  size: "md",
-});
+const BlockContext = createContext<BlockContextValue>({});
 export { BlockContext };
 
 export const BlockProvider = BlockContext.Provider;

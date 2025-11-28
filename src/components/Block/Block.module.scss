@@ -35,3 +35,16 @@
 .borderBottom {
   border-bottom: var(--border-width) solid var(--border-color);
 }
+
+.backgroundSecondary {
+  background-color: var(--mantine-color-gray-1);
+}
+
+[data-mantine-color-scheme="dark"] .backgroundSecondary {
+  background-color: var(--mantine-color-dark-7);
+}
+
+.backgroundInverse {
+  color: var(--mantine-color-white);
+  background-color: var(--mantine-color-blue-9);
+}

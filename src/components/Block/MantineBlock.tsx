@@ -1,7 +1,8 @@
 import { forwardRef } from "react";
-import type { BlockInputProps } from "./Block.types";
+import type { BlockInputProps, BlockContextValue } from "./Block.types";
 import { useAbstractToMantineProps } from "./useAbstractToMantineProps";
 import { BlockProvider } from "./BlockContext";
+import { useBlockContext } from "./useBlockContext";
 
 const MantineBlock = forwardRef<HTMLDivElement, BlockInputProps>(
   (props, ref) => {
@@ -11,8 +12,8 @@ const MantineBlock = forwardRef<HTMLDivElement, BlockInputProps>(
     const content = (
       <Component
         align={mappedProps.flexAlign}
-        bg={mappedProps.backgroundColor}
-        c={mappedProps.textColor}
+        // bg={mappedProps.backgroundColor}
+        // c={mappedProps.textColor}
         className={mappedProps.className}
         direction={mappedProps.flexDirection}
         flex={mappedProps.flex}
@@ -39,12 +40,15 @@ const MantineBlock = forwardRef<HTMLDivElement, BlockInputProps>(
       />
     );
 
-    if (mappedProps.size) {
-      return (
-        <BlockProvider value={{ size: mappedProps.size }}>
-          {content}
-        </BlockProvider>
-      );
+    const parentContext = useBlockContext();
+    const providerValue: BlockContextValue = { ...parentContext };
+    if (mappedProps.size) providerValue.size = mappedProps.size;
+    if (props.backgroundInverse) providerValue.backgroundVariant = "inverse";
+    else if (props.backgroundSecondary)
+      providerValue.backgroundVariant = "secondary";
+
+    if (providerValue.size || providerValue.backgroundVariant) {
+      return <BlockProvider value={providerValue}>{content}</BlockProvider>;
     }
     return content;
   }

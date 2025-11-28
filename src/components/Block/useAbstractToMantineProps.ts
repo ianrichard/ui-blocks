@@ -145,13 +145,13 @@ export function useAbstractToMantineProps<
     : undefined;
 
   let backgroundColor: ColorInputProp = undefined;
-  let textColor: ColorInputProp = undefined;
+  //   let textColor: ColorInputProp = undefined;
   if (backgroundInverseProp) {
-    backgroundColor = "blue.6";
-    textColor = "white";
+    backgroundColor = "inverse";
+    // textColor = "white";
   } else if (backgroundSecondaryProp) {
-    backgroundColor = "gray.1";
-    textColor = "black";
+    backgroundColor = "secondary";
+    // textColor = "black";
   }
 
   const mergedClassName = classNames(
@@ -164,6 +164,8 @@ export function useAbstractToMantineProps<
       [styles.borderTop]: borderTopProp,
       [styles.borderBottom]: borderBottomProp,
       [styles.flex]: display === "flex",
+      [styles.backgroundInverse]: backgroundInverseProp,
+      [styles.backgroundSecondary]: backgroundSecondaryProp,
     }
   );
 
@@ -192,7 +194,7 @@ export function useAbstractToMantineProps<
     component,
     display,
     backgroundColor,
-    textColor,
+    // textColor,
     otherProps: passthroughProps,
     flexAlign,
     flex,

@@ -30,6 +30,8 @@ export type FlexAlignMappedProp =
   | undefined;
 export type FlexMappedProp = number | undefined;
 export type ComponentMappedProp = React.ElementType;
+export type BackgroundMappedProp = "secondary" | "inverse";
+
 export type SizeAliasInputProp = boolean;
 
 export interface WidthInputProps {
@@ -213,7 +215,7 @@ export interface BlockInputProps
   onClick?: () => void;
   sizeCompact?: SizeAliasInputProp;
   sizeCozy?: SizeAliasInputProp;
-  textColor?: ColorInputProp;
+  //   textColor?: ColorInputProp;
   [key: string]: unknown;
 }
 
@@ -244,7 +246,12 @@ export type BlockMappedProps = {
   outerSpaceRight?: SpaceMappedProp;
   outerSpaceTop?: SpaceMappedProp;
   outerSpaceTopBottom?: SpaceMappedProp;
-  textColor?: ColorMappedProp;
+  //   textColor?: ColorMappedProp;
   width?: WidthMappedProp;
   size?: SizeMappedProp;
+};
+
+export type BlockContextValue = {
+  size?: MantineSize;
+  backgroundVariant?: BackgroundMappedProp;
 };

@@ -7,7 +7,7 @@ import { BreakpointsProvider } from "./components/Breakpoints/BreakpointsProvide
 
 function App() {
   return (
-    <MantineProvider defaultColorScheme="auto">
+    <MantineProvider defaultColorScheme="light">
       <BreakpointsProvider>
         <BrowserRouter>
           <Routes>
