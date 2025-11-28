@@ -62,8 +62,9 @@ const MantineButtonBase = forwardRef<
   }
 
   const buttonClassName = classNames(props.className, {
-    [styles.inverse]: backgroundVariant === "inverse",
+    [styles.backgroundInverse]: backgroundVariant === "inverse",
     [styles.primary]: primary,
+    [styles.backgroundSecondary]: backgroundVariant === "secondary",
   });
 
   const commonProps = {

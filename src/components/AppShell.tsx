@@ -1,49 +1,73 @@
-import { AppShell as MantineAppShell, NavLink, Burger } from "@mantine/core";
-import { Outlet, useNavigate, useLocation } from "react-router-dom";
-
+import { Outlet } from "react-router-dom";
+import { Burger, NavLink } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import Block from ".";
-import { IconLayoutGrid } from "@tabler/icons-react";
+import {
+  IconCards,
+  IconLayoutGrid,
+  IconTypography,
+  IconMarkdown,
+  IconPalette,
+  IconSquareRounded,
+} from "@tabler/icons-react";
 
 export function AppShell() {
   const [opened, { toggle }] = useDisclosure();
-  const navigate = useNavigate();
-  const location = useLocation();
 
   const navItems = [
-    { label: "Block Demo", path: "/block-demo", icon: IconLayoutGrid },
+    { label: "Cards", id: "card-demo", icon: IconCards },
+    { label: "Grid", id: "grid-demo", icon: IconLayoutGrid },
+    { label: "Backgrounds", id: "background-demo", icon: IconPalette },
+    { label: "Buttons", id: "button-demo", icon: IconSquareRounded },
+    { label: "Markdown", id: "markdown-demo", icon: IconMarkdown },
+    { label: "Typography", id: "typography-demo", icon: IconTypography },
   ];
+
   return (
-    <MantineAppShell
-      header={{ height: 60 }}
-      navbar={{ width: 300, breakpoint: "sm", collapsed: { mobile: !opened } }}
-      px="md"
-    >
-      <MantineAppShell.Header>
-        <Block.Section row innerSpace gap>
-          <Burger hiddenFrom="sm" opened={opened} onClick={toggle} size="sm" />
-          <Block.Title>Block UI</Block.Title>
-        </Block.Section>
-      </MantineAppShell.Header>
-      <MantineAppShell.Navbar p="md">
-        <MantineAppShell.Section>
+    <Block.Section row minHeight="100vh">
+      <Block.Section column borderRight minWidth={280}>
+        <Block.Section
+          // row
+          alignMiddle
+          innerSpace
+          gap
+          style={{
+            position: "sticky",
+            top: 0,
+          }}
+        >
+          {/* <Burger hiddenFrom="sm" opened={opened} onClick={toggle} size="sm" /> */}
+          <Block.Title pl="sm" pb="sm">
+            <Burger
+              hiddenFrom="sm"
+              opened={opened}
+              onClick={toggle}
+              size="sm"
+            />
+            Block UI
+          </Block.Title>
+
           {navItems.map((item) => (
             <NavLink
-              key={item.path}
+              key={item.id}
+              href={`#${item.id}`}
               label={item.label}
               leftSection={<item.icon size={20} />}
-              active={location.pathname === item.path}
-              onClick={() => {
-                navigate(item.path);
-                toggle();
+              mb="sm"
+              onClick={(e) => {
+                e.preventDefault();
+                const el = document.getElementById(item.id);
+                if (el) {
+                  el.scrollIntoView({ behavior: "smooth", block: "start" });
+                }
               }}
             />
           ))}
-        </MantineAppShell.Section>
-      </MantineAppShell.Navbar>
-      <MantineAppShell.Main>
+        </Block.Section>
+      </Block.Section>
+      <Block.Section innerSpace="xl">
         <Outlet />
-      </MantineAppShell.Main>
-    </MantineAppShell>
+      </Block.Section>
+    </Block.Section>
   );
 }

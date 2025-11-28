@@ -10,6 +10,7 @@ import MantineSection from "./Section/MantineSection";
 import { MantineGrid, MantineGridItem } from "./Grid/MantineGrid";
 import ButtonGroup from "./Button/ButtonGroup";
 import MantineMarkdown from "./Markdown/MantineMarkdown";
+import Tabs, { Tab, TabPanel } from "./Tabs/Tabs";
 
 const Block = {
   Card: MantineCard,
@@ -25,6 +26,9 @@ const Block = {
   GridItem: MantineGridItem,
   ButtonGroup,
   Markdown: MantineMarkdown,
+  Tabs,
+  Tab,
+  TabPanel,
 };
 
 export default Block;

@@ -14,3 +14,8 @@
 .section h6:first-of-type {
   margin-top: 0 !important;
 }
+
+.section > image,
+.section > svg {
+  margin-bottom: 0.5em;
+}

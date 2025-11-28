@@ -1,8 +1,12 @@
-.inverse.primary {
+.backgroundInverse.primary {
   background-color: var(--mantine-color-white);
   color: var(--mantine-color-dark-9);
 }
-.inverse.primary:hover,
-.inverse.primary:focus {
+.backgroundInverse.primary:hover,
+.backgroundInverse.primary:focus {
   background-color: var(--mantine-color-gray-1);
+}
+
+.backgroundSecondary {
+  filter: contrast(2) saturate(0.8);
 }

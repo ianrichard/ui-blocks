@@ -2,8 +2,8 @@ import "@mantine/core/styles.css";
 import { MantineProvider } from "@mantine/core";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AppShell } from "./components/AppShell";
-import { MantineBlockDemo } from "./pages/MantineBlockDemo";
 import { BreakpointsProvider } from "./components/Breakpoints/BreakpointsProvider";
+import Demos from "./pages/Demos";
 
 function App() {
   return (
@@ -12,8 +12,8 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<AppShell />}>
-              <Route index element={<Navigate to="/block-demo" replace />} />
-              <Route path="block-demo" element={<MantineBlockDemo />} />
+              <Route index element={<Navigate to="/demos" replace />} />
+              <Route path="demos" element={<Demos />} />
             </Route>
           </Routes>
         </BrowserRouter>
