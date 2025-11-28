@@ -4,7 +4,7 @@ export default function CardWithImageDemo() {
   return (
     <Block.Size sizeCozy>
       <Block.Card>
-        <Block.Section col rowXl middle>
+        <Block.Section column rowXl middle>
           <Block.Image height={180} heightLg={320} width="100%" widthXl={340} />
           <Block.Section innerSpace>
             <Block.Title>Card with Image</Block.Title>

@@ -1,101 +1,78 @@
-import { useBreakpointMatches } from "./useBreakpointMatches";
-import { mantineSizes } from "../Size/resolveSizeProp";
+import { useBreakpointsState } from "./useBreakpointsState";
+
 import { useSizeProp } from "../Size/useSizeProp";
 import { Box, Flex } from "@mantine/core";
 import type { BlockMappedProps, ColorInputProp } from "./Block.types";
 import classNames from "classnames";
 import styles from "./Block.module.scss";
-
-const RESPONSIVE_PREFIXES = [
-  "width",
-  "minWidth",
-  "maxWidth",
-  "height",
-  "minHeight",
-  "maxHeight",
-  "columns",
-  "outerSpace",
-  "outerSpaceTop",
-  "outerSpaceBottom",
-  "outerSpaceLeft",
-  "outerSpaceRight",
-  "innerSpace",
-  "innerSpaceTop",
-  "innerSpaceBottom",
-  "innerSpaceLeft",
-  "innerSpaceRight",
-  "row",
-  "column",
-  "gap",
-];
-
-const BREAKPOINTS = [
-  "",
-  ...mantineSizes.map((s) => s.charAt(0).toUpperCase() + s.slice(1)),
-];
-
-function getHighestActiveBreakpoint(matches: { matches: boolean }[]) {
-  for (let i = matches.length - 1; i >= 0; i--) {
-    if (matches[i].matches) {
-      return i;
-    }
-  }
-  return 0;
-}
-
-function getAllResponsiveKeys() {
-  const keys: string[] = [];
-  for (const base of RESPONSIVE_PREFIXES) {
-    for (const bp of BREAKPOINTS) {
-      keys.push(bp ? `${base}${bp}` : base);
-    }
-  }
-  return keys;
-}
+import { useMemo } from "react";
+import { getResponsivePropNames } from "./responsivePropNames";
 
 export function useAbstractToMantineProps<
   Props extends Record<string, unknown>
 >(props: Props) {
-  const matches = useBreakpointMatches();
-  const highestActive = getHighestActiveBreakpoint(matches);
-  const responsiveKeys = getAllResponsiveKeys();
+  const { breakpointsState, highestActiveIndex } = useBreakpointsState();
+
+  const responsivePropNames = useMemo(() => getResponsivePropNames(), []);
+
+  // List of valid breakpoint suffixes
+  const breakpointSuffixes = ["Xs", "Sm", "Md", "Lg", "Xl"];
+
+  const responsivePropsUsed = useMemo(() => {
+    const used: Record<string, string[]> = {};
+    responsivePropNames.forEach((name) => {
+      if (props[name] !== undefined) {
+        const matchedSuffix = breakpointSuffixes.find((suf) =>
+          name.endsWith(suf)
+        );
+        if (matchedSuffix) {
+          const base = name.slice(0, -matchedSuffix.length);
+          const suffix = matchedSuffix.toLowerCase();
+          if (!used[base]) used[base] = [];
+          used[base].push(suffix);
+        } else {
+          if (!used[name]) used[name] = [];
+          used[name].push("base");
+        }
+      }
+    });
+    return used;
+  }, [props, responsivePropNames, breakpointSuffixes]);
+
   const resolvedSize = useSizeProp(props);
 
+  console.log(responsivePropsUsed);
+
   function iterateBreakpoints<T>(
-    handler: (bpKey: string) => T | undefined
+    handler: (breakpointKey: string) => T | undefined
   ): T | undefined {
-    for (let i = highestActive; i >= 0; i--) {
-      const bpKey = matches[i].key;
-      const result = handler(bpKey);
+    for (let i = highestActiveIndex; i >= 0; i--) {
+      const breakpointKey = breakpointsState[i].key;
+      const result = handler(breakpointKey);
       if (result !== undefined) return result;
     }
     return undefined;
   }
 
   function resolveResponsiveProp(base: string) {
-    return iterateBreakpoints((bpKey) => {
-      const propName = bpKey ? `${base}${bpKey}` : base;
+    if (!responsivePropsUsed[base]) return undefined;
+    return iterateBreakpoints((breakpointKey) => {
+      const propName = breakpointKey ? `${base}${breakpointKey}` : base;
       if (props[propName] !== undefined) return props[propName];
     });
   }
 
   function resolveGapProp() {
-    return iterateBreakpoints((bpKey) => {
-      const propName = bpKey ? `gap${bpKey}` : "gap";
-      const value = props[propName];
-      if (typeof value === "string") return value;
-      if (value === true) return resolvedSize;
-    });
+    const value = resolveResponsiveProp("gap");
+    if (typeof value === "string") return value;
+    if (value === true) return resolvedSize;
+    return value;
   }
 
   function resolveResponsiveDirection() {
-    return iterateBreakpoints((bpKey) => {
-      const rowProp = bpKey ? `row${bpKey}` : "row";
-      const columnProp = bpKey ? `column${bpKey}` : "column";
-      if (props[rowProp]) return "row";
-      if (props[columnProp]) return "column";
-      return undefined;
-    });
+    if (resolveResponsiveProp("row")) return "row";
+    if (resolveResponsiveProp("column")) return "column";
+    return undefined;
   }
 
   function resolveSpaceProp(base: string) {
@@ -105,7 +82,7 @@ export function useAbstractToMantineProps<
   }
 
   const nonResponsiveProps = Object.fromEntries(
-    Object.entries(props).filter(([key]) => !responsiveKeys.includes(key))
+    Object.entries(props).filter(([key]) => !responsivePropNames.includes(key))
   );
 
   const {
@@ -173,10 +150,6 @@ export function useAbstractToMantineProps<
       [styles.flex]: display === "flex",
     }
   );
-
-  if (props.component) {
-    console.log(flexDirection);
-  }
 
   return {
     className: mergedClassName,

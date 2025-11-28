@@ -7,7 +7,20 @@ export interface BreakpointMatch {
   matches: boolean;
 }
 
-export function useBreakpointMatches(): BreakpointMatch[] {
+function getHighestBreakpointIndex(matches: { matches: boolean }[]) {
+  for (let i = matches.length - 1; i >= 0; i--) {
+    if (matches[i].matches) {
+      return i;
+    }
+  }
+  return 0;
+}
+
+export function useBreakpointsState(): {
+  breakpointsState: BreakpointMatch[];
+  highestActiveIndex: number;
+  activeBreakpoints: string[];
+} {
   const theme = useMantineTheme();
   const breakpoints = mantineSizes.map((size) => theme.breakpoints[size]);
   const queries = [
@@ -28,7 +41,7 @@ export function useBreakpointMatches(): BreakpointMatch[] {
     { key: "Xl", query: `(min-width: ${breakpoints[3]})` },
   ];
   // Call useMediaQuery for each breakpoint in a fixed order
-  const matches = [
+  const breakpointMatches = [
     true, // base always matches
     useMediaQuery(queries[1].query!),
     useMediaQuery(queries[2].query!),
@@ -36,5 +49,20 @@ export function useBreakpointMatches(): BreakpointMatch[] {
     useMediaQuery(queries[4].query!),
     useMediaQuery(queries[5].query!),
   ];
-  return queries.map((bp, i) => ({ key: bp.key, matches: matches[i] }));
+  const breakpointsState = queries.map((bp, i) => ({
+    key: bp.key,
+    matches: breakpointMatches[i],
+  }));
+  const highestActiveIndex = getHighestBreakpointIndex(breakpointsState);
+  // activeBreakpoints: contiguous keys up to and including highest true (excluding base '')
+  let activeBreakpoints: string[] = [];
+  if (highestActiveIndex > 0) {
+    activeBreakpoints = breakpointsState
+      .slice(1, highestActiveIndex + 1)
+      .map((bp) => bp.key.toLowerCase());
+  }
+
+  console.log(activeBreakpoints);
+
+  return { breakpointsState, highestActiveIndex, activeBreakpoints };
 }
