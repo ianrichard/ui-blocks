@@ -1,10 +1,12 @@
 import { lazy, Suspense } from "react";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
+import MantineBlock from "../Block/MantineBlock";
+import type { BlockInputProps } from "../Block/Block.types";
 const SyntaxHighlighter = lazy(() =>
   import("react-syntax-highlighter").then((mod) => ({ default: mod.Prism }))
 );
 
-export interface CodePreviewProps {
+export interface CodePreviewProps extends BlockInputProps {
   src: string;
   language?: string;
   title?: string;
@@ -38,6 +40,7 @@ export default function MantineCodePreview({
   src,
   language = "tsx",
   showReactReturnOnly,
+  ...props
 }: CodePreviewProps) {
   // If language is tsx and showReactReturnOnly is undefined, default to true
   const shouldShowReturnOnly =
@@ -47,19 +50,26 @@ export default function MantineCodePreview({
       ? extractReturnContent(src)
       : src.trim();
   return (
-    <Suspense fallback={<div>Loading…</div>}>
+    <MantineBlock
+      component={Suspense}
+      fallback={<div>Loading…</div>}
+      {...props}
+    >
       <SyntaxHighlighter
         language={language}
         style={vscDarkPlus}
         customStyle={{
-          margin: 0,
+          margin: "0",
           padding: "1rem",
+          height: "100%",
+          display: "flex",
+          alignItems: "center",
           // borderRadius: 12,
         }}
         wrapLongLines
       >
         {displaySrc}
       </SyntaxHighlighter>
-    </Suspense>
+    </MantineBlock>
   );
 }

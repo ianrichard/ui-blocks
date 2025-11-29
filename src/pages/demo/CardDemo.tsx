@@ -12,7 +12,7 @@ export default function CardDemo() {
     <>
       <Block.Section row gap="xl">
         <BasicCardDemo />
-        <Block.Card>
+        <Block.Card maxWidth={700}>
           <MantineCodePreview src={basicCardSource} title="Basic Card" />
         </Block.Card>
       </Block.Section>
