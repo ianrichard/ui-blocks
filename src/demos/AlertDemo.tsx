@@ -1,6 +1,6 @@
 import Block from "../components";
 import MantineAlert from "../components/Alert/MantineAlert";
-import MantineIcon from "../components/Icon/MantineIcon";
+import { MantineUtilityIcon } from "../components/Icon/MantineIcon";
 
 export default function AlertDemo() {
   return (
@@ -12,7 +12,7 @@ export default function AlertDemo() {
         <MantineAlert
           title="Bummer!"
           color="red"
-          icon={<MantineIcon name="AlertCircle" />}
+          icon={<MantineUtilityIcon name="AlertCircle" />}
         >
           Something terrible happened! You made a mistake and there is no going
           back, your data was lost forever!
@@ -22,7 +22,7 @@ export default function AlertDemo() {
           variant="light"
           color="blue"
           title="Alert title"
-          icon={<MantineIcon name="Info" />}
+          icon={<MantineUtilityIcon name="Info" />}
         >
           Alert with light variant
         </MantineAlert>
@@ -31,7 +31,7 @@ export default function AlertDemo() {
           variant="outline"
           color="green"
           title="Success"
-          icon={<MantineIcon name="Check" />}
+          icon={<MantineUtilityIcon name="Check" />}
         >
           Everything is fine!
         </MantineAlert>

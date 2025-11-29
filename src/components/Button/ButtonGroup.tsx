@@ -13,7 +13,7 @@ const ButtonGroupBase = ({
   textSize = "md",
   ...rest
 }: ButtonGroupProps) => {
-  const gap = ["xs", "sm", "md"].includes(textSize) ? "sm" : "md";
+  const gap = ["xs", "sm", "md"].includes(textSize) ? "xs" : "md";
   return (
     <MantineBlock row gap={gap} wrap="wrap" mt={gap} {...rest}>
       {children}

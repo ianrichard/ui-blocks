@@ -7,7 +7,7 @@ export default function BadgeDemo() {
       <Block.Title level={2} outerSpaceBottom="md">
         Badge
       </Block.Title>
-      <Block.Section gap="md" outerSpaceBottom="md">
+      <Block.Section row gap="xs" outerSpaceBottom="md">
         <MantineBadge>Default</MantineBadge>
         <MantineBadge color="blue" variant="filled">
           Filled
@@ -19,7 +19,7 @@ export default function BadgeDemo() {
           Dot
         </MantineBadge>
       </Block.Section>
-      <Block.Section gap="md">
+      <Block.Section row gap="xs">
         <MantineBadge size="xs">XS</MantineBadge>
         <MantineBadge size="sm">SM</MantineBadge>
         <MantineBadge size="md">MD</MantineBadge>

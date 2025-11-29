@@ -82,6 +82,7 @@ export function useAbstractToMantineProps<
     const value = resolveResponsiveProp("gap");
     if (typeof value === "string") return value;
     if (value === true) return getScaleSize(value);
+
     return value;
   }
 

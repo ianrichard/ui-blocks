@@ -1,8 +1,8 @@
 import React from "react";
 import type { ReactElement, ReactNode } from "react";
 import { Tabs as MantineTabs } from "@mantine/core";
-import MantineIcon from "../Icon/MantineIcon";
 import MantineSection from "../Section/MantineSection";
+import { MantineUtilityIcon } from "../Icon/MantineIcon";
 
 interface TabProps {
   children: ReactNode;
@@ -39,7 +39,7 @@ export default function Tabs({ children, defaultValue }: TabsProps) {
   function getTabIcon(icon: unknown): ReactNode {
     if (typeof icon === "string") {
       try {
-        return <MantineIcon name={icon} size="1.05em" mb={0} />;
+        return <MantineUtilityIcon name={icon} />;
       } catch {
         return null;
       }

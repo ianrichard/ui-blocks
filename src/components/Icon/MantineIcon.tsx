@@ -12,54 +12,68 @@ export interface IconProps extends TextSizeInputProps {
   // textSize: TextSizeInputProp;
 }
 
-const MantineIconBase = forwardRef<
-  HTMLSpanElement | HTMLButtonElement | HTMLAnchorElement,
-  IconProps
->(({ name = "IconPhoto", onClick, href, textSize = "md", ...other }, ref) => {
-  const sizeMap: Record<string, number> = {
-    xs: 32,
-    sm: 32,
-    md: 32,
-    lg: 48,
-    xl: 48,
-  };
+const sizeMapIcon: Record<string, number> = {
+  xs: 32,
+  sm: 32,
+  md: 32,
+  lg: 48,
+  xl: 48,
+};
 
-  const IconComponent = (TablerIcons[name] ||
-    TablerIcons.IconCircle) as React.ComponentType<{ size: number }>;
+const sizeMapUtility: Record<string, number> = {
+  xs: 16,
+  sm: 20,
+  md: 24,
+  lg: 28,
+  xl: 32,
+};
 
-  const sizeValue = sizeMap[textSize];
+const MantineIconBase = (
+  sizeMap: Record<string, number>,
+  extraClass?: string
+) =>
+  forwardRef<
+    HTMLSpanElement | HTMLButtonElement | HTMLAnchorElement,
+    IconProps
+  >(({ name = "IconPhoto", onClick, href, textSize = "md", ...other }, ref) => {
+    const IconComponent = (TablerIcons[name] ||
+      TablerIcons.IconCircle) as React.ComponentType<{ size: number }>;
+    const sizeValue = sizeMap[textSize];
+    const className = [styles.icon, extraClass].filter(Boolean).join(" ");
 
-  if (onClick || href) {
+    if (onClick || href) {
+      return (
+        <ActionIcon
+          variant="transparent"
+          onClick={onClick}
+          component={href ? "a" : undefined}
+          href={href}
+          size={sizeValue}
+          ref={ref as React.ForwardedRef<HTMLAnchorElement>}
+          className={className}
+          {...other}
+        >
+          <IconComponent size={sizeValue} />
+        </ActionIcon>
+      );
+    }
+
     return (
-      <ActionIcon
-        variant="transparent"
-        onClick={onClick}
-        component={href ? "a" : undefined}
-        href={href}
-        size={sizeValue}
-        ref={ref as React.ForwardedRef<HTMLAnchorElement>}
-        className={styles.icon}
-        {...other}
+      <span
+        className={className}
+        ref={ref as React.ForwardedRef<HTMLSpanElement>}
       >
-        <IconComponent size={sizeValue} />
-      </ActionIcon>
+        <IconComponent size={sizeValue} {...other} />
+      </span>
     );
-  }
+  });
 
-  return (
-    <span
-      className={styles.icon}
-      ref={ref as React.ForwardedRef<HTMLSpanElement>}
-    >
-      <IconComponent size={sizeValue} {...other} />
-    </span>
-  );
-});
-
-MantineIconBase.displayName = "Block.IconBase";
-
-const MantineIcon = withBlockSize(MantineIconBase);
-
+const MantineIcon = withBlockSize(
+  MantineIconBase(sizeMapIcon, styles.withMargin)
+);
 MantineIcon.displayName = "Block.Icon";
 
-export default MantineIcon;
+const MantineUtilityIcon = withBlockSize(MantineIconBase(sizeMapUtility));
+MantineUtilityIcon.displayName = "Block.UtilityIcon";
+
+export { MantineIcon, MantineUtilityIcon };

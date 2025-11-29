@@ -1,6 +1,6 @@
 import MantineCard from "./Card/MantineCard";
 import MantineButton from "./Button/MantineButton";
-import MantineIcon from "./Icon/MantineIcon";
+import { MantineIcon, MantineUtilityIcon } from "./Icon/MantineIcon";
 import MantineText from "./Text/MantineText";
 import MantineTitle from "./Title/MantineTitle";
 import MantineImage from "./Image/MantineImage";
@@ -25,6 +25,7 @@ const Block = {
   Card: MantineCard,
   Button: MantineButton,
   Icon: MantineIcon,
+  UtilityIcon: MantineUtilityIcon,
   Text: MantineText,
   Title: MantineTitle,
   Image: MantineImage,
