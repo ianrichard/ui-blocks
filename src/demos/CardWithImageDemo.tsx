@@ -2,7 +2,7 @@ import Block from "../components";
 
 export default function CardWithImageDemo() {
   return (
-    <Block.Card sizeCozy>
+    <Block.Card scaleCozy>
       <Block.Section column rowLg alignMiddle>
         <Block.Image height={180} heightLg={320} width="100%" widthLg={340} />
         <Block.Section innerSpace>

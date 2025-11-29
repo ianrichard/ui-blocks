@@ -44,12 +44,12 @@ const MantineBlock = forwardRef<HTMLDivElement, BlockInputProps>(
 
     const parentContext = useBlockContext();
     const providerValue: BlockContextValue = { ...parentContext };
-    if (mappedProps.size) providerValue.size = mappedProps.size;
+    if (mappedProps.textSize) providerValue.textSize = mappedProps.textSize;
     if (props.backgroundInverse) providerValue.backgroundVariant = "inverse";
     else if (props.backgroundSecondary)
       providerValue.backgroundVariant = "secondary";
 
-    if (providerValue.size || providerValue.backgroundVariant) {
+    if (providerValue.textSize || providerValue.backgroundVariant) {
       return <BlockProvider value={providerValue}>{content}</BlockProvider>;
     }
     return content;

@@ -48,4 +48,6 @@ const Block = {
   Alert: MantineAlert,
 };
 
+export type BlockType = typeof Block;
+
 export default Block;

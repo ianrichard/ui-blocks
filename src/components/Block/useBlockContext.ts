@@ -9,5 +9,5 @@ export function useBlockContext(): BlockContextValue {
 
 export function useBlockSize(size?: MantineSize) {
   const context = useBlockContext();
-  return size || context.size || "md";
+  return size || context.textSize || "md";
 }

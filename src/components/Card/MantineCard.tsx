@@ -12,7 +12,7 @@ interface MantineCardProps extends BlockInputProps {
 
 const MantineCardBase = forwardRef<HTMLDivElement, MantineCardProps>(
   ({ children, ...props }, ref) => {
-    const radius = ["xs", "sm", "md"].includes(props.size as string)
+    const radius = ["xs", "sm", "md"].includes(props.textSize as string)
       ? "md"
       : "lg";
 

@@ -21,7 +21,7 @@ const RESPONSIVE_PREFIXES = [
   "outerSpaceRight",
   "outerSpaceTop",
   "row",
-  "size",
+  "textSize",
   "width",
 ];
 

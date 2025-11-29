@@ -1,12 +1,12 @@
 import React, { forwardRef } from "react";
 import type { ReactNode } from "react";
-import { Button } from "@mantine/core";
+import { Button, type MantineSize } from "@mantine/core";
 import { resolveSizeProp } from "../Size/resolveSizeProp";
 import { withBlockSize } from "../Block/withBlockSize";
-import type { MantineSize } from "@mantine/core";
 import { useBlockContext } from "../Block/useBlockContext";
 import classNames from "classnames";
 import styles from "./Button.module.scss";
+import type { TextSizeInputProp } from "../Block/Block.types";
 
 export interface ButtonProps {
   children: ReactNode;
@@ -18,6 +18,7 @@ export interface ButtonProps {
   hollow?: boolean;
   disabled?: boolean;
   size?: MantineSize;
+  textSize?: TextSizeInputProp;
 }
 
 const MantineButtonBase = forwardRef<
@@ -25,7 +26,6 @@ const MantineButtonBase = forwardRef<
   ButtonProps
 >((props, ref) => {
   const { backgroundVariant } = useBlockContext();
-  console.log(backgroundVariant);
 
   let variant = "filled";
   let color = "blue";
@@ -38,12 +38,17 @@ const MantineButtonBase = forwardRef<
     disabled,
     children,
     href,
-    size = "md",
+    size,
+    textSize,
     ...other
   } = props;
 
   const primary = !secondary && !tertiary && !destructive && !hollow;
-  const buttonSize = resolveSizeProp({ size }, undefined, -1);
+  const buttonSize = resolveSizeProp(
+    { textSize: size || (textSize as MantineSize) },
+    undefined,
+    -1
+  );
 
   if (secondary) {
     variant = "light";

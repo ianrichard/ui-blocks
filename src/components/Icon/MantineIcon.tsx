@@ -3,18 +3,19 @@ import { ActionIcon } from "@mantine/core";
 import * as TablerIcons from "@tabler/icons-react";
 import { withBlockSize } from "../Block/withBlockSize";
 import styles from "./Icon.module.scss";
-import type { SizeInputProps } from "../Block/Block.types";
+import type { TextSizeInputProps } from "../Block/Block.types";
 
-export interface IconProps extends SizeInputProps {
+export interface IconProps extends TextSizeInputProps {
   name?: keyof typeof TablerIcons;
   onClick?: () => void;
   href?: string;
+  // textSize: TextSizeInputProp;
 }
 
 const MantineIconBase = forwardRef<
   HTMLSpanElement | HTMLButtonElement | HTMLAnchorElement,
   IconProps
->(({ name = "IconPhoto", onClick, href, size = "md", ...other }, ref) => {
+>(({ name = "IconPhoto", onClick, href, textSize = "md", ...other }, ref) => {
   const sizeMap: Record<string, number> = {
     xs: 32,
     sm: 32,
@@ -26,7 +27,7 @@ const MantineIconBase = forwardRef<
   const IconComponent = (TablerIcons[name] ||
     TablerIcons.IconCircle) as React.ComponentType<{ size: number }>;
 
-  const sizeValue = sizeMap[size];
+  const sizeValue = sizeMap[textSize];
 
   if (onClick || href) {
     return (

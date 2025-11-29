@@ -35,7 +35,7 @@ function omit<T extends object, K extends keyof T>(
 
 const MantineTitleBase = forwardRef<HTMLHeadingElement, MantineTitleProps>(
   (props, ref) => {
-    const { children, className, size = "md", ...rest } = props;
+    const { children, className, textSize = "md", ...rest } = props;
     const exclusiveKey = getExclusiveProp(
       props as Record<string, unknown>,
       ["hero", "level1", "level2", "level3", "level4", "level5", "level6"],
@@ -73,7 +73,7 @@ const MantineTitleBase = forwardRef<HTMLHeadingElement, MantineTitleProps>(
         className={classNames(
           styles.title,
           styles[levelClass],
-          styles[size],
+          styles[textSize],
           className
         )}
         {...titleProps}

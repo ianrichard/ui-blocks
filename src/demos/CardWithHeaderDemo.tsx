@@ -4,7 +4,7 @@ export default function CardWithHeaderDemo() {
   return (
     <Block.Card>
       <Block.Section innerSpace row alignMiddle borderBottom>
-        <Block.Title fill>Card with Header</Block.Title>
+        <Block.Title fillSpace>Card with Header</Block.Title>
         <Block.Icon
           name="IconSettings"
           onClick={() => alert("Settings clicked!")}

@@ -36,11 +36,10 @@ interface TabsProps {
 }
 
 export default function Tabs({ children, defaultValue }: TabsProps) {
-  console.log(children);
   function getTabIcon(icon: unknown): ReactNode {
     if (typeof icon === "string") {
       try {
-        return <MantineIcon name={icon} size=".4em" mb={0} />;
+        return <MantineIcon name={icon} size="1.05em" mb={0} />;
       } catch {
         return null;
       }

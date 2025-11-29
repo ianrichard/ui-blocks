@@ -45,7 +45,7 @@ export function useAbstractToMantineProps<
     [props]
   );
 
-  const resolvedSize = useSizeProp(props);
+  const textSize = useSizeProp(props);
 
   function resolveResponsiveProp(propWithoutResponsiveSuffix: string) {
     const responsivePropsForAttribute =
@@ -70,10 +70,18 @@ export function useAbstractToMantineProps<
     return undefined;
   }
 
+  function getScaleSize(defaultValue: boolean | unknown) {
+    if (defaultValue) {
+      return textSize;
+    } else {
+      return "md";
+    }
+  }
+
   function resolveGapProp() {
     const value = resolveResponsiveProp("gap");
     if (typeof value === "string") return value;
-    if (value === true) return resolvedSize;
+    if (value === true) return getScaleSize(value);
     return value;
   }
 
@@ -85,7 +93,8 @@ export function useAbstractToMantineProps<
 
   function resolveSpaceProp(base: string) {
     const value = resolveResponsiveProp(base);
-    if (value === true) return resolvedSize;
+    if (typeof value === "string") return value;
+    if (value === true) return getScaleSize(value);
     return value;
   }
 
@@ -94,8 +103,8 @@ export function useAbstractToMantineProps<
       Object.entries(props).filter(
         ([key]) =>
           !RESPONSIVE_PROP_NAMES.includes(key) &&
-          key !== "sizeCozy" &&
-          key !== "sizeCompact"
+          key !== "scaleCozy" &&
+          key !== "scaleCompact"
       )
     );
     return filtered;
@@ -112,8 +121,9 @@ export function useAbstractToMantineProps<
     borderBottom: borderBottomProp,
     alignMiddle: alignMiddleProp,
     verticalSpace: verticalSpaceProp,
-    fill: fillProp,
+    fillSpace: fillSpaceProp,
     component: componentProp,
+    // textSize: textSizeProp,
     ...passthroughProps
   } = nonResponsiveProps;
 
@@ -136,7 +146,7 @@ export function useAbstractToMantineProps<
   const flexAlign =
     flexDirection === "row" && alignMiddleProp ? "center" : undefined;
 
-  const flex = fillProp ? 1 : undefined;
+  const flex = fillSpaceProp ? 1 : undefined;
 
   const outerSpaceTopBottom = verticalSpaceProp
     ? typeof verticalSpaceProp === "string"
@@ -193,9 +203,9 @@ export function useAbstractToMantineProps<
     display,
     backgroundColor,
     // textColor,
-    otherProps: passthroughProps,
     flexAlign,
     flex,
-    size: resolvedSize,
+    textSize: textSize,
+    otherProps: passthroughProps,
   } as BlockMappedProps;
 }
