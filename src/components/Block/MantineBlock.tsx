@@ -12,8 +12,6 @@ const MantineBlock = forwardRef<HTMLDivElement, BlockInputProps>(
     const content = (
       <Component
         align={mappedProps.flexAlign}
-        // bg={mappedProps.backgroundColor}
-        // c={mappedProps.textColor}
         className={mappedProps.className}
         direction={mappedProps.flexDirection}
         flex={mappedProps.flex}

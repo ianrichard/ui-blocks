@@ -37,7 +37,6 @@ function extractReturnContent(src: string): string {
 export default function MantineCodePreview({
   src,
   language = "tsx",
-  title,
   showReactReturnOnly,
 }: CodePreviewProps) {
   // If language is tsx and showReactReturnOnly is undefined, default to true
