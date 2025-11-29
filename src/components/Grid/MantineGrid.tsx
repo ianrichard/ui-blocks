@@ -6,6 +6,7 @@ import styles from "./MantineGrid.module.scss";
 import MantineBlock from "../Block/MantineBlock";
 import { useAbstractToMantineProps } from "../Block/useAbstractToMantineProps";
 import type { ColumnsInputProps } from "../Block/Block.types";
+import { useResponsiveProps } from "../Block/useResponsiveProps";
 
 interface MantineGridProps {
   children?: React.ReactNode;
@@ -28,11 +29,10 @@ interface MantineGridItemProps extends ColumnsInputProps {
 }
 
 export const MantineGridItem = (props: MantineGridItemProps) => {
-  const { children, ...columnsProps } = props;
-  const { columns, otherProps } = useAbstractToMantineProps(columnsProps);
+  const { columns, ...otherProps } = useResponsiveProps(props);
   return (
     <Grid.Col className={styles.gridItem} span={columns} {...otherProps}>
-      {children}
+      {props.children}
     </Grid.Col>
   );
 };

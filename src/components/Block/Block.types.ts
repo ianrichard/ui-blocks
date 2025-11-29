@@ -42,7 +42,7 @@ type Breakpoint = "" | "Xs" | "Sm" | "Md" | "Lg" | "Xl";
 
 type ResponsiveProps<T, K extends string> = {
   [B in Breakpoint as `${K}${B}`]?: T;
-};
+} & { [key: string]: unknown };
 
 export type WidthInputProps = ResponsiveProps<WidthInputProp, "width"> & {
   minWidth?: WidthInputProp;
@@ -99,7 +99,6 @@ export interface BlockInputProps
   scaleCompact?: SizeAliasInputProp;
   scaleCozy?: SizeAliasInputProp;
   //   textColor?: ColorInputProp;
-  [key: string]: unknown;
 }
 
 export type BlockMappedProps = {
