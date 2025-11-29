@@ -1,4 +1,3 @@
-import { Box, Flex } from "@mantine/core";
 import classNames from "classnames";
 import { useMemo } from "react";
 import styles from "./Block.module.scss";
@@ -10,9 +9,9 @@ import {
 } from "./useBlockContext";
 import { EXCLUDED_KEYS } from "./blockConstants";
 
-export function useAbstractToMantineProps<
-  Props extends Record<string, unknown>
->(props: Props) {
+export function useAbstractProps<Props extends Record<string, unknown>>(
+  props: Props
+) {
   const resolvedProps = useResponsiveProps(props);
 
   const sizeFromPropOrContext = useSizeFromPropOrContext(resolvedProps);
@@ -31,7 +30,6 @@ export function useAbstractToMantineProps<
   function resolveResponsiveDirection() {
     if (resolvedProps["row"]) return "row";
     if (resolvedProps["column"]) return "column";
-    return undefined;
   }
 
   const nonResponsiveProps = useMemo(() => {
@@ -52,25 +50,10 @@ export function useAbstractToMantineProps<
     borderBottom: borderBottomProp,
     alignMiddle: alignMiddleProp,
     fillSpace: fillSpaceProp,
-    component: componentProp,
     ...passthroughProps
   } = nonResponsiveProps;
 
   const flexDirection = resolveResponsiveDirection();
-  let component;
-  let display = "block";
-
-  if (flexDirection === "row" || flexDirection === "column") {
-    display = "flex";
-  }
-
-  if (componentProp) {
-    component = componentProp;
-  } else if (!componentProp && display === "flex") {
-    component = Flex;
-  } else {
-    component = Box;
-  }
 
   const flexAlign =
     flexDirection === "row" && alignMiddleProp ? "center" : undefined;
@@ -93,7 +76,7 @@ export function useAbstractToMantineProps<
       [styles.borderRight]: borderRightProp,
       [styles.borderTop]: borderTopProp,
       [styles.borderBottom]: borderBottomProp,
-      [styles.flex]: display === "flex",
+      [styles.flex]: flexDirection === "row" || flexDirection === "column",
       [styles.backgroundInverse]: backgroundInverseProp,
       [styles.backgroundSecondary]: backgroundSecondaryProp,
     }
@@ -125,13 +108,13 @@ export function useAbstractToMantineProps<
     innerSpaceLeftRight: resolveSpaceProp("innerSpaceLeftRight"),
     gap: resolveSpaceProp("gap"),
     flexDirection,
-    component,
-    display,
     backgroundVariant,
     flexAlign,
     flex,
     scale: scaleFrompPropOrContext,
     size: sizeFromPropOrContext,
     otherProps: passthroughProps,
+    display:
+      flexDirection === "row" || flexDirection === "column" ? "flex" : "block",
   } as BlockMappedProps;
 }

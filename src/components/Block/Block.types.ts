@@ -128,7 +128,7 @@ export interface BlockInputProps
   scaleCozy?: SizeAliasInputProp;
 }
 
-// Mapped props returned from useAbstractToMantineProps
+// Mapped props returned from useAbstractProps
 export type BlockMappedProps = {
   backgroundVariant?: BackgroundMappedProp;
   children?: ReactNode;

@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 import { Image as MantineImageComponent } from "@mantine/core";
 import type { HeightInputProps, WidthInputProps } from "../Block/Block.types";
-import { useAbstractToMantineProps } from "../Block/useAbstractToMantineProps";
+import { useAbstractProps } from "../Block/useAbstractProps";
 
 export interface ImageProps extends WidthInputProps, HeightInputProps {
   url?: string;
@@ -22,7 +22,7 @@ const MantineImage = forwardRef<HTMLImageElement, ImageProps>(
     },
     ref
   ) => {
-    const { width, height } = useAbstractToMantineProps(other);
+    const { width, height } = useAbstractProps(other);
     return (
       <MantineImageComponent
         ref={ref}

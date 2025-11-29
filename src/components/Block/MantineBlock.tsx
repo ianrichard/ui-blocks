@@ -1,13 +1,26 @@
 import { forwardRef } from "react";
+import type { ElementType } from "react";
+import { Box, Flex } from "@mantine/core";
 import type { BlockInputProps, BlockContextValue } from "./Block.types";
-import { useAbstractToMantineProps } from "./useAbstractToMantineProps";
+import { useAbstractProps } from "./useAbstractProps";
 import { BlockProvider } from "./BlockContext";
 import { useBlockContext } from "./useBlockContext";
 
 const MantineBlock = forwardRef<HTMLDivElement, BlockInputProps>(
   (props, ref) => {
-    const mappedProps = useAbstractToMantineProps(props);
-    const Component = mappedProps.component;
+    const mappedProps = useAbstractProps(props);
+    let Component: ElementType;
+    if (
+      props.component &&
+      (typeof props.component === "function" ||
+        typeof props.component === "string")
+    ) {
+      Component = props.component as ElementType;
+    } else if (mappedProps.display === "flex") {
+      Component = Flex;
+    } else {
+      Component = Box;
+    }
 
     const content = (
       <Component
