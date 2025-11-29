@@ -7,6 +7,11 @@ import ButtonDemo from "./demo/ButtonDemo";
 import CardDemo from "./demo/CardDemo";
 import GridDemo from "./demo/GridDemo";
 import TabsDemo from "./demo/TabsDemo";
+import InputDemo from "../demos/InputDemo";
+import BadgeDemo from "../demos/BadgeDemo";
+import AccordionDemo from "../demos/AccordionDemo";
+import ModalDemo from "../demos/ModalDemo";
+import AlertDemo from "../demos/AlertDemo";
 
 const Demos = () => {
   const sectionProps = {
@@ -39,6 +44,21 @@ const Demos = () => {
       </Block.Section>
       <Block.Section id="tabs-demo" {...sectionProps}>
         <TabsDemo />
+      </Block.Section>
+      <Block.Section id="input-demo" {...sectionProps}>
+        <InputDemo />
+      </Block.Section>
+      <Block.Section id="badge-demo" {...sectionProps}>
+        <BadgeDemo />
+      </Block.Section>
+      <Block.Section id="accordion-demo" {...sectionProps}>
+        <AccordionDemo />
+      </Block.Section>
+      <Block.Section id="modal-demo" {...sectionProps}>
+        <ModalDemo />
+      </Block.Section>
+      <Block.Section id="alert-demo" {...sectionProps}>
+        <AlertDemo />
       </Block.Section>
     </MantineBlock>
   );

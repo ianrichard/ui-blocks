@@ -7,7 +7,7 @@ import Demos from "./pages/Demos";
 
 function App() {
   return (
-    <MantineProvider defaultColorScheme="light">
+    <MantineProvider defaultColorScheme="dark">
       <BreakpointsProvider>
         <BrowserRouter>
           <Routes>

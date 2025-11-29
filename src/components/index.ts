@@ -11,6 +11,15 @@ import { MantineGrid, MantineGridItem } from "./Grid/MantineGrid";
 import ButtonGroup from "./Button/ButtonGroup";
 import MantineMarkdown from "./Markdown/MantineMarkdown";
 import Tabs, { Tab, TabPanel } from "./Tabs/Tabs";
+import MantineInput from "./Input/MantineInput";
+import MantineBadge from "./Badge/MantineBadge";
+import MantineAccordion, {
+  AccordionItem,
+  AccordionControl,
+  AccordionPanel,
+} from "./Accordion/MantineAccordion";
+import MantineModal from "./Modal/MantineModal";
+import MantineAlert from "./Alert/MantineAlert";
 
 const Block = {
   Card: MantineCard,
@@ -29,6 +38,14 @@ const Block = {
   Tabs,
   Tab,
   TabPanel,
+  Input: MantineInput,
+  Badge: MantineBadge,
+  Accordion: MantineAccordion,
+  AccordionItem,
+  AccordionControl,
+  AccordionPanel,
+  Modal: MantineModal,
+  Alert: MantineAlert,
 };
 
 export default Block;
