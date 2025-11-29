@@ -1,12 +1,11 @@
 import React, { forwardRef } from "react";
 import type { ReactNode } from "react";
 import { Button, type MantineSize } from "@mantine/core";
-import { resolveSizeProp } from "../Size/resolveSizeProp";
 import { withBlockSize } from "../Block/withBlockSize";
 import { useBlockContext } from "../Block/useBlockContext";
 import classNames from "classnames";
 import styles from "./Button.module.scss";
-import type { TextSizeInputProp } from "../Block/Block.types";
+import { getShiftedSize } from "../Size/shiftSize";
 
 export interface ButtonProps {
   children: ReactNode;
@@ -18,7 +17,6 @@ export interface ButtonProps {
   hollow?: boolean;
   disabled?: boolean;
   size?: MantineSize;
-  textSize?: TextSizeInputProp;
 }
 
 const MantineButtonBase = forwardRef<
@@ -39,16 +37,11 @@ const MantineButtonBase = forwardRef<
     children,
     href,
     size,
-    textSize,
     ...other
   } = props;
 
   const primary = !secondary && !tertiary && !destructive && !hollow;
-  const buttonSize = resolveSizeProp(
-    { textSize: size || (textSize as MantineSize) },
-    undefined,
-    -1
-  );
+  const buttonSize = getShiftedSize(size, -1);
 
   if (secondary) {
     variant = "light";

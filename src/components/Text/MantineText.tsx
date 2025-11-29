@@ -5,19 +5,19 @@ import type { ReactNode } from "react";
 import styles from "./Text.module.scss";
 import classNames from "classnames";
 import { withBlockSize } from "../Block/withBlockSize";
-import type { TextSizeInputProp } from "../Block/Block.types";
+import type { SizeInputProp } from "../Block/Block.types";
 
 interface MantineTextProps extends TextProps {
   children?: ReactNode;
-  textSize?: TextSizeInputProp;
+  size?: SizeInputProp;
 }
 
 const MantineTextBase = forwardRef<HTMLParagraphElement, MantineTextProps>(
   (props, ref) => {
-    const { children, className, textSize = "md", ...other } = props;
+    const { children, className, size = "md", ...other } = props;
     return (
       <Text
-        className={classNames(styles.text, styles[textSize], className)}
+        className={classNames(styles.text, styles[size], className)}
         ref={ref}
         {...other}
       >

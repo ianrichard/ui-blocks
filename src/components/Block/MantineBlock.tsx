@@ -18,24 +18,27 @@ const MantineBlock = forwardRef<HTMLDivElement, BlockInputProps>(
         direction={mappedProps.flexDirection}
         flex={mappedProps.flex}
         gap={mappedProps.gap}
-        h={mappedProps.height}
-        m={mappedProps.outerSpace}
-        mah={mappedProps.maxHeight}
-        maw={mappedProps.maxWidth}
-        mb={mappedProps.outerSpaceBottom}
-        mih={mappedProps.minHeight}
         miw={mappedProps.minWidth}
+        w={mappedProps.width}
+        maw={mappedProps.maxWidth}
+        h={mappedProps.height}
+        mah={mappedProps.maxHeight}
+        mih={mappedProps.minHeight}
+        m={mappedProps.outerSpace}
+        mt={mappedProps.outerSpaceTop}
+        mb={mappedProps.outerSpaceBottom}
         ml={mappedProps.outerSpaceLeft}
         mr={mappedProps.outerSpaceRight}
-        mt={mappedProps.outerSpaceTop}
         my={mappedProps.outerSpaceTopBottom}
+        mx={mappedProps.outerSpaceLeftRight}
         p={mappedProps.innerSpace}
+        pt={mappedProps.innerSpaceTop}
         pb={mappedProps.innerSpaceBottom}
         pl={mappedProps.innerSpaceLeft}
         pr={mappedProps.innerSpaceRight}
-        pt={mappedProps.innerSpaceTop}
+        py={mappedProps.innerSpaceTopBottom}
+        px={mappedProps.innerSpaceLeftRight}
         ref={ref}
-        w={mappedProps.width}
         {...mappedProps.otherProps}
       >
         {mappedProps.children}
@@ -44,12 +47,13 @@ const MantineBlock = forwardRef<HTMLDivElement, BlockInputProps>(
 
     const parentContext = useBlockContext();
     const providerValue: BlockContextValue = { ...parentContext };
-    if (mappedProps.textSize) providerValue.textSize = mappedProps.textSize;
-    if (props.backgroundInverse) providerValue.backgroundVariant = "inverse";
-    else if (props.backgroundSecondary)
-      providerValue.backgroundVariant = "secondary";
 
-    if (providerValue.textSize || providerValue.backgroundVariant) {
+    if (mappedProps.size) providerValue.size = mappedProps.size;
+    if (mappedProps.scale) providerValue.scale = mappedProps.scale;
+    if (mappedProps.backgroundVariant)
+      providerValue.backgroundVariant = mappedProps.backgroundVariant;
+
+    if (Object.keys(mappedProps).length > 0) {
       return <BlockProvider value={providerValue}>{content}</BlockProvider>;
     }
     return content;

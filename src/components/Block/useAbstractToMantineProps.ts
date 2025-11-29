@@ -1,33 +1,31 @@
 import { Box, Flex } from "@mantine/core";
 import classNames from "classnames";
 import { useMemo } from "react";
-import { useSizeProp } from "../Size/useSizeProp";
 import styles from "./Block.module.scss";
 import type { BlockMappedProps, ColorInputProp } from "./Block.types";
-import { RESPONSIVE_PROP_NAMES } from "./responsivePropNames";
 import { useResponsiveProps } from "./useResponsiveProps";
+import {
+  useScaleFromPropOrContext,
+  useSizeFromPropOrContext,
+} from "./useBlockContext";
+import { EXCLUDED_KEYS } from "./blockConstants";
 
 export function useAbstractToMantineProps<
   Props extends Record<string, unknown>
 >(props: Props) {
-  // Use the new generic responsive prop resolver
   const resolvedProps = useResponsiveProps(props);
 
-  const textSize = useSizeProp(resolvedProps);
+  const sizeFromPropOrContext = useSizeFromPropOrContext(resolvedProps);
+  const scaleFrompPropOrContext = useScaleFromPropOrContext(resolvedProps);
 
-  function getScaleSize(defaultValue: boolean | unknown) {
-    if (defaultValue) {
-      return textSize;
-    } else {
+  function resolveSpaceProp(base: string) {
+    const value = resolvedProps[base];
+    if (["string", "number"].includes(typeof value)) return value;
+    if (value === true) {
+      if (sizeFromPropOrContext) return sizeFromPropOrContext;
+      if (scaleFrompPropOrContext) return scaleFrompPropOrContext;
       return "md";
     }
-  }
-
-  function resolveGapProp() {
-    const value = resolvedProps["gap"];
-    if (typeof value === "string") return value;
-    if (value === true) return getScaleSize(value);
-    return value;
   }
 
   function resolveResponsiveDirection() {
@@ -36,22 +34,9 @@ export function useAbstractToMantineProps<
     return undefined;
   }
 
-  function resolveSpaceProp(base: string) {
-    const value = resolvedProps[base];
-    if (typeof value === "string") return value;
-    if (value === true) return getScaleSize(value);
-    return value;
-  }
-
-  // Remove responsive props from passthrough
   const nonResponsiveProps = useMemo(() => {
     const filtered = Object.fromEntries(
-      Object.entries(resolvedProps).filter(
-        ([key]) =>
-          !RESPONSIVE_PROP_NAMES.includes(key) &&
-          key !== "scaleCozy" &&
-          key !== "scaleCompact"
-      )
+      Object.entries(resolvedProps).filter(([key]) => !EXCLUDED_KEYS.has(key))
     );
     return filtered;
   }, [resolvedProps]);
@@ -66,10 +51,8 @@ export function useAbstractToMantineProps<
     borderTop: borderTopProp,
     borderBottom: borderBottomProp,
     alignMiddle: alignMiddleProp,
-    verticalSpace: verticalSpaceProp,
     fillSpace: fillSpaceProp,
     component: componentProp,
-    // textSize: textSizeProp,
     ...passthroughProps
   } = nonResponsiveProps;
 
@@ -94,17 +77,11 @@ export function useAbstractToMantineProps<
 
   const flex = fillSpaceProp ? 1 : undefined;
 
-  const outerSpaceTopBottom = verticalSpaceProp
-    ? typeof verticalSpaceProp === "string"
-      ? verticalSpaceProp
-      : "xl"
-    : undefined;
-
-  let backgroundColor: ColorInputProp = undefined;
+  let backgroundVariant: ColorInputProp = undefined;
   if (backgroundInverseProp) {
-    backgroundColor = "inverse";
+    backgroundVariant = "inverse";
   } else if (backgroundSecondaryProp) {
-    backgroundColor = "secondary";
+    backgroundVariant = "secondary";
   }
 
   const mergedClassName = classNames(
@@ -137,21 +114,24 @@ export function useAbstractToMantineProps<
     outerSpaceBottom: resolveSpaceProp("outerSpaceBottom"),
     outerSpaceLeft: resolveSpaceProp("outerSpaceLeft"),
     outerSpaceRight: resolveSpaceProp("outerSpaceRight"),
-    outerSpaceTopBottom,
+    outerSpaceTopBottom: resolveSpaceProp("outerSpaceTopBottom"),
+    outerSpaceLeftRight: resolveSpaceProp("outerSpaceLeftRight"),
     innerSpace: resolveSpaceProp("innerSpace"),
     innerSpaceTop: resolveSpaceProp("innerSpaceTop"),
     innerSpaceBottom: resolveSpaceProp("innerSpaceBottom"),
     innerSpaceLeft: resolveSpaceProp("innerSpaceLeft"),
     innerSpaceRight: resolveSpaceProp("innerSpaceRight"),
-    gap: resolveGapProp(),
+    innerSpaceTopBottom: resolveSpaceProp("innerSpaceTopBottom"),
+    innerSpaceLeftRight: resolveSpaceProp("innerSpaceLeftRight"),
+    gap: resolveSpaceProp("gap"),
     flexDirection,
     component,
     display,
-    backgroundColor,
-    // textColor,
+    backgroundVariant,
     flexAlign,
     flex,
-    textSize: textSize,
+    scale: scaleFrompPropOrContext,
+    size: sizeFromPropOrContext,
     otherProps: passthroughProps,
   } as BlockMappedProps;
 }

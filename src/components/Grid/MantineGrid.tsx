@@ -15,7 +15,7 @@ interface MantineGridProps {
 const MantineGridBase = (props: MantineGridProps) => {
   const { children, size = "md", ...rest } = props;
   return (
-    <MantineBlock component={Grid} gutter={size} {...rest} verticalSpace>
+    <MantineBlock component={Grid} gutter={size} {...rest} outerSpaceTopBottom>
       {children}
     </MantineBlock>
   );

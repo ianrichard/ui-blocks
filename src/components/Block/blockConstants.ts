@@ -1,4 +1,10 @@
-import { BREAKPOINTS } from "../Breakpoints/breakpoints";
+export const BREAKPOINTS = [
+  { key: "xs", value: 576 },
+  { key: "sm", value: 768 },
+  { key: "md", value: 992 },
+  { key: "lg", value: 1200 },
+  { key: "xl", value: 1408 },
+];
 
 const RESPONSIVE_PREFIXES = [
   "children",
@@ -7,22 +13,27 @@ const RESPONSIVE_PREFIXES = [
   "gap",
   "height",
   "innerSpace",
+  "innerSpaceTop",
   "innerSpaceBottom",
   "innerSpaceLeft",
   "innerSpaceRight",
-  "innerSpaceTop",
+  "innerSpaceTopBottom",
+  "innerSpaceLeftRight",
   "maxHeight",
   "maxWidth",
   "minHeight",
   "minWidth",
   "outerSpace",
+  "outerSpaceTop",
   "outerSpaceBottom",
   "outerSpaceLeft",
   "outerSpaceRight",
-  "outerSpaceTop",
+  "outerSpaceTopBottom",
+  "outerSpaceLeftRight",
   "row",
-  "textSize",
+  "size",
   "width",
+  "scale",
 ];
 
 const BREAKPOINT_SUFFIXES = [
@@ -39,3 +50,9 @@ export const RESPONSIVE_PROP_NAMES: string[] = (() => {
   }
   return keys;
 })();
+
+export const EXCLUDED_KEYS = new Set([
+  ...RESPONSIVE_PROP_NAMES,
+  "scaleCozy",
+  "scaleCompact",
+]);

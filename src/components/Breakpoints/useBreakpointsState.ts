@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BREAKPOINTS } from "./breakpoints";
+import { BREAKPOINTS } from "../Block/blockConstants";
 
 export function useBreakpointsState(): { activeBreakpoints: string[] } {
   const getActiveBreakpoints = () => {

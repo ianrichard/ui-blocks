@@ -1,48 +1,46 @@
-import { BREAKPOINTS } from "../Breakpoints/breakpoints";
 import { useBreakpointsState } from "../Breakpoints/useBreakpointsState";
+import { BREAKPOINTS } from "./blockConstants";
 
-/**
- * Resolves responsive props for a component based on active breakpoints.
- * @param props The component props (may include responsive props like fooMd, barXl, etc)
- * @returns New props object with responsive props resolved to their root names
- */
 export function useResponsiveProps<Props extends Record<string, unknown>>(
   props: Props
 ): Partial<Props> {
   const { activeBreakpoints } = useBreakpointsState();
   // Build a map of breakpoint suffixes (e.g. 'Md', 'Xl')
-  const suffixes = BREAKPOINTS.map(
-    (b) => b.key.charAt(0).toUpperCase() + b.key.slice(1)
+  const breakpointSuffixes = BREAKPOINTS.map(
+    (breakpoint) =>
+      breakpoint.key.charAt(0).toUpperCase() + breakpoint.key.slice(1)
   );
 
   // For each prop, group by root name and collect all responsive variants
   const responsiveMap: Record<string, { [suffix: string]: string }> = {};
-  Object.keys(props).forEach((key) => {
-    const matchedSuffix = suffixes.find((suffix) => key.endsWith(suffix));
+  Object.keys(props).forEach((propKey) => {
+    const matchedSuffix = breakpointSuffixes.find((suffix) =>
+      propKey.endsWith(suffix)
+    );
     if (matchedSuffix) {
-      const root = key.slice(0, -matchedSuffix.length);
-      if (!responsiveMap[root]) responsiveMap[root] = {};
-      responsiveMap[root][matchedSuffix.toLowerCase()] = key;
+      const rootPropName = propKey.slice(0, -matchedSuffix.length);
+      if (!responsiveMap[rootPropName]) responsiveMap[rootPropName] = {};
+      responsiveMap[rootPropName][matchedSuffix.toLowerCase()] = propKey;
     } else {
-      if (!responsiveMap[key]) responsiveMap[key] = {};
-      responsiveMap[key]["base"] = key;
+      if (!responsiveMap[propKey]) responsiveMap[propKey] = {};
+      responsiveMap[propKey]["base"] = propKey;
     }
   });
 
   // For each root prop, resolve the value for the highest active breakpoint
   const resolvedProps: Record<string, unknown> = {};
-  Object.entries(responsiveMap).forEach(([root, variants]) => {
+  Object.entries(responsiveMap).forEach(([rootPropName, variants]) => {
     // Check breakpoints from highest to lowest
     for (let i = activeBreakpoints.length - 1; i >= 0; i--) {
-      const bp = activeBreakpoints[i];
-      if (variants[bp]) {
-        resolvedProps[root] = props[variants[bp]];
+      const activeBreakpoint = activeBreakpoints[i];
+      if (variants[activeBreakpoint]) {
+        resolvedProps[rootPropName] = props[variants[activeBreakpoint]];
         return;
       }
     }
     // Fallback to base
     if (variants["base"] !== undefined) {
-      resolvedProps[root] = props[variants["base"]];
+      resolvedProps[rootPropName] = props[variants["base"]];
     }
   });
 

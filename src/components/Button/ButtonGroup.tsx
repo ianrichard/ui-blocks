@@ -1,19 +1,19 @@
 import MantineBlock from "../Block/MantineBlock";
 import type { ReactNode } from "react";
 import { withBlockSize } from "../Block/withBlockSize";
-import type { TextSizeInputProp } from "../Block/Block.types";
+import type { SizeInputProp } from "../Block/Block.types";
 
 interface ButtonGroupProps {
-  textSize?: TextSizeInputProp;
+  size?: SizeInputProp;
   children?: ReactNode;
 }
 
 const ButtonGroupBase = ({
   children,
-  textSize = "md",
+  size = "md",
   ...rest
 }: ButtonGroupProps) => {
-  const gap = ["xs", "sm", "md"].includes(textSize) ? "xs" : "md";
+  const gap = ["xs", "sm", "md"].includes(size) ? "xs" : "md";
   return (
     <MantineBlock row gap={gap} wrap="wrap" mt={gap} {...rest}>
       {children}

@@ -1,6 +1,5 @@
 import { forwardRef } from "react";
 import { Avatar as MantineAvatarComponent } from "@mantine/core";
-import type { SizeProp } from "../Size/sizeTypes";
 import type { SizeInputProps } from "../Block/Block.types";
 
 export interface AvatarProps extends SizeInputProps {

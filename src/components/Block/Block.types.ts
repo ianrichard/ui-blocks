@@ -1,9 +1,5 @@
 import type { ReactNode, ElementType } from "react";
-import type {
-  MantineFontSize,
-  MantineSize,
-  MantineSpacing,
-} from "@mantine/core";
+import type { MantineSize, MantineSpacing } from "@mantine/core";
 
 export type AlignmentInputProp = boolean;
 export type BorderInputProp = boolean;
@@ -16,11 +12,13 @@ export type ColumnsMappedProp = ColumnsInputProp;
 export type FlexDirectionMappedProp = "row" | "column" | undefined;
 export type GapInputProp = boolean | MantineSize;
 export type GapMappedProp = MantineSize;
-export type HeightInputProp = string | number;
+export type HeightInputProp = string | number | undefined;
 export type HeightMappedProp = HeightInputProp;
-export type RowInputProp = boolean;
-export type TextSizeInputProp = MantineFontSize;
-export type TextSizemappedProp = TextSizeInputProp;
+export type RowInputProp = boolean | undefined;
+export type SizeInputProp = MantineSize | undefined;
+export type ScaleInputProp = MantineSize | undefined;
+export type SizeMappedProp = SizeInputProp;
+export type ScaleMappedProp = ScaleInputProp | undefined;
 export type SpaceInputProp = boolean | MantineSpacing;
 export type SpaceMappedProp = MantineSpacing;
 export type WidthInputProp = string | number;
@@ -34,7 +32,7 @@ export type FlexAlignMappedProp =
   | undefined;
 export type FlexMappedProp = number | undefined;
 export type ComponentMappedProp = React.ElementType;
-export type BackgroundMappedProp = "secondary" | "inverse";
+export type BackgroundMappedProp = "secondary" | "inverse" | undefined;
 
 export type SizeAliasInputProp = boolean;
 
@@ -63,7 +61,9 @@ export type RowInputProps = ResponsiveProps<RowInputProp, "row">;
 
 export type ColumnInputProps = ResponsiveProps<ColumnInputProp, "column">;
 
-export type TextSizeInputProps = ResponsiveProps<TextSizeInputProp, "textSize">;
+export type SizeInputProps = ResponsiveProps<SizeInputProp, "size">;
+
+export type ScaleInputProps = ResponsiveProps<ScaleInputProp, "scale">;
 
 export type GapInputProps = ResponsiveProps<GapInputProp, "gap">;
 
@@ -78,7 +78,9 @@ export interface BlockInputProps
     RowInputProps,
     ColumnInputProps,
     GapInputProps,
-    ChildrenResponsiveProps {
+    ChildrenResponsiveProps,
+    SizeInputProps,
+    ScaleInputProps {
   alignBottom?: AlignmentInputProp;
   alignCenter?: AlignmentInputProp;
   alignLeft?: AlignmentInputProp;
@@ -102,7 +104,7 @@ export interface BlockInputProps
 }
 
 export type BlockMappedProps = {
-  backgroundColor?: ColorMappedProp;
+  backgroundVariant?: BackgroundMappedProp;
   children?: ReactNode;
   className: string;
   columns?: ColumnsMappedProp;
@@ -114,27 +116,32 @@ export type BlockMappedProps = {
   gap?: GapMappedProp;
   height?: HeightMappedProp;
   innerSpace?: SpaceMappedProp;
+  innerSpaceTop?: SpaceMappedProp;
   innerSpaceBottom?: SpaceMappedProp;
   innerSpaceLeft?: SpaceMappedProp;
   innerSpaceRight?: SpaceMappedProp;
-  innerSpaceTop?: SpaceMappedProp;
+  innerSpaceTopBottom?: SpaceMappedProp;
+  innerSpaceLeftRight?: SpaceMappedProp;
   maxHeight?: HeightMappedProp;
   maxWidth?: WidthMappedProp;
   minHeight?: HeightMappedProp;
   minWidth?: WidthMappedProp;
   otherProps: Record<string, unknown>;
   outerSpace?: SpaceMappedProp;
+  outerSpaceTop?: SpaceMappedProp;
   outerSpaceBottom?: SpaceMappedProp;
   outerSpaceLeft?: SpaceMappedProp;
   outerSpaceRight?: SpaceMappedProp;
-  outerSpaceTop?: SpaceMappedProp;
   outerSpaceTopBottom?: SpaceMappedProp;
-  textSize?: TextSizemappedProp;
+  outerSpaceLeftRight?: SpaceMappedProp;
+  scale?: ScaleMappedProp;
+  size?: SizeMappedProp;
   width?: WidthMappedProp;
 };
 
 export type BlockContextValue = {
-  textSize?: MantineFontSize;
+  size?: MantineSize;
+  scale?: MantineSize;
   backgroundVariant?: BackgroundMappedProp;
 };
 
