@@ -4,7 +4,6 @@ import { withBlockSize } from "../Block/withBlockSize";
 import type { MantineSize } from "@mantine/core";
 import styles from "./MantineGrid.module.scss";
 import MantineBlock from "../Block/MantineBlock";
-import { useAbstractToMantineProps } from "../Block/useAbstractToMantineProps";
 import type { ColumnsInputProps } from "../Block/Block.types";
 import { useResponsiveProps } from "../Block/useResponsiveProps";
 

@@ -1,74 +1,19 @@
-import { BREAKPOINTS } from "../Breakpoints/breakpoints";
-import { useBreakpointsContext } from "../Breakpoints/useBreakpointsContext";
-import { useSizeProp } from "../Size/useSizeProp";
 import { Box, Flex } from "@mantine/core";
-import type { BlockMappedProps, ColorInputProp } from "./Block.types";
 import classNames from "classnames";
-import styles from "./Block.module.scss";
 import { useMemo } from "react";
+import { useSizeProp } from "../Size/useSizeProp";
+import styles from "./Block.module.scss";
+import type { BlockMappedProps, ColorInputProp } from "./Block.types";
 import { RESPONSIVE_PROP_NAMES } from "./responsivePropNames";
-
-const RESPONSIVE_PROPS_SUFFIXES = BREAKPOINTS.map(
-  (breakpoint) =>
-    breakpoint.key.charAt(0).toUpperCase() + breakpoint.key.slice(1)
-);
-
-function getResponsivePropsForAttribute(props: Record<string, unknown>) {
-  const responsivePropsForAttribute: Record<string, string[]> = {};
-  RESPONSIVE_PROP_NAMES.forEach((name) => {
-    if (props[name] !== undefined) {
-      const matchedSuffix = RESPONSIVE_PROPS_SUFFIXES.find((suffix) =>
-        name.endsWith(suffix)
-      );
-      if (matchedSuffix) {
-        const base = name.slice(0, -matchedSuffix.length);
-        const suffix = matchedSuffix.toLowerCase();
-        if (!responsivePropsForAttribute[base])
-          responsivePropsForAttribute[base] = [];
-        responsivePropsForAttribute[base].push(suffix);
-      } else {
-        if (!responsivePropsForAttribute[name])
-          responsivePropsForAttribute[name] = [];
-        responsivePropsForAttribute[name].push("base");
-      }
-    }
-  });
-  return responsivePropsForAttribute;
-}
+import { useResponsiveProps } from "./useResponsiveProps";
 
 export function useAbstractToMantineProps<
   Props extends Record<string, unknown>
 >(props: Props) {
-  const { activeBreakpoints } = useBreakpointsContext();
-  const cachedResponsiveProps = useMemo(
-    () => getResponsivePropsForAttribute(props),
-    [props]
-  );
+  // Use the new generic responsive prop resolver
+  const resolvedProps = useResponsiveProps(props);
 
-  const textSize = useSizeProp(props);
-
-  function resolveResponsiveProp(propWithoutResponsiveSuffix: string) {
-    const responsivePropsForAttribute =
-      cachedResponsiveProps[propWithoutResponsiveSuffix];
-    if (!responsivePropsForAttribute) return undefined;
-    for (let i = activeBreakpoints.length - 1; i >= 0; i--) {
-      const key = activeBreakpoints[i];
-      if (responsivePropsForAttribute.includes(key)) {
-        const propName = key
-          ? `${propWithoutResponsiveSuffix}${key
-              .charAt(0)
-              .toUpperCase()}${key.slice(1)}`
-          : propWithoutResponsiveSuffix;
-        if (props[propName] !== undefined) return props[propName];
-      }
-    }
-    if (
-      responsivePropsForAttribute.includes("base") &&
-      props[propWithoutResponsiveSuffix] !== undefined
-    )
-      return props[propWithoutResponsiveSuffix];
-    return undefined;
-  }
+  const textSize = useSizeProp(resolvedProps);
 
   function getScaleSize(defaultValue: boolean | unknown) {
     if (defaultValue) {
@@ -79,29 +24,29 @@ export function useAbstractToMantineProps<
   }
 
   function resolveGapProp() {
-    const value = resolveResponsiveProp("gap");
+    const value = resolvedProps["gap"];
     if (typeof value === "string") return value;
     if (value === true) return getScaleSize(value);
-
     return value;
   }
 
   function resolveResponsiveDirection() {
-    if (resolveResponsiveProp("row")) return "row";
-    if (resolveResponsiveProp("column")) return "column";
+    if (resolvedProps["row"]) return "row";
+    if (resolvedProps["column"]) return "column";
     return undefined;
   }
 
   function resolveSpaceProp(base: string) {
-    const value = resolveResponsiveProp(base);
+    const value = resolvedProps[base];
     if (typeof value === "string") return value;
     if (value === true) return getScaleSize(value);
     return value;
   }
 
+  // Remove responsive props from passthrough
   const nonResponsiveProps = useMemo(() => {
     const filtered = Object.fromEntries(
-      Object.entries(props).filter(
+      Object.entries(resolvedProps).filter(
         ([key]) =>
           !RESPONSIVE_PROP_NAMES.includes(key) &&
           key !== "scaleCozy" &&
@@ -109,7 +54,7 @@ export function useAbstractToMantineProps<
       )
     );
     return filtered;
-  }, [props]);
+  }, [resolvedProps]);
 
   const {
     className: classNameProp,
@@ -179,14 +124,14 @@ export function useAbstractToMantineProps<
 
   return {
     className: mergedClassName,
-    children: resolveResponsiveProp("children"),
-    width: resolveResponsiveProp("width"),
-    minWidth: resolveResponsiveProp("minWidth"),
-    maxWidth: resolveResponsiveProp("maxWidth"),
-    height: resolveResponsiveProp("height"),
-    minHeight: resolveResponsiveProp("minHeight"),
-    maxHeight: resolveResponsiveProp("maxHeight"),
-    columns: resolveResponsiveProp("columns"),
+    children: resolvedProps["children"],
+    width: resolvedProps["width"],
+    minWidth: resolvedProps["minWidth"],
+    maxWidth: resolvedProps["maxWidth"],
+    height: resolvedProps["height"],
+    minHeight: resolvedProps["minHeight"],
+    maxHeight: resolvedProps["maxHeight"],
+    columns: resolvedProps["columns"],
     outerSpace: resolveSpaceProp("outerSpace"),
     outerSpaceTop: resolveSpaceProp("outerSpaceTop"),
     outerSpaceBottom: resolveSpaceProp("outerSpaceBottom"),
