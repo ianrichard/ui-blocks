@@ -60,7 +60,6 @@ const MantineBlock = forwardRef<HTMLDivElement, BlockInputProps>(
     const providerValue: BlockContextValue = { ...parentContext };
 
     if (mappedProps.size) providerValue.size = mappedProps.size;
-    if (mappedProps.scale) providerValue.scale = mappedProps.scale;
     if (mappedProps.backgroundVariant)
       providerValue.backgroundVariant = mappedProps.backgroundVariant;
 

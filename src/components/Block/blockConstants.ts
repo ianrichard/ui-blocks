@@ -33,7 +33,6 @@ const RESPONSIVE_PREFIXES = [
   "row",
   "size",
   "width",
-  "scale",
 ];
 
 const BREAKPOINT_SUFFIXES = [
@@ -53,6 +52,6 @@ export const RESPONSIVE_PROP_NAMES: string[] = (() => {
 
 export const EXCLUDED_KEYS = new Set([
   ...RESPONSIVE_PROP_NAMES,
-  "scaleCozy",
-  "scaleCompact",
+  "sizeCozy",
+  "sizeCompact",
 ]);

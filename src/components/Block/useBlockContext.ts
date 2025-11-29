@@ -8,17 +8,9 @@ export function useBlockContext(): BlockContextValue {
 
 export function useSizeFromPropOrContext(props: BlockInputProps) {
   const blockContext = useBlockContext();
-  const scaleFromPropOrContext = useScaleFromPropOrContext(props);
 
   if (props.size) return props.size;
+  if (props.sizeCompact) return "xs";
+  if (props.sizeCozy) return "xl";
   else if (blockContext.size) return blockContext.size;
-  else if (scaleFromPropOrContext) return scaleFromPropOrContext;
-}
-
-export function useScaleFromPropOrContext(props: BlockInputProps) {
-  const blockContext = useBlockContext();
-  if (props.scale) return props.scale;
-  if (props.scaleCompact) return "xs";
-  if (props.scaleCozy) return "xl";
-  if (blockContext.scale) return blockContext.scale;
 }

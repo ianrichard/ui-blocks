@@ -3,10 +3,7 @@ import { useMemo } from "react";
 import styles from "./Block.module.scss";
 import type { BlockMappedProps, ColorInputProp } from "./Block.types";
 import { useResponsiveProps } from "./useResponsiveProps";
-import {
-  useScaleFromPropOrContext,
-  useSizeFromPropOrContext,
-} from "./useBlockContext";
+import { useSizeFromPropOrContext } from "./useBlockContext";
 import { EXCLUDED_KEYS } from "./blockConstants";
 
 export function useAbstractProps<Props extends Record<string, unknown>>(
@@ -15,14 +12,12 @@ export function useAbstractProps<Props extends Record<string, unknown>>(
   const resolvedProps = useResponsiveProps(props);
 
   const sizeFromPropOrContext = useSizeFromPropOrContext(resolvedProps);
-  const scaleFrompPropOrContext = useScaleFromPropOrContext(resolvedProps);
 
   function resolveSpaceProp(base: string) {
     const value = resolvedProps[base];
     if (["string", "number"].includes(typeof value)) return value;
     if (value === true) {
       if (sizeFromPropOrContext) return sizeFromPropOrContext;
-      if (scaleFrompPropOrContext) return scaleFrompPropOrContext;
       return "md";
     }
   }
@@ -111,7 +106,6 @@ export function useAbstractProps<Props extends Record<string, unknown>>(
     backgroundVariant,
     flexAlign,
     flex,
-    scale: scaleFrompPropOrContext,
     size: sizeFromPropOrContext,
     otherProps: passthroughProps,
     display:

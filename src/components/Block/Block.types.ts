@@ -36,11 +36,9 @@ export type HeightMappedProp = HeightInputProp;
 export type WidthInputProp = string | number;
 export type WidthMappedProp = WidthInputProp;
 
-// Size and Scale types
+// Size types
 export type SizeInputProp = MantineSize | undefined;
-export type ScaleInputProp = MantineSize | undefined;
 export type SizeMappedProp = SizeInputProp;
-export type ScaleMappedProp = ScaleInputProp | undefined;
 export type SizeAliasInputProp = boolean;
 
 // Space types
@@ -90,7 +88,6 @@ export type InnerSpaceInputProps = InnerSpaceDirectionalProps;
 export type RowInputProps = ResponsiveProps<RowInputProp, "row">;
 export type ColumnInputProps = ResponsiveProps<ColumnInputProp, "column">;
 export type SizeInputProps = ResponsiveProps<SizeInputProp, "size">;
-export type ScaleInputProps = ResponsiveProps<ScaleInputProp, "scale">;
 export type GapInputProps = ResponsiveProps<GapInputProp, "gap">;
 export type ChildrenResponsiveProps = ResponsiveProps<ReactNode, "children">;
 
@@ -105,8 +102,7 @@ export interface BlockInputProps
     ColumnInputProps,
     GapInputProps,
     ChildrenResponsiveProps,
-    SizeInputProps,
-    ScaleInputProps {
+    SizeInputProps {
   alignBottom?: AlignmentInputProp;
   alignCenter?: AlignmentInputProp;
   alignLeft?: AlignmentInputProp;
@@ -124,8 +120,8 @@ export interface BlockInputProps
   component?: ElementType;
   fillSpace?: boolean;
   onClick?: () => void;
-  scaleCompact?: SizeAliasInputProp;
-  scaleCozy?: SizeAliasInputProp;
+  sizeCompact?: SizeAliasInputProp;
+  sizeCozy?: SizeAliasInputProp;
 }
 
 // Mapped props returned from useAbstractProps
@@ -160,7 +156,6 @@ export type BlockMappedProps = {
   outerSpaceRight?: SpaceMappedProp;
   outerSpaceTopBottom?: SpaceMappedProp;
   outerSpaceLeftRight?: SpaceMappedProp;
-  scale?: ScaleMappedProp;
   size?: SizeMappedProp;
   width?: WidthMappedProp;
 };
@@ -168,6 +163,5 @@ export type BlockMappedProps = {
 // Context value for BlockProvider
 export type BlockContextValue = {
   size?: MantineSize;
-  scale?: MantineSize;
   backgroundVariant?: BackgroundMappedProp;
 };

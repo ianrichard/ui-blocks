@@ -15,15 +15,23 @@ export function useBreakpointsState(): { activeBreakpoints: string[] } {
   );
 
   useEffect(() => {
+    let throttleTimeout: ReturnType<typeof setTimeout> | null = null;
     const handleResize = () => {
-      const next = getActiveBreakpoints();
-      setActiveBreakpoints((prev) => {
-        if (prev.join() === next.join()) return prev;
-        return next;
-      });
+      if (throttleTimeout) return;
+      throttleTimeout = setTimeout(() => {
+        const next = getActiveBreakpoints();
+        setActiveBreakpoints((prev) => {
+          if (prev.join() === next.join()) return prev;
+          return next;
+        });
+        throttleTimeout = null;
+      }, 10);
     };
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      if (throttleTimeout) clearTimeout(throttleTimeout);
+    };
   }, []);
 
   return { activeBreakpoints };

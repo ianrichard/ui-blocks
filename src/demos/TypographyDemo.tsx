@@ -4,7 +4,7 @@ export default function TypographyDemo() {
   return (
     <>
       <Block.Card innerSpace>
-        <Block.Section scaleCompact>
+        <Block.Section sizeCompact>
           <Block.Title level1>Headline Compact 1</Block.Title>
           <Block.Title level2>Headline Compact 2</Block.Title>
           <Block.Title level3>Headline Compact 3</Block.Title>
@@ -24,7 +24,7 @@ export default function TypographyDemo() {
         <Block.Text>Paragraph text</Block.Text>
       </Block.Card>
       <Block.Card innerSpace>
-        <Block.Section scaleCozy>
+        <Block.Section sizeCozy>
           <Block.Title level1>Headline Cozy 1</Block.Title>
           <Block.Title level2>Headline Cozy 2</Block.Title>
           <Block.Title level3>Headline Cozy 3</Block.Title>
