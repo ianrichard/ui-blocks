@@ -52,15 +52,17 @@ export type BackgroundMappedProp = "secondary" | "inverse" | undefined;
 // Responsive prop utility types
 // Used to generate prop types for responsive variants (e.g., widthMd, gapXl)
 type Breakpoint = "" | "Xs" | "Sm" | "Md" | "Lg" | "Xl";
-type ResponsiveProps<T, K extends string> = {
-  [B in Breakpoint as `${K}${B}`]?: T;
+type ResponsiveProps<ValueType, PropPrefix extends string> = {
+  [BreakpointKey in Breakpoint as `${PropPrefix}${BreakpointKey}`]?: ValueType;
 } & { [key: string]: unknown };
 
 // Directional prop utility types
 // Used for props like outerSpaceTop, innerSpaceLeft, etc.
 type Direction = "" | "Top" | "Bottom" | "Left" | "Right";
-type DirectionalProps<T, K extends string> = {
-  [D in Direction as `${K}${D}`]?: T;
+type DirectionalProps<ValueType, PropPrefix extends string> = {
+  [DirectionKey in Direction as `${PropPrefix}${DirectionKey}`]?: ValueType;
+} & {
+  [Key in `${PropPrefix}${Direction}${Exclude<Breakpoint, "">}`]?: ValueType;
 };
 
 // Outer/Inner space directional types

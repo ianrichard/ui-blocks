@@ -1,10 +1,10 @@
-import { useBreakpointsState } from "../Breakpoints/useBreakpointsState";
+import { useBreakpointsContext } from "../Breakpoints/useBreakpointsContext";
 import { BREAKPOINTS } from "./blockConstants";
 
 export function useResponsiveProps<Props extends Record<string, unknown>>(
   props: Props
 ): Partial<Props> {
-  const { activeBreakpoints } = useBreakpointsState();
+  const { activeBreakpoints } = useBreakpointsContext();
   // Build a map of breakpoint suffixes (e.g. 'Md', 'Xl')
   const breakpointSuffixes = BREAKPOINTS.map(
     (breakpoint) =>

@@ -2,7 +2,7 @@ import Block from "../components";
 
 export default function BasicCardDemo() {
   return (
-    <Block.Card innerSpace maxWidth={420}>
+    <Block.Card innerSpace width="100%" widthLg="50%">
       <Block.Icon />
       <Block.Title>Basic Card</Block.Title>
       <Block.Text>

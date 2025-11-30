@@ -34,7 +34,11 @@ const MantineCardBase = forwardRef<HTMLDivElement, MantineCardProps>(
 
 MantineCardBase.displayName = "MantineCardBase";
 
-const MantineCard = withBlockSize(MantineCardBase);
+const MantineCard = withBlockSize(
+  MantineCardBase
+) as React.ForwardRefExoticComponent<
+  MantineCardProps & React.RefAttributes<HTMLDivElement>
+>;
 
 MantineCard.displayName = "MantineCard";
 

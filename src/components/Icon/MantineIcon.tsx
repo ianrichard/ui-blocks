@@ -6,7 +6,7 @@ import styles from "./Icon.module.scss";
 import type { SizeInputProps } from "../Block/Block.types";
 
 export interface IconProps extends SizeInputProps {
-  name?: keyof typeof TablerIcons;
+  name?: string;
   onClick?: () => void;
   href?: string;
   // size: SizeInputProp;
@@ -45,9 +45,9 @@ const MantineIconBase = (
       return (
         <ActionIcon
           variant="transparent"
-          onClick={onClick}
+          // onClick={onClick}
           component={href ? "a" : undefined}
-          href={href}
+          // href={href}
           size={sizeValue}
           ref={ref as React.ForwardedRef<HTMLAnchorElement>}
           className={className}

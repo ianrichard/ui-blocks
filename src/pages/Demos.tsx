@@ -1,5 +1,4 @@
 import Block from "../components";
-import MantineBlock from "../components/Block/MantineBlock";
 import MarkdownDemo from "../demos/MarkdownDemo";
 import TypographyDemo from "../demos/TypographyDemo";
 import BackgroundDemo from "./demo/BackgroundDemo";
@@ -23,7 +22,7 @@ const Demos = () => {
     },
   };
   return (
-    <MantineBlock innerSpaceLeft innerSpaceRight>
+    <>
       <Block.Section id="card-demo" {...sectionProps} innerSpaceTop={32}>
         <CardDemo />
       </Block.Section>
@@ -60,7 +59,7 @@ const Demos = () => {
       <Block.Section id="alert-demo" {...sectionProps}>
         <AlertDemo />
       </Block.Section>
-    </MantineBlock>
+    </>
   );
 };
 
