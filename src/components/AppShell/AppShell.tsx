@@ -1,42 +1,31 @@
-import { type NavItem as NavItemType } from "../Nav/navItemsTypes";
-import { AppShellMobile } from "./AppShellMobile";
-import { AppShellDesktop } from "./AppShellDesktop";
+import type { ReactNode } from "react";
 import Block from "..";
-import type { MouseEvent, ReactNode } from "react";
+import { AppShellDesktop } from "./AppShellDesktop";
+import { AppShellMobile } from "./AppShellMobile";
 
-export interface AppShellProps {
-  navItems: NavItemType[];
-  onNavItemSelect: (e: MouseEvent) => void;
-  header: ReactNode;
+export function AppShellHeader({ children }: { children: ReactNode }) {
+  return children;
+}
+export function AppShellNav({ children }: { children: ReactNode }) {
+  return children;
+}
+export function AppShellContent({ children }: { children: ReactNode }) {
+  return children;
+}
+
+interface AppShellProps {
   children: ReactNode;
 }
 
-export function AppShell({
-  navItems,
-  onNavItemSelect,
-  header,
-  children,
-}: AppShellProps) {
+export function AppShell({ children }: AppShellProps) {
   return (
     <Block.Section
-      children={
-        <AppShellMobile
-          navItems={navItems}
-          onSelect={onNavItemSelect}
-          header={header}
-        >
-          {children}
-        </AppShellMobile>
-      }
-      childrenMd={
-        <AppShellDesktop
-          navItems={navItems}
-          onSelect={onNavItemSelect}
-          header={header}
-        >
-          {children}
-        </AppShellDesktop>
-      }
+      children={<AppShellMobile>{children}</AppShellMobile>}
+      childrenMd={<AppShellDesktop>{children}</AppShellDesktop>}
     />
   );
 }
+
+AppShell.Header = AppShellHeader;
+AppShell.Nav = AppShellNav;
+AppShell.Content = AppShellContent;

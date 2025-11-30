@@ -1,43 +1,30 @@
 import Block from "..";
-import { NavItems, type NavItemsProps } from "../Nav/NavItems";
-import { NavHeaderMobile } from "../Nav/NavHeaderMobile";
 import MantineModal from "../Modal/MantineModal";
-import { useState, type MouseEvent, type ReactNode } from "react";
+import { useState, type ReactNode } from "react";
+import { extractAppShellChildren } from "./extractAppShellChildren";
+import { NavHeaderMobile } from "../Nav/NavHeaderMobile";
 
-interface AppShellMobileProps extends NavItemsProps {
-  header: ReactNode;
+interface AppShellMobileProps {
   children: ReactNode;
 }
 
-export function AppShellMobile({
-  navItems,
-  onSelect,
-  header,
-  children,
-}: AppShellMobileProps) {
+export function AppShellMobile({ children }: AppShellMobileProps) {
   const [opened, setOpened] = useState(false);
-  const handleSelect = (e: MouseEvent) => {
-    if (onSelect) onSelect(e);
-    setOpened(false);
-  };
+  const { header, nav, content } = extractAppShellChildren(children);
   return (
     <>
       <Block.Section
         innerSpace
         borderBottom
         backgroundSecondary
-        style={{
-          position: "sticky",
-          top: 0,
-          zIndex: 1,
-        }}
+        style={{ position: "sticky", top: 0, zIndex: 1 }}
       >
-        <NavHeaderMobile opened={opened} onMenuClick={() => setOpened(true)}>
+        <NavHeaderMobile opened={opened} onClick={() => setOpened(true)}>
           {header}
         </NavHeaderMobile>
       </Block.Section>
       <Block.Section innerSpaceLeft innerSpaceRight>
-        {children}
+        {content}
       </Block.Section>
       <MantineModal
         opened={opened}
@@ -45,7 +32,7 @@ export function AppShellMobile({
         title="Block UI"
         centered
       >
-        <NavItems navItems={navItems} onSelect={handleSelect} />
+        {nav}
       </MantineModal>
     </>
   );

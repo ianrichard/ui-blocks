@@ -11,6 +11,7 @@ import { AppShell } from "./components/AppShell/AppShell";
 import { BreakpointsProvider } from "./components/Breakpoints/BreakpointsProvider";
 import Demos from "./pages/Demos";
 import type { MouseEvent } from "react";
+import { NavItem } from "./components/Nav/NavItem";
 
 const navItems = [
   { label: "Cards", id: "card-demo", icon: "IconCards" },
@@ -42,12 +43,20 @@ function App() {
             <Route
               path="/"
               element={
-                <AppShell
-                  navItems={navItems}
-                  onNavItemSelect={scrollToSection}
-                  header={<span>Block UI</span>}
-                >
-                  <Outlet />
+                <AppShell>
+                  <AppShell.Header>Block UI</AppShell.Header>
+                  <AppShell.Nav>
+                    {navItems.map((item, index) => (
+                      <NavItem
+                        key={index}
+                        onClick={scrollToSection}
+                        {...item}
+                      />
+                    ))}
+                  </AppShell.Nav>
+                  <AppShell.Content>
+                    <Outlet />
+                  </AppShell.Content>
                 </AppShell>
               }
             >

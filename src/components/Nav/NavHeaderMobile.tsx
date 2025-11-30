@@ -4,18 +4,18 @@ import type { ReactNode } from "react";
 
 interface NavHeaderMobileProps {
   opened: boolean;
-  onMenuClick: () => void;
+  onClick: () => void;
   children?: ReactNode;
 }
 
 export function NavHeaderMobile({
   opened,
-  onMenuClick,
+  onClick,
   children,
 }: NavHeaderMobileProps) {
   return (
     <Block.Title row gap="xs">
-      <Burger opened={opened} onClick={onMenuClick} size="sm" />
+      <Burger opened={opened} onClick={onClick} size="sm" />
       {children}
     </Block.Title>
   );
