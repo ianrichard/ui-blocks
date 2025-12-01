@@ -7,10 +7,13 @@ export default function ModalDemo() {
   const [opened, setOpened] = useState(false);
 
   return (
-    <Block.Section outerSpace="xl">
-      <Block.Title level={2} outerSpaceBottom="md">
-        Modal
-      </Block.Title>
+    <>
+      <Block.Section>
+        <MantineButton onClick={() => setOpened(true)}>
+          Open Modal
+        </MantineButton>
+      </Block.Section>
+
       <MantineModal
         opened={opened}
         onClose={() => setOpened(false)}
@@ -22,12 +25,6 @@ export default function ModalDemo() {
           </Block.Text>
         </Block.Section>
       </MantineModal>
-
-      <Block.Section>
-        <MantineButton onClick={() => setOpened(true)}>
-          Open Modal
-        </MantineButton>
-      </Block.Section>
-    </Block.Section>
+    </>
   );
 }

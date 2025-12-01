@@ -2,8 +2,8 @@ import Block from "../components";
 
 export default function BackgroundVariantsDemo() {
   return (
-    <Block.Section row gap>
-      <Block.Card innerSpace backgroundInverse>
+    <Block.Section row gap="xl">
+      <Block.Card innerSpace="lg" backgroundInverse>
         <Block.Title>Inverse Background</Block.Title>
         <Block.Text>Dark background with light text</Block.Text>
         <Block.Button>Action</Block.Button>

@@ -49,6 +49,9 @@ export type SpaceMappedProp = MantineSpacing;
 export type ComponentMappedProp = React.ElementType;
 export type BackgroundMappedProp = "secondary" | "inverse" | undefined;
 
+// Frost types
+export type FrostInputProp = boolean | "xs" | "sm" | "md" | "lg" | "xl";
+
 // Responsive prop utility types
 // Used to generate prop types for responsive variants (e.g., widthMd, gapXl)
 type Breakpoint = "" | "Xs" | "Sm" | "Md" | "Lg" | "Xl";
@@ -92,6 +95,8 @@ export type ColumnInputProps = ResponsiveProps<ColumnInputProp, "column">;
 export type SizeInputProps = ResponsiveProps<SizeInputProp, "size">;
 export type GapInputProps = ResponsiveProps<GapInputProp, "gap">;
 export type ChildrenResponsiveProps = ResponsiveProps<ReactNode, "children">;
+export type WrapInputProp = boolean | undefined;
+export type WrapInputProps = ResponsiveProps<WrapInputProp, "wrap">;
 
 // Main Block input props interface
 export interface BlockInputProps
@@ -104,7 +109,8 @@ export interface BlockInputProps
     ColumnInputProps,
     GapInputProps,
     ChildrenResponsiveProps,
-    SizeInputProps {
+    SizeInputProps,
+    WrapInputProps {
   alignBottom?: AlignmentInputProp;
   alignCenter?: AlignmentInputProp;
   alignLeft?: AlignmentInputProp;
@@ -124,6 +130,10 @@ export interface BlockInputProps
   onClick?: () => void;
   sizeCompact?: SizeAliasInputProp;
   sizeCozy?: SizeAliasInputProp;
+  sticky?: boolean;
+  frost?: FrostInputProp;
+  background?: boolean;
+  backgroundImage?: string;
 }
 
 // Mapped props returned from useAbstractProps
@@ -160,6 +170,7 @@ export type BlockMappedProps = {
   outerSpaceLeftRight?: SpaceMappedProp;
   size?: SizeMappedProp;
   width?: WidthMappedProp;
+  wrap?: WrapInputProp;
 };
 
 // Context value for BlockProvider

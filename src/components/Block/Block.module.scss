@@ -1,6 +1,7 @@
 :root {
   --border-width: 1px;
   --border-color: var(--mantine-color-default-border);
+  --block-background: transparent;
 }
 
 .blockBase {
@@ -14,6 +15,10 @@
     margin-top: 0 !important;
     margin-bottom: 0 !important;
   }
+}
+
+.wrap {
+  flex-wrap: wrap;
 }
 
 .border {
@@ -36,15 +41,61 @@
   border-bottom: var(--border-width) solid var(--border-color);
 }
 
+.backgroundPrimary,
+.backgroundSecondary,
+.backgroundInverse {
+  background: var(--block-background);
+}
+
+.backgroundPrimary {
+  --block-background: var(--mantine-color-body);
+}
+
 .backgroundSecondary {
-  background-color: var(--mantine-color-gray-1);
+  --block-background: var(--mantine-color-gray-1);
 }
 
 [data-mantine-color-scheme="dark"] .backgroundSecondary {
-  background-color: var(--mantine-color-dark-7);
+  --block-background: var(--mantine-color-dark-6);
 }
 
 .backgroundInverse {
   color: var(--mantine-color-white);
-  background-color: var(--mantine-color-blue-9);
+  --block-background: var(--mantine-color-blue-9);
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.frost {
+  --frost-opacity: 0%;
+  background-color: color-mix(
+    in srgb,
+    var(--block-background) var(--frost-opacity),
+    transparent calc(100% - var(--frost-opacity))
+  );
+  backdrop-filter: blur(8px);
+}
+
+.frost--xs {
+  --frost-opacity: 95%;
+}
+
+.frost--sm {
+  --frost-opacity: 90%;
+}
+
+.frost--md {
+  --frost-opacity: 80%;
+}
+
+.frost--lg {
+  --frost-opacity: 50%;
+}
+
+.frost--xl {
+  --frost-opacity: 0%;
 }

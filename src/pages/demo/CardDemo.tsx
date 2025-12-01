@@ -9,17 +9,27 @@ import Block from "../../components";
 
 export default function CardDemo() {
   return (
-    <>
-      <Block.Section row gap="xl">
+    <Block.Section column gap="xl">
+      <Block.Section row wrap gap="xl">
         <BasicCardDemo />
-        <Block.Card width="100%" maxWidth={700}>
+        <Block.Card fillSpace minWidth={400} maxWidth={640}>
           <MantineCodePreview src={basicCardSource} title="Basic Card" />
         </Block.Card>
       </Block.Section>
       <CardWithImageDemo />
-      <MantineCodePreview src={cardWithImageSource} title="Card with Image" />
-      <CardWithHeaderDemo />
-      <MantineCodePreview src={cardWithHeaderSource} title="Card with Header" />
-    </>
+      <Block.Card maxWidth={720}>
+        <MantineCodePreview src={cardWithImageSource} title="Card with Image" />
+      </Block.Card>
+      <Block.Section row gap="xl">
+        <CardWithHeaderDemo />
+        <Block.Card>
+          <MantineCodePreview
+            src={cardWithHeaderSource}
+            title="Card with Header"
+            fillSpace
+          />
+        </Block.Card>
+      </Block.Section>
+    </Block.Section>
   );
 }

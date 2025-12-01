@@ -21,10 +21,11 @@ const MantineCardBase = forwardRef<HTMLDivElement, MantineCardProps>(
         className={styles.card}
         ref={ref}
         component={Card}
-        outerSpaceTopBottom
+        // outerSpaceTopBottom
         radius={radius}
         border={props.border !== undefined ? props.border : true}
         {...props}
+        background
       >
         {children}
       </MantineBlock>

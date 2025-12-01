@@ -2,9 +2,7 @@ import Block from "../components";
 
 export default function ButtonVariantsDemo() {
   return (
-    <Block.Card innerSpace>
-      <Block.Title>Button Variants</Block.Title>
-
+    <Block.Section column gap>
       <Block.Card innerSpace>
         <Block.Title level4>Default</Block.Title>
         <Block.Text>Paragraph text</Block.Text>
@@ -40,6 +38,6 @@ export default function ButtonVariantsDemo() {
           <Block.Button destructive>Destructive</Block.Button>
         </Block.ButtonGroup>
       </Block.Card>
-    </Block.Card>
+    </Block.Section>
   );
 }

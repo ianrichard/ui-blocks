@@ -4,7 +4,7 @@ import { MantineUtilityIcon } from "../components/Icon/MantineIcon";
 
 export default function AlertDemo() {
   return (
-    <Block.Section outerSpace="xl">
+    <>
       <Block.Title level={2} outerSpaceBottom="md">
         Alert
       </Block.Title>
@@ -36,6 +36,6 @@ export default function AlertDemo() {
           Everything is fine!
         </MantineAlert>
       </Block.Section>
-    </Block.Section>
+    </>
   );
 }

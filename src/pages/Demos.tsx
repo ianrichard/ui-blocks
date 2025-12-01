@@ -1,6 +1,4 @@
 import Block from "../components";
-import MarkdownDemo from "../demos/MarkdownDemo";
-import TypographyDemo from "../demos/TypographyDemo";
 import BackgroundDemo from "./demo/BackgroundDemo";
 import ButtonDemo from "./demo/ButtonDemo";
 import CardDemo from "./demo/CardDemo";
@@ -11,6 +9,8 @@ import BadgeDemo from "../demos/BadgeDemo";
 import AccordionDemo from "../demos/AccordionDemo";
 import ModalDemo from "../demos/ModalDemo";
 import AlertDemo from "../demos/AlertDemo";
+import MarkdownDemo from "./demo/MarkdownDemo";
+import TypographyDemo from "./demo/TypographyDemo";
 
 const Demos = () => {
   const sectionProps = {
@@ -18,7 +18,7 @@ const Demos = () => {
     innerSpaceBottom: 64,
     borderBottom: true,
     style: {
-      borderWidth: 8,
+      // borderWidth: 8,
     },
   };
   return (

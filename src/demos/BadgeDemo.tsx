@@ -3,10 +3,7 @@ import MantineBadge from "../components/Badge/MantineBadge";
 
 export default function BadgeDemo() {
   return (
-    <Block.Section outerSpace="xl">
-      <Block.Title level={2} outerSpaceBottom="md">
-        Badge
-      </Block.Title>
+    <Block.Section column gap="xl">
       <Block.Section row gap="xs" outerSpaceBottom="md">
         <MantineBadge>Default</MantineBadge>
         <MantineBadge color="blue" variant="filled">

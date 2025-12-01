@@ -1,15 +1,16 @@
 import Block from "..";
 import MantineModal from "../Modal/MantineModal";
-import { useState, type ReactNode } from "react";
+import type { ReactNode } from "react";
 import { extractAppShellChildren } from "./extractAppShellChildren";
 import { NavHeaderMobile } from "../Nav/NavHeaderMobile";
+import { useAppShellMobileNav } from "./AppShellMobileNavContext";
 
 interface AppShellMobileProps {
   children: ReactNode;
 }
 
 export function AppShellMobile({ children }: AppShellMobileProps) {
-  const [opened, setOpened] = useState(false);
+  const { opened, setOpened } = useAppShellMobileNav();
   const { header, nav, content } = extractAppShellChildren(children);
   return (
     <>
@@ -17,7 +18,10 @@ export function AppShellMobile({ children }: AppShellMobileProps) {
         innerSpace
         borderBottom
         backgroundSecondary
-        style={{ position: "sticky", top: 0, zIndex: 1 }}
+        // style={{ position: "sticky", top: 0, zIndex: 1 }}
+        sticky
+        background
+        frost="xs"
       >
         <NavHeaderMobile opened={opened} onClick={() => setOpened(true)}>
           {header}
@@ -30,7 +34,9 @@ export function AppShellMobile({ children }: AppShellMobileProps) {
         opened={opened}
         onClose={() => setOpened(false)}
         title="Block UI"
-        centered
+        drawer
+        width="100%"
+        maxWidth={320}
       >
         {nav}
       </MantineModal>

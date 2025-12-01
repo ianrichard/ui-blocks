@@ -3,7 +3,7 @@ import MantineInput from "../components/Input/MantineInput";
 
 export default function InputDemo() {
   return (
-    <Block.Section outerSpace="xl">
+    <>
       <Block.Title level={2} outerSpaceBottom="md">
         Input
       </Block.Title>
@@ -25,6 +25,6 @@ export default function InputDemo() {
           value="Cannot change me"
         />
       </Block.Section>
-    </Block.Section>
+    </>
   );
 }

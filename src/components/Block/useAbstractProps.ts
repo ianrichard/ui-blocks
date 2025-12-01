@@ -38,6 +38,8 @@ export function useAbstractProps<Props extends Record<string, unknown>>(
     className: classNameProp,
     backgroundInverse: backgroundInverseProp,
     backgroundSecondary: backgroundSecondaryProp,
+    background: backgroundProp,
+    backgroundImage: backgroundImageProp,
     border: borderProp,
     borderLeft: borderLeftProp,
     borderRight: borderRightProp,
@@ -45,6 +47,9 @@ export function useAbstractProps<Props extends Record<string, unknown>>(
     borderBottom: borderBottomProp,
     alignMiddle: alignMiddleProp,
     fillSpace: fillSpaceProp,
+    sticky: stickyProp,
+    frost: frostProp,
+    wrap: wrapProp,
     ...passthroughProps
   } = nonResponsiveProps;
 
@@ -62,6 +67,8 @@ export function useAbstractProps<Props extends Record<string, unknown>>(
     backgroundVariant = "secondary";
   }
 
+  const frostValue = frostProp === true ? "md" : frostProp;
+
   const mergedClassName = classNames(
     styles.blockBase,
     classNameProp as string | undefined,
@@ -72,8 +79,14 @@ export function useAbstractProps<Props extends Record<string, unknown>>(
       [styles.borderTop]: borderTopProp,
       [styles.borderBottom]: borderBottomProp,
       [styles.flex]: flexDirection === "row" || flexDirection === "column",
-      [styles.backgroundInverse]: backgroundInverseProp,
+      [styles.wrap]: wrapProp,
+      [styles.backgroundPrimary]: backgroundProp,
       [styles.backgroundSecondary]: backgroundSecondaryProp,
+      [styles.backgroundInverse]: backgroundInverseProp,
+      [styles.sticky]: stickyProp,
+      [styles.frost]: frostProp,
+      [styles[`frost--${frostValue}`]]: frostProp,
+      [styles.backgroundImage]: !!backgroundImageProp,
     }
   );
 
