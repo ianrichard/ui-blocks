@@ -3,78 +3,82 @@ import {
   REACT_TYPE_DEFINITIONS,
   COMMON_TYPE_DEFINITIONS,
 } from "./editorTypeConstants";
+import {
+  ABSTRACT_PROPS_KEYS,
+  MAPPED_PROPS_KEYS,
+  SPACE_PROPS_KEYS,
+  LAYOUT_PROPS_KEYS,
+  OTHER_INPUT_PROPS,
+} from "./blockPropNames";
 
 /**
  * Generates Monaco-compatible type definitions for Block components
- * MVP: Extracts common prop patterns and generates basic types
+ * Uses real prop names extracted from useAbstractProps and MantineBlock
  */
 export function generateEditorTypes(): string {
   // Get all Block component names dynamically
   const componentNames = Object.keys(Block);
 
-  // Define property categories dynamically
+  // Helper to generate prop definition
+  const prop = (name: string, type: string) => ({
+    name,
+    type,
+    optional: true,
+  });
+
+  // Build property categories using real extracted names
   const propCategories = {
     basics: [
-      { name: "children", type: "React.ReactNode", optional: true },
-      { name: "className", type: "string", optional: true },
-      { name: "style", type: "React.CSSProperties", optional: true },
-      { name: "onClick", type: "() => void", optional: true },
+      prop("children", "React.ReactNode"),
+      prop("className", "string"),
+      prop("style", "React.CSSProperties"),
+      prop("onClick", "() => void"),
     ],
     layout: [
-      { name: "column", type: "boolean", optional: true },
-      { name: "row", type: "boolean", optional: true },
-      { name: "fillSpace", type: "boolean", optional: true },
-      { name: "wrap", type: "boolean", optional: true },
+      ...LAYOUT_PROPS_KEYS.map((name) => prop(name, "boolean")),
+      ...ABSTRACT_PROPS_KEYS.filter((name) =>
+        ["fillSpace", "wrap"].includes(name)
+      ).map((name) => prop(name, "boolean")),
     ],
-    spacing: [
-      { name: "gap", type: "SpacingValue", optional: true },
-      { name: "innerSpace", type: "SpacingValue", optional: true },
-      { name: "innerSpaceTop", type: "SpacingValue", optional: true },
-      { name: "innerSpaceBottom", type: "SpacingValue", optional: true },
-      { name: "innerSpaceLeft", type: "SpacingValue", optional: true },
-      { name: "innerSpaceRight", type: "SpacingValue", optional: true },
-      { name: "outerSpace", type: "SpacingValue", optional: true },
-      { name: "outerSpaceTop", type: "SpacingValue", optional: true },
-      { name: "outerSpaceBottom", type: "SpacingValue", optional: true },
-      { name: "outerSpaceLeft", type: "SpacingValue", optional: true },
-      { name: "outerSpaceRight", type: "SpacingValue", optional: true },
-    ],
+    spacing: SPACE_PROPS_KEYS.map((name) => prop(name, "SpacingValue")),
     sizing: [
-      { name: "width", type: "string | number", optional: true },
-      { name: "height", type: "string | number", optional: true },
-      { name: "minWidth", type: "string | number", optional: true },
-      { name: "maxWidth", type: "string | number", optional: true },
-      { name: "minHeight", type: "string | number", optional: true },
-      { name: "maxHeight", type: "string | number", optional: true },
+      ...MAPPED_PROPS_KEYS.filter((name) =>
+        [
+          "width",
+          "height",
+          "minWidth",
+          "maxWidth",
+          "minHeight",
+          "maxHeight",
+        ].includes(name)
+      ).map((name) => prop(name, "string | number")),
+      ...MAPPED_PROPS_KEYS.filter((name) => name === "columns").map((name) =>
+        prop(name, "number")
+      ),
     ],
-    alignment: [
-      { name: "alignCenter", type: "boolean", optional: true },
-      { name: "alignMiddle", type: "boolean", optional: true },
-      { name: "alignLeft", type: "boolean", optional: true },
-      { name: "alignRight", type: "boolean", optional: true },
-      { name: "alignBottom", type: "boolean", optional: true },
-    ],
-    background: [
-      { name: "backgroundSecondary", type: "boolean", optional: true },
-      { name: "backgroundInverse", type: "boolean", optional: true },
-      { name: "background", type: "boolean", optional: true },
-      { name: "backgroundImage", type: "string", optional: true },
-    ],
-    border: [
-      { name: "border", type: "boolean", optional: true },
-      { name: "borderTop", type: "boolean", optional: true },
-      { name: "borderBottom", type: "boolean", optional: true },
-      { name: "borderLeft", type: "boolean", optional: true },
-      { name: "borderRight", type: "boolean", optional: true },
-    ],
-    other: [
-      { name: "sticky", type: "boolean", optional: true },
-      {
-        name: "frost",
-        type: 'boolean | "xs" | "sm" | "md" | "lg" | "xl"',
-        optional: true,
-      },
-    ],
+    alignment: ABSTRACT_PROPS_KEYS.filter((name) =>
+      name.startsWith("align")
+    ).map((name) => prop(name, "boolean")),
+    background: ABSTRACT_PROPS_KEYS.filter(
+      (name) => name.startsWith("background") || name === "backgroundImage"
+    ).map((name) =>
+      name === "backgroundImage" ? prop(name, "string") : prop(name, "boolean")
+    ),
+    border: ABSTRACT_PROPS_KEYS.filter((name) => name.startsWith("border")).map(
+      (name) => prop(name, "boolean")
+    ),
+    visual: ABSTRACT_PROPS_KEYS.filter((name) =>
+      ["sticky", "frost"].includes(name)
+    ).map((name) =>
+      name === "frost"
+        ? prop(name, 'boolean | "xs" | "sm" | "md" | "lg" | "xl"')
+        : prop(name, "boolean")
+    ),
+    size: OTHER_INPUT_PROPS.map((name) =>
+      name === "size"
+        ? prop(name, '"xs" | "sm" | "md" | "lg" | "xl"')
+        : prop(name, "boolean")
+    ),
   };
 
   // Generate property strings for each category
