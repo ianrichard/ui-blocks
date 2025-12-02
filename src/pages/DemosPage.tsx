@@ -12,6 +12,8 @@ import AlertDemo from "../demos/AlertDemo";
 import MarkdownDemo from "./demo/MarkdownDemo";
 import TypographyDemo from "./demo/TypographyDemo";
 
+import styles from "./DemosPage.module.scss";
+
 const Demos = () => {
   const sectionProps = {
     innerSpaceTop: 64,
@@ -22,7 +24,7 @@ const Demos = () => {
     },
   };
   return (
-    <>
+    <div className={styles.container}>
       <Block.Section id="card-demo" {...sectionProps} innerSpaceTop={32}>
         <CardDemo />
       </Block.Section>
@@ -59,7 +61,7 @@ const Demos = () => {
       <Block.Section id="alert-demo" {...sectionProps}>
         <AlertDemo />
       </Block.Section>
-    </>
+    </div>
   );
 };
 

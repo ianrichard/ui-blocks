@@ -32,7 +32,8 @@ export function AppShellDesktop({ children }: AppShellDesktopProps) {
         </Block.Card>
       </Block.Section>
       <Block.Section
-        minWidth={0}
+        // minWidth={0}
+        fillSpace
         maxWidth={1280}
         innerSpaceLeft="xl"
         innerSpaceRight="xl"

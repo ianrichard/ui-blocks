@@ -9,12 +9,13 @@ import {
 } from "react-router-dom";
 import { AppShell } from "./components/AppShell/AppShell";
 import { BreakpointsProvider } from "./components/Breakpoints/BreakpointsProvider";
-import Demos from "./pages/Demos";
+import Demos from "./pages/DemosPage";
+import EditorPage from "./pages/EditorPage";
 import type { MouseEvent } from "react";
 import { NavItem } from "./components/Nav/NavItem";
 import { AppShellMobileNavContext } from "./components/AppShell/AppShellMobileNavContext";
 import { useState } from "react";
-import styles from "./App.module.scss";
+import CodePreviewPage from "./pages/CodePreviewPage";
 
 const navItems = [
   { label: "Cards", id: "card-demo", icon: "IconCards" },
@@ -48,48 +49,48 @@ function App() {
   }
 
   return (
-    <div className={styles.app}>
-      <MantineProvider defaultColorScheme="dark">
-        <BreakpointsProvider>
-          <AppShellMobileNavContext.Provider
-            value={{
-              closeNav,
-              openNav,
-              opened: mobileNavOpened,
-              setOpened: setMobileNavOpened,
-            }}
-          >
-            <BrowserRouter>
-              <Routes>
-                <Route
-                  path="/"
-                  element={
-                    <AppShell>
-                      <AppShell.Header>Block UI</AppShell.Header>
-                      <AppShell.Nav>
-                        {navItems.map((item, index) => (
-                          <NavItem
-                            key={index}
-                            onClick={scrollToSection}
-                            {...item}
-                          />
-                        ))}
-                      </AppShell.Nav>
-                      <AppShell.Content>
-                        <Outlet />
-                      </AppShell.Content>
-                    </AppShell>
-                  }
-                >
-                  <Route index element={<Navigate to="/demos" replace />} />
-                  <Route path="demos" element={<Demos />} />
-                </Route>
-              </Routes>
-            </BrowserRouter>
-          </AppShellMobileNavContext.Provider>
-        </BreakpointsProvider>
-      </MantineProvider>
-    </div>
+    <MantineProvider defaultColorScheme="dark">
+      <BreakpointsProvider>
+        <AppShellMobileNavContext.Provider
+          value={{
+            closeNav,
+            openNav,
+            opened: mobileNavOpened,
+            setOpened: setMobileNavOpened,
+          }}
+        >
+          <BrowserRouter>
+            <Routes>
+              <Route path="/preview" element={<CodePreviewPage />} />
+              <Route
+                path="/"
+                element={
+                  <AppShell>
+                    <AppShell.Header>Block UI</AppShell.Header>
+                    <AppShell.Nav>
+                      {navItems.map((item, index) => (
+                        <NavItem
+                          key={index}
+                          onClick={scrollToSection}
+                          {...item}
+                        />
+                      ))}
+                    </AppShell.Nav>
+                    <AppShell.Content>
+                      <Outlet />
+                    </AppShell.Content>
+                  </AppShell>
+                }
+              >
+                <Route index element={<Navigate to="/demos" replace />} />
+                <Route path="demos" element={<Demos />} />
+                <Route path="editor" element={<EditorPage />} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </AppShellMobileNavContext.Provider>
+      </BreakpointsProvider>
+    </MantineProvider>
   );
 }
 

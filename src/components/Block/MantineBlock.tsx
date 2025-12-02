@@ -22,8 +22,6 @@ const MantineBlock = forwardRef<HTMLDivElement, BlockInputProps>(
       Component = Box;
     }
 
-    console.log(mappedProps);
-
     const content = (
       <Component
         align={mappedProps.flexAlign}
