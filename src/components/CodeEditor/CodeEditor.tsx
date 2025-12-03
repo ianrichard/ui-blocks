@@ -25,6 +25,36 @@ export default function CodeEditor({
     // Setup auto-closing JSX tags
     setupAutoCloseJSXTags(editor, monaco);
 
+    // Configure suggest options to filter suggestions
+    editor.updateOptions({
+      suggest: {
+        showKeywords: false,
+        // showSnippets: false,
+        // showProperties: false, // Hide property names like "Section", "Card"
+      },
+    });
+
+    // Trigger suggestions after typing '=' or '"'
+    editor.onDidChangeModelContent(() => {
+      const model = editor.getModel();
+      if (!model) return;
+
+      const position = editor.getPosition();
+      if (!position) return;
+
+      const textBeforeCursor = model.getValueInRange({
+        startLineNumber: position.lineNumber,
+        startColumn: Math.max(1, position.column - 1),
+        endLineNumber: position.lineNumber,
+        endColumn: position.column,
+      });
+
+      // Auto-trigger suggestions after = or opening quote
+      if (textBeforeCursor === "=" || textBeforeCursor === '"') {
+        editor.trigger("keyboard", "editor.action.triggerSuggest", {});
+      }
+    });
+
     console.log("Type definitions added");
   };
 
@@ -40,6 +70,12 @@ export default function CodeEditor({
         autoClosingBrackets: "always",
         autoClosingQuotes: "always",
         formatOnType: true,
+        quickSuggestions: {
+          other: true,
+          comments: false,
+          strings: true,
+        },
+        suggestOnTriggerCharacters: true,
       }}
       onChange={onChange}
       onMount={handleMount}
