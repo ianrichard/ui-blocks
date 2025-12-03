@@ -1,3 +1,5 @@
+import { SIZE_VALUES_TYPE, SPACE_INPUT_TYPE } from "./typeExtractor";
+
 /**
  * Base React type definitions that Monaco needs for JSX/TSX support
  */
@@ -14,8 +16,9 @@ declare namespace React {
 
 /**
  * Common type aliases used across Block components
+ * Extracted from Block.types.ts where possible
  */
 export const COMMON_TYPE_DEFINITIONS = `
-type SpacingValue = boolean | "xs" | "sm" | "md" | "lg" | "xl";
-type SizeValue = "xs" | "sm" | "md" | "lg" | "xl";
+type SizeValue = ${SIZE_VALUES_TYPE};
+type SpacingValue = ${SPACE_INPUT_TYPE};
 `.trim();

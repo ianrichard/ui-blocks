@@ -10,6 +10,7 @@ import {
   LAYOUT_PROPS_KEYS,
   OTHER_INPUT_PROPS,
 } from "./blockPropNames";
+import { analyzeComponentProps } from "./componentPropAnalyzer";
 
 /**
  * Generates Monaco-compatible type definitions for Block components
@@ -19,12 +20,27 @@ export function generateEditorTypes(): string {
   // Get all Block component names dynamically
   const componentNames = Object.keys(Block);
 
+  // Analyze which components use BlockProps vs custom props
+  const componentPropInfo = analyzeComponentProps();
+
   // Helper to generate prop definition
   const prop = (name: string, type: string) => ({
     name,
     type,
     optional: true,
   });
+
+  // Helper to generate responsive variants (e.g., widthXs, widthSm, widthMd, widthLg, widthXl)
+  const responsiveVariants = (
+    baseName: string,
+    type: string
+  ): Array<{ name: string; type: string; optional: true }> => {
+    const breakpoints = ["Xs", "Sm", "Md", "Lg", "Xl"];
+    return [
+      prop(baseName, type),
+      ...breakpoints.map((bp) => prop(`${baseName}${bp}`, type)),
+    ];
+  };
 
   // Build property categories using real extracted names
   const propCategories = {
@@ -35,12 +51,16 @@ export function generateEditorTypes(): string {
       prop("onClick", "() => void"),
     ],
     layout: [
-      ...LAYOUT_PROPS_KEYS.map((name) => prop(name, "boolean")),
+      ...LAYOUT_PROPS_KEYS.flatMap((name) =>
+        responsiveVariants(name, "boolean")
+      ),
       ...ABSTRACT_PROPS_KEYS.filter((name) =>
         ["fillSpace", "wrap"].includes(name)
-      ).map((name) => prop(name, "boolean")),
+      ).flatMap((name) => responsiveVariants(name, "boolean")),
     ],
-    spacing: SPACE_PROPS_KEYS.map((name) => prop(name, "SpacingValue")),
+    spacing: SPACE_PROPS_KEYS.flatMap((name) =>
+      responsiveVariants(name, "SpacingValue")
+    ),
     sizing: [
       ...MAPPED_PROPS_KEYS.filter((name) =>
         [
@@ -51,9 +71,9 @@ export function generateEditorTypes(): string {
           "minHeight",
           "maxHeight",
         ].includes(name)
-      ).map((name) => prop(name, "string | number")),
-      ...MAPPED_PROPS_KEYS.filter((name) => name === "columns").map((name) =>
-        prop(name, "number")
+      ).flatMap((name) => responsiveVariants(name, "string | number")),
+      ...MAPPED_PROPS_KEYS.filter((name) => name === "columns").flatMap(
+        (name) => responsiveVariants(name, "number")
       ),
     ],
     alignment: ABSTRACT_PROPS_KEYS.filter((name) =>
@@ -74,11 +94,12 @@ export function generateEditorTypes(): string {
         ? prop(name, 'boolean | "xs" | "sm" | "md" | "lg" | "xl"')
         : prop(name, "boolean")
     ),
-    size: OTHER_INPUT_PROPS.map((name) =>
-      name === "size"
-        ? prop(name, '"xs" | "sm" | "md" | "lg" | "xl"')
-        : prop(name, "boolean")
-    ),
+    size: OTHER_INPUT_PROPS.flatMap((name) => {
+      if (name === "size") {
+        return responsiveVariants(name, '"xs" | "sm" | "md" | "lg" | "xl"');
+      }
+      return [prop(name, "boolean")];
+    }),
   };
 
   // Generate property strings for each category
@@ -103,10 +124,35 @@ ${Object.entries(propCategories)
 }
   `.trim();
 
+  // Generate component-specific interfaces for components with custom props
+  const customInterfaces: string[] = [];
+  for (const [name, info] of Object.entries(componentPropInfo)) {
+    if (!info.usesBlockProps && info.customProps) {
+      const propsStr = Object.entries(info.customProps)
+        .map(([propName, propType]) => `  ${propName}?: ${propType};`)
+        .join("\n");
+      customInterfaces.push(
+        `
+interface ${name}Props {
+${propsStr}
+}
+      `.trim()
+      );
+    }
+  }
+
   // Generate Block component declarations dynamically
   const blockDeclaration = `
 declare const Block: {
-${componentNames.map((name) => `  ${name}: React.FC<BlockProps>;`).join("\n")}
+${componentNames
+  .map((name) => {
+    const info = componentPropInfo[name];
+    if (info && !info.usesBlockProps && info.customProps) {
+      return `  ${name}: React.FC<${name}Props>;`;
+    }
+    return `  ${name}: React.FC<BlockProps>;`;
+  })
+  .join("\n")}
 };
   `.trim();
 
@@ -115,6 +161,7 @@ ${componentNames.map((name) => `  ${name}: React.FC<BlockProps>;`).join("\n")}
     REACT_TYPE_DEFINITIONS,
     COMMON_TYPE_DEFINITIONS,
     blockPropsInterface,
+    ...customInterfaces,
     blockDeclaration,
   ].join("\n\n");
 }

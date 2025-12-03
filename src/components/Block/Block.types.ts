@@ -1,5 +1,7 @@
 import type { ReactNode, ElementType } from "react";
-import type { MantineSize, MantineSpacing } from "@mantine/core";
+
+export type SizeValues = "xs" | "sm" | "md" | "lg" | "xl";
+export type SpaceValues = SizeValues | number;
 
 // Alignment and Border types
 export type AlignmentInputProp = boolean;
@@ -27,8 +29,8 @@ export type FlexDirectionMappedProp = "row" | "column" | undefined;
 export type FlexMappedProp = number | undefined;
 
 // Gap types
-export type GapInputProp = boolean | MantineSize;
-export type GapMappedProp = MantineSize;
+export type GapInputProp = boolean | SpaceValues;
+export type GapMappedProp = SpaceValues;
 
 // Height and Width types
 export type HeightInputProp = string | number | undefined;
@@ -37,20 +39,20 @@ export type WidthInputProp = string | number;
 export type WidthMappedProp = WidthInputProp;
 
 // Size types
-export type SizeInputProp = MantineSize | undefined;
+export type SizeInputProp = SizeValues | undefined;
 export type SizeMappedProp = SizeInputProp;
 export type SizeAliasInputProp = boolean;
 
 // Space types
-export type SpaceInputProp = boolean | MantineSpacing;
-export type SpaceMappedProp = MantineSpacing;
+export type SpaceInputProp = boolean | SpaceValues;
+export type SpaceMappedProp = SpaceValues;
 
 // Component and Background types
 export type ComponentMappedProp = React.ElementType;
 export type BackgroundMappedProp = "secondary" | "inverse" | undefined;
 
 // Frost types
-export type FrostInputProp = boolean | "xs" | "sm" | "md" | "lg" | "xl";
+export type FrostInputProp = boolean | SizeValues;
 
 // Responsive prop utility types
 // Used to generate prop types for responsive variants (e.g., widthMd, gapXl)
@@ -175,6 +177,6 @@ export type BlockMappedProps = {
 
 // Context value for BlockProvider
 export type BlockContextValue = {
-  size?: MantineSize;
+  size?: "xs" | "sm" | "md" | "lg" | "xl";
   backgroundVariant?: BackgroundMappedProp;
 };
