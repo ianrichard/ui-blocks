@@ -3,8 +3,8 @@
  * This ensures our editor types match what's actually used in the components
  */
 
-import useAbstractPropsSource from "../Block/useAbstractProps.ts?raw";
-import useBlockContextSource from "../Block/useBlockContext.ts?raw";
+import useAbstractPropsSource from "../../components/Block/useAbstractProps.ts?raw";
+import useBlockContextSource from "../../components/Block/useBlockContext.ts?raw";
 
 /**
  * Extract property names from destructuring in useAbstractProps

@@ -3,6 +3,10 @@ import "../../monaco-setup";
 import { configureMonacoForJSX } from "./monacoConfig";
 import { setupAutoCloseJSXTags } from "./autoCloseJSXTags";
 
+/**
+ * Generic code editor component using Monaco
+ * Pass in custom type definitions via the typeDefinitions prop
+ */
 export interface CodeEditorProps {
   onChange?: (value: string | undefined) => void;
   typeDefinitions?: string;

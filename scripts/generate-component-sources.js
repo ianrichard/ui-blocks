@@ -64,7 +64,7 @@ while ((match = namedImportRegex.exec(indexSource)) !== null) {
 // Generate the componentSources.ts file
 const outputPath = path.resolve(
   __dirname,
-  "../src/components/CodeEditor/componentSources.ts"
+  "../src/pages/editor/componentSources.ts"
 );
 
 const fileContent = `/**

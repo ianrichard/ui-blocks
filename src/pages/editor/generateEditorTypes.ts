@@ -1,8 +1,6 @@
-import Block from "../index";
-import {
-  REACT_TYPE_DEFINITIONS,
-  COMMON_TYPE_DEFINITIONS,
-} from "./editorTypeConstants";
+import Block from "../../components/index";
+import { REACT_TYPE_DEFINITIONS } from "../../components/CodeEditor/editorTypeConstants";
+import { BLOCK_TYPE_DEFINITIONS } from "./blockTypeConstants";
 import {
   ABSTRACT_PROPS_KEYS,
   MAPPED_PROPS_KEYS,
@@ -159,7 +157,7 @@ ${componentNames
   // Combine all parts
   return [
     REACT_TYPE_DEFINITIONS,
-    COMMON_TYPE_DEFINITIONS,
+    BLOCK_TYPE_DEFINITIONS,
     blockPropsInterface,
     ...customInterfaces,
     blockDeclaration,

@@ -2,12 +2,12 @@ import Block from "../components";
 import CodeEditor from "../components/CodeEditor/CodeEditor";
 import { useRef, useMemo } from "react";
 import { encodeBase64 } from "../components/CodePreviewPage/utils";
-import { generateEditorTypes } from "../components/CodeEditor/generateEditorTypes";
+import { generateEditorTypes } from "./editor/generateEditorTypes";
 
 export default function EditorPage() {
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
-  // Generate type definitions dynamically
+  // Generate Block-specific type definitions for the editor
   const editorTypes = useMemo(() => generateEditorTypes(), []);
 
   function handleChange(value: string | undefined) {

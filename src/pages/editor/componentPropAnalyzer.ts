@@ -1,5 +1,5 @@
-import Block from "../index";
-import indexSource from "../index.ts?raw";
+import Block from "../../components/index";
+import indexSource from "../../components/index.ts?raw";
 import { componentSourceMap } from "./componentSources";
 
 /**
