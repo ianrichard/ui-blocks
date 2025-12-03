@@ -8,7 +8,11 @@ export default function EditorPage() {
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
   // Generate Block-specific type definitions for the editor
-  const editorTypes = useMemo(() => generateEditorTypes(), []);
+  const editorTypes = useMemo(() => {
+    const types = generateEditorTypes();
+    console.log("Generated editor types (simple):", types.length, "chars");
+    return types;
+  }, []);
 
   function handleChange(value: string | undefined) {
     const str = value ?? "";
