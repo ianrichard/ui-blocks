@@ -7,20 +7,23 @@ import Block from "../../components";
 import { REACT_TYPES, COMMON_TYPES } from "./types/baseTypes";
 import { generateBlockPropsInterface } from "./types/typeGenerators";
 import {
+  BUTTON_PROPS,
+  ACCORDION_PROPS,
+  CUSTOM_COMPONENT_MAP,
+} from "./types/customComponents";
+import {
   ABSTRACT_PROPS_KEYS,
   MAPPED_PROPS_KEYS,
   SPACE_PROPS_KEYS,
   LAYOUT_PROPS_KEYS,
   OTHER_INPUT_PROPS,
 } from "./blockPropNames";
-import { analyzeComponentProps } from "./componentPropAnalyzer";
 
 /**
  * Generate complete Monaco type definitions
  */
 export function generateEditorTypes(): string {
   const componentNames = Object.keys(Block);
-  const componentPropInfo = analyzeComponentProps();
 
   // Generate BlockProps from extracted prop names
   const blockPropsInterface = generateBlockPropsInterface({
@@ -45,26 +48,14 @@ export function generateEditorTypes(): string {
     other: OTHER_INPUT_PROPS.filter((p): p is string => p !== null),
   });
 
-  // Generate custom component interfaces
-  const customInterfaces: string[] = [];
-  for (const [name, info] of Object.entries(componentPropInfo)) {
-    if (!info.usesBlockProps && info.customProps) {
-      const propsStr = Object.entries(info.customProps)
-        .map(([propName, propType]) => `  ${propName}?: ${propType};`)
-        .join("\n");
-      customInterfaces.push(`interface ${name}Props {\n${propsStr}\n}`);
-    }
-  }
+  // Custom component interfaces (Button, Accordion, etc.)
+  const customInterfaces = [BUTTON_PROPS, ACCORDION_PROPS];
 
   // Generate Block component declarations
   const blockDeclaration = `declare const Block: {
 ${componentNames
   .map((name) => {
-    const info = componentPropInfo[name];
-    const propsType =
-      info && !info.usesBlockProps && info.customProps
-        ? `${name}Props`
-        : "BlockProps";
+    const propsType = CUSTOM_COMPONENT_MAP[name] || "BlockProps";
     return `  ${name}: React.FC<${propsType}>;`;
   })
   .join("\n")}
