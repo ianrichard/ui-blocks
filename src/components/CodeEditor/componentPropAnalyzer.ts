@@ -3,37 +3,7 @@ import indexSource from "../index.ts?raw";
 import { componentSourceMap } from "./componentSources";
 
 /**
- * Extract component import paths from index.ts
- */
-function extractComponentPaths(source: string): Record<string, string> {
-  const paths: Record<string, string> = {};
-
-  // Match patterns like: import MantineCard from "./Card/MantineCard";
-  const importRegex = /import\s+(\w+).*from\s+["'](.\/[^"']+)["']/g;
-  let match;
-
-  while ((match = importRegex.exec(source)) !== null) {
-    const [, importName, path] = match;
-    // Store the path for each import
-    paths[importName] = path;
-  }
-
-  // Match patterns like: import { X, Y } from "./path"
-  const namedImportRegex = /import\s+\{([^}]+)\}\s+from\s+["'](.\/[^"']+)["']/g;
-
-  while ((match = namedImportRegex.exec(source)) !== null) {
-    const [, imports, path] = match;
-    const names = imports.split(",").map((s) => s.trim());
-    names.forEach((name) => {
-      paths[name] = path;
-    });
-  }
-
-  return paths;
-}
-
-/**
- * Map component names to their import names
+ * Map component names in Block object to their import names from index.ts
  */
 function mapComponentNamesToImports(source: string): Record<string, string> {
   const mapping: Record<string, string> = {};
@@ -56,8 +26,7 @@ function mapComponentNamesToImports(source: string): Record<string, string> {
   return mapping;
 }
 
-// Extract component paths and mappings from index.ts
-const componentPaths = extractComponentPaths(indexSource);
+// Extract component mapping from index.ts
 const componentMapping = mapComponentNamesToImports(indexSource);
 
 // Get all component names from Block
@@ -74,7 +43,6 @@ for (const name of componentNames) {
     componentSources[name] = componentSourceMap[importName];
   } else {
     // Component not analyzed yet - assume it uses BlockProps
-    // To analyze it, add its import to componentSources.ts
     componentSources[name] = "extends BlockInputProps";
   }
 }
